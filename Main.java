@@ -1,6 +1,6 @@
 import javax.swing.*;
-import java.awt.event.ActionListener;
-//import java.awt.*;
+/*import java.awt.event.ActionListener;
+import java.awt.*;*/
 
 public class Main
 {
@@ -36,9 +36,9 @@ public class Main
         searchBar.setBounds(680,0,50,20);
         menuBar.add(searchBar);
 
-        JButton seachButton = new JButton("Search");
-        seachButton.setBounds(750,0,50,20);
-        menuBar.add(seachButton);
+        JButton searchButton = new JButton("Search");
+        searchButton.setBounds(750,0,50,20);
+        menuBar.add(searchButton);
 
 
     }
