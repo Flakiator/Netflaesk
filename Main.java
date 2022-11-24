@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 /*import java.awt.event.ActionListener;
 import java.awt.*;*/
 
@@ -29,15 +30,20 @@ public class Main
         //Laver MenuBar
         JMenuBar menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
-        JMenu myList = new JMenu("My List");
+        // Tilføjer mylist til menubar
+        JButton myList = new JButton("My List");
         menuBar.add(myList);
 
+        // tilføjer mellemrum
+        menuBar.add(new JToolBar.Separator(new Dimension( 520,0)));
+
+        // laver tekstfelt
         JTextField searchBar = new JTextField();
-        searchBar.setBounds(680,0,50,20);
+        //tilføjer tekstfelt
         menuBar.add(searchBar);
 
+        // laver søgeknap
         JButton searchButton = new JButton("Search");
-        searchButton.setBounds(750,0,50,20);
         menuBar.add(searchButton);
 
 
