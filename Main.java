@@ -38,17 +38,48 @@ public class Main
         menuBar.add(myList);
 
         // tilføjer mellemrum
-        menuBar.add(new JToolBar.Separator(new Dimension( 520,0)));
+        menuBar.add(new JToolBar.Separator(new Dimension( 50,0)));
+
+        //UI valg af Genre
+        JLabel genreLabel = new JLabel();
+        genreLabel.setText("Genres: ");
+        menuBar.add(genreLabel);
+
+        String[] genres = {"All","Kategorierne..."};
+        JComboBox genreBox = new JComboBox(genres);
+        menuBar.add(genreBox);
+
+        //Metode til at lave mellemrum mellem componenter
+        JMenuItem menu = new JMenuItem();
+        menuBar.add(menu);
+        menu.setMargin(new Insets(10,10,10,10));
+
+        //UI valg af Media
+        JLabel mediaLabel = new JLabel();
+        mediaLabel.setText("Media: ");
+        menuBar.add(mediaLabel);
+
+        String[] medias = {"All","Movies","Series"};
+        JComboBox mediaBox = new JComboBox(medias);
+        menuBar.add(mediaBox);
+
+        //Metode til at lave mellemrum mellem componenter
+        JMenuItem menu1 = new JMenuItem();
+        menuBar.add(menu1);
+        menu1.setMargin(new Insets(10, 10, 10, 10));
+        JMenuItem menu2 = new JMenuItem();
+        menuBar.add(menu2);
+        menu2.setMargin(new Insets(10, 10, 10, 10));
 
         // laver tekstfelt
         JTextField searchBar = new JTextField();
         //tilføjer tekstfelt
         menuBar.add(searchBar);
+        searchBar.setText("Type here...");
 
         // laver søgeknap
         JButton searchButton = new JButton("Search");
         menuBar.add(searchButton);
-
 
     }
 
