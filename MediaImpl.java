@@ -7,7 +7,11 @@ double score;
 boolean favorite;
     public MediaImpl(String title, String picture, List<String> genre, double score, boolean favorite)
     {
-
+        this.title = title;
+        this.picture = picture;
+        this.genre = genre;
+        this.score = score;
+        this.favorite = favorite;
     }
 
     public void play(String message)
@@ -32,7 +36,7 @@ boolean favorite;
     }
     public String getTitle()
     {
-        return null;
+        return this.title;
     }
     public double getScore()
     {
