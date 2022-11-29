@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 public class Main
 {
@@ -18,6 +16,7 @@ public class Main
         //Den har en standard size, ikke redigerbar af client
         frame.setResizable(false);
         //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
+        frame.setLayout(null);
 
         makeMenuBar();
         frame.setSize(800,800); //x og y
@@ -42,12 +41,12 @@ public class Main
         menuBar.add(new JToolBar.Separator(new Dimension( 50,0)));
 
         //UI valg af Genre
-        JLabel genreLabel = new JLabel("Genres: ");
+        JLabel genreLabel = new JLabel();
+        genreLabel.setText("Genres: ");
         menuBar.add(genreLabel);
 
         String[] genres = {"All","Kategorierne..."};
-        // Husk at tilføj <String>
-        JComboBox<String> genreBox = new JComboBox<>(genres);
+        JComboBox genreBox = new JComboBox(genres);
         menuBar.add(genreBox);
 
         //Metode til at lave mellemrum mellem componenter
@@ -56,11 +55,12 @@ public class Main
         menu.setMargin(new Insets(10,10,10,10));
 
         //UI valg af Media
-        JLabel mediaLabel = new JLabel("Media: ");
+        JLabel mediaLabel = new JLabel();
+        mediaLabel.setText("Media: ");
         menuBar.add(mediaLabel);
 
         String[] medias = {"All","Movies","Series"};
-        JComboBox<String> mediaBox = new JComboBox<>(medias);
+        JComboBox mediaBox = new JComboBox(medias);
         menuBar.add(mediaBox);
 
         //Metode til at lave mellemrum mellem componenter
@@ -72,20 +72,10 @@ public class Main
         menu2.setMargin(new Insets(10, 10, 10, 10));
 
         // laver tekstfelt
-        JTextField searchBar = new JTextField("Type here...");
-        // laver focus listener så "type here" går væk
-        searchBar.addFocusListener(new FocusListener() {
-
-            public void focusGained(FocusEvent e) {
-                searchBar.setText(null);
-            }
-
-            public void focusLost(FocusEvent e) {
-                searchBar.setText("Type here...");
-            }
-        });
+        JTextField searchBar = new JTextField();
         //tilføjer tekstfelt
         menuBar.add(searchBar);
+        searchBar.setText("Type here...");
 
         // laver søgeknap
         JButton searchButton = new JButton("Search");
