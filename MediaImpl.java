@@ -1,6 +1,11 @@
+import java.util.*;
 public class MediaImpl implements Media{
-
-    public MediaImpl()
+String title;
+String picture;
+List<String> genre;
+double score;
+boolean favorite;
+    public MediaImpl(String title, String picture, List<String> genre, double score, boolean favorite)
     {
 
     }
