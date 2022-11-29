@@ -5,11 +5,7 @@ import java.util.Scanner;
 
 public class DataAcessImpl implements DataAcess
 {
-    private String moviesPath = "Data/film.txt";
-    private String seriesPath = "Data/serier.txt";
-    private String mPicPath = "Data/filmplakater";
-    private String sPicPath = "Data/serieforsider";
-    private String favorites = "Data/favorites.txt";
+    //private String favorites = "Data/favorites.txt";
 
     public List<String> loadMedia(String path)
     {
@@ -42,13 +38,13 @@ public class DataAcessImpl implements DataAcess
 
     public List<String> loadMovies()
     {
-         List<String> movies = loadMedia(moviesPath);
-         return movies;
+        String moviesPath = "Data/film.txt";
+        return loadMedia(moviesPath);
     }
     public List<String> loadSeries()
     {
-        List<String> series = loadMedia(seriesPath);
-        return series;
+        String seriesPath = "Data/serier.txt";
+        return loadMedia(seriesPath);
     }
 
     public List<String> loadPic(String path)
@@ -68,13 +64,13 @@ public class DataAcessImpl implements DataAcess
     }
     public List<String> loadMPic()
     {
-        List<String> mPic = loadPic(mPicPath);
-        return mPic;
+        String mPicPath = "Data/filmplakater";
+        return loadPic(mPicPath);
     }
     public List<String> loadSPic()
     {
-        List<String> sPic = loadPic(sPicPath);
-        return sPic;
+        String sPicPath = "Data/serieforsider";
+        return loadPic(sPicPath);
     }
     public List<String> loadFavorites()
     {
