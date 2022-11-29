@@ -4,25 +4,25 @@ import java.io.*;
 import java.util.Scanner;
 
 public class DataAcessImpl implements DataAcess{
-    private static String moviesPath = "Data/film.txt";
+    private String moviesPath = "Data/film.txt";
     private String seriesPath = "Data/serier.txt";
     private String mPicPath = "Data/filmplakater";
     private String sPicPath = "Data/serieforsider";
     private String favorites = "Data/favorites.txt";
 
-    public List<String> loadMovies()
+    public List<String> loadMedia(String path)
     {
-        List<String> movies = new ArrayList<>();
+        List<String> media = new ArrayList<>();
         try {
-            File file = new File(moviesPath);
+            File file = new File(path);
             Scanner myReader = new Scanner(file);
             while (myReader.hasNextLine())
             {
                 String data = myReader.nextLine();
-                movies.add(data);
+                media.add(data);
             }
             myReader.close();
-            return movies;
+            return media;
         } catch (FileNotFoundException e)
         {
             System.out.println("An error occurred.");
@@ -30,25 +30,16 @@ public class DataAcessImpl implements DataAcess{
             return null;
         }
     }
+
+    public List<String> loadMovies()
+    {
+         List<String> movies = loadMedia(moviesPath);
+         return movies;
+    }
     public List<String> loadSeries()
     {
-        List<String> series = new ArrayList<>();
-        try {
-            File file = new File(seriesPath);
-            Scanner myReader = new Scanner(file);
-            while (myReader.hasNextLine())
-            {
-                String data = myReader.nextLine();
-                series.add(data);
-            }
-            myReader.close();
-            return series;
-        } catch (FileNotFoundException e)
-        {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-            return null;
-        }
+        List<String> series = loadMedia(seriesPath);
+        return series;
     }
 
     public List<String> loadMPic()

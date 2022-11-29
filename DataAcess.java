@@ -1,8 +1,7 @@
 import java.util.*;
 public interface DataAcess
 {
-    //List<String> loadMovies();
-    List<String> loadSeries();
+    List<String> loadMedia(String path);
     List<String> loadMPic();
     List<String> loadSPic();
     List<String> loadFavorites();
