@@ -19,12 +19,12 @@ boolean favorite;
     public void play(String message)
     {
     //Udkast til hvordan vores playfunktion ca skal laves (Dette er uden data/specificering af media!)
-        //Metoden skal være bundet til en knap "Play", som er en del af UI - ikke lavet endnu
+        //Metoden er for nu "bundet" til makePanel() i Main
 
-        JOptionPane.showMessageDialog(null,"Afspiller: " + title,
-                "Afspilningsvindue",JOptionPane.INFORMATION_MESSAGE);
-
+            JOptionPane.showMessageDialog(null, "Afspiller: " + title,
+                    "Afspilningsvindue", JOptionPane.INFORMATION_MESSAGE);
     }
+
     public void display()
     {
 
