@@ -20,6 +20,7 @@ public class Main
         //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
 
         makeMenuBar();
+        makePanel();
         frame.setSize(800,800); //x og y
         frame.setVisible(true); //frame bliver synlig
     }
@@ -86,4 +87,15 @@ public class Main
 
     }
 
+    private static void makePanel()
+    {
+        JPanel overview = new JPanel();
+        overview.setLayout(new GridLayout(5,7,4,4));
+        /*int mediaElements = loadmovies().size() + loadseries().size();
+        for (int i = 0; i < mediaElements; i++)
+        {
+
+        }*/
+        frame.add(overview);
+    }
 }
