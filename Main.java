@@ -12,12 +12,12 @@ public class Main
     }
     private static void makeFrame()
     {
-        frame = new JFrame("NetflÃ¦sk"); //Laver en frame
-        //GÃ¸r sÃ¥ vores program rent faktisk lukker.
+        frame = new JFrame("Netflæsk"); //Laver en frame
+        //Gør så vores program rent faktisk lukker.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Den har en standard size, ikke redigerbar af client
         frame.setResizable(false);
-        //frame.getContentPane().setBackground(Color.white); //Kan ogsÃ¥ laves med 'new Color'.
+        //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
 
         makeMenuBar();
         makePanel();
@@ -30,7 +30,7 @@ public class Main
         //Laver MenuBar
         JMenuBar menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
-        // TilfÃ¸jer mylist til menubar
+        // Tilføjer mylist til menubar
         JButton myList = new JButton("My List");
         myList.addActionListener(e ->
         {
@@ -39,7 +39,7 @@ public class Main
         });
         menuBar.add(myList);
 
-        // tilfÃ¸jer mellemrum
+        // tilføjer mellemrum
         menuBar.add(new JToolBar.Separator(new Dimension( 50,0)));
 
         //UI valg af Genre
@@ -47,7 +47,7 @@ public class Main
         menuBar.add(genreLabel);
 
         String[] genres = {"All","Kategorierne..."};
-        // Husk at tilfÃ¸j <String>
+        // Husk at tilføj <String>
         JComboBox<String> genreBox = new JComboBox<>(genres);
         menuBar.add(genreBox);
 
@@ -67,7 +67,7 @@ public class Main
 
         // laver tekstfelt
         JTextField searchBar = new JTextField("Type here...");
-        // laver focus listener sÃ¥ "type here" gÃ¥r vÃ¦k
+        // laver focus listener så "type here" går væk
         searchBar.addFocusListener(new FocusListener() {
 
             public void focusGained(FocusEvent e) {
@@ -78,10 +78,10 @@ public class Main
                 searchBar.setText("Type here...");
             }
         });
-        //tilfÃ¸jer tekstfelt
+        //tilføjer tekstfelt
         menuBar.add(searchBar);
 
-        // laver sÃ¸geknap
+        // laver søgeknap
         JButton searchButton = new JButton("Search");
         menuBar.add(searchButton);
 
