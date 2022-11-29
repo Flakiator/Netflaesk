@@ -50,10 +50,8 @@ public class Main
         JComboBox<String> genreBox = new JComboBox<>(genres);
         menuBar.add(genreBox);
 
-        //Metode til at lave mellemrum mellem componenter
-        JMenuItem menu = new JMenuItem();
-        menuBar.add(menu);
-        menu.setMargin(new Insets(10,10,10,10));
+        //Mellemrum efter genres
+        menuBar.add(new JToolBar.Separator(new Dimension( 15,0)));
 
         //UI valg af Media
         JLabel mediaLabel = new JLabel("Media: ");
@@ -63,13 +61,8 @@ public class Main
         JComboBox<String> mediaBox = new JComboBox<>(medias);
         menuBar.add(mediaBox);
 
-        //Metode til at lave mellemrum mellem componenter
-        JMenuItem menu1 = new JMenuItem();
-        menuBar.add(menu1);
-        menu1.setMargin(new Insets(10, 10, 10, 10));
-        JMenuItem menu2 = new JMenuItem();
-        menuBar.add(menu2);
-        menu2.setMargin(new Insets(10, 10, 10, 10));
+        //mellemrum efter media
+        menuBar.add(new JToolBar.Separator(new Dimension( 30,0)));
 
         // laver tekstfelt
         JTextField searchBar = new JTextField("Type here...");
