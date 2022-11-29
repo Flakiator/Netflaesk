@@ -3,7 +3,8 @@ import java.util.List;
 import java.io.*;
 import java.util.Scanner;
 
-public class DataAcessImpl implements DataAcess{
+public class DataAcessImpl implements DataAcess
+{
     private String moviesPath = "Data/film.txt";
     private String seriesPath = "Data/serier.txt";
     private String mPicPath = "Data/filmplakater";
@@ -42,13 +43,26 @@ public class DataAcessImpl implements DataAcess{
         return series;
     }
 
+    public List<String> loadPic(String path)
+    {
+        List<String> mediaPic = new ArrayList<>();
+        File file = new File(path);
+        File[] allFiles = file.listFiles();
+        for (int i = 0; i < allFiles.length; i++)
+        {
+            mediaPic.add(String.valueOf(allFiles[i]));
+        }
+        return mediaPic;
+    }
     public List<String> loadMPic()
     {
-        return null;
+        List<String> mPic = loadPic(mPicPath);
+        return mPic;
     }
     public List<String> loadSPic()
     {
-        return null;
+        List<String> sPic = loadPic(sPicPath);
+        return sPic;
     }
     public List<String> loadFavorites()
     {
