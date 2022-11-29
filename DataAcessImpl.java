@@ -1,6 +1,8 @@
 import java.util.List;
 
 public class DataAcessImpl implements DataAcess{
+    String moviesPath = "";
+
     public List<String> loadMovies()
     {
         return null;
