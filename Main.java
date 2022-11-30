@@ -106,7 +106,7 @@ public class Main {
         MediaImpl m = new MediaImpl("","",new ArrayList<>(),0,false);
         JButton playButton = new JButton("play");
         playButton.addActionListener(e -> m.play("Afspiller: " + m.title));
-        
+
         //openMedia skal tilgås når et element i overview (grid) klikkes
     }
 }
