@@ -20,8 +20,8 @@ public class Main {
         frame.setResizable(false);
         //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
 
-        makeMenuBar();
         makePanel();
+        makeMenuBar();
         openMediaUI();
         frame.setSize(800, 800); //x og y
         frame.setVisible(true); //frame bliver synlig
@@ -90,13 +90,18 @@ public class Main {
 
     private static void makePanel() {
         overview = new JPanel();
-        overview.setLayout(new GridLayout(5, 7, 4, 4));
+        overview.setLayout(new GridLayout(3, 7, 2, 1));
         /*int mediaElements = loadmovies().size() + loadseries().size();
         for (int i = 0; i < mediaElements; i++)
         {
         }*/
+        //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
+        for (int k = 0; k < 3; k++) {
+            for (int j = 0; j < 7; j++) {
+                overview.add(new JButton(""));
+            }
+        }
         overview.setBackground(Color.lightGray);
-
         frame.add(overview);
     }
 
