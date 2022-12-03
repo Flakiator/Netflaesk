@@ -13,12 +13,12 @@ public class Main {
     }
 
     private static void makeFrame() {
-        frame = new JFrame("NetflÃ¦sk"); //Laver en frame
-        //GÃ¸r sÃ¥ vores program rent faktisk lukker.
+        frame = new JFrame("Netflæsk"); //Laver en frame
+        //Gør så vores program rent faktisk lukker.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Den har en standard size, ikke redigerbar af client
         frame.setResizable(false);
-        //frame.getContentPane().setBackground(Color.white); //Kan ogsÃ¥ laves med 'new Color'.
+        //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
 
         makePanel();
         makeMenuBar();
@@ -31,7 +31,7 @@ public class Main {
         //Laver MenuBar
         JMenuBar menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
-        // TilfÃ¸jer mylist til menubar
+        // Tilføjer mylist til menubar
         JButton myList = new JButton("My List");
         myList.addActionListener(e ->
         {
@@ -40,7 +40,7 @@ public class Main {
         });
         menuBar.add(myList);
 
-        // tilfÃ¸jer mellemrum
+        // tilføjer mellemrum
         menuBar.add(new JToolBar.Separator(new Dimension(50, 0)));
 
         //UI valg af Genre
@@ -48,7 +48,7 @@ public class Main {
         menuBar.add(genreLabel);
 
         String[] genres = {"All", "Kategorierne..."};
-        // Husk at tilfÃ¸j <String>
+        // Husk at tilføj <String>
         JComboBox<String> genreBox = new JComboBox<>(genres);
         menuBar.add(genreBox);
 
@@ -68,7 +68,7 @@ public class Main {
 
         // laver tekstfelt
         JTextField searchBar = new JTextField("Type here...");
-        // laver focus listener sÃ¥ "type here" gÃ¥r vÃ¦k
+        // laver focus listener så "type here" går væk
         searchBar.addFocusListener(new FocusListener() {
 
             public void focusGained(FocusEvent e) {
@@ -79,10 +79,10 @@ public class Main {
                 searchBar.setText("Type here...");
             }
         });
-        //tilfÃ¸jer tekstfelt
+        //tilføjer tekstfelt
         menuBar.add(searchBar);
 
-        // laver sÃ¸geknap
+        // laver søgeknap
         JButton searchButton = new JButton("Search");
         menuBar.add(searchButton);
 
@@ -95,7 +95,7 @@ public class Main {
         for (int i = 0; i < mediaElements; i++)
         {
         }*/
-        //KÃ¸rer for-loop som adder button for hver row og coloum. Kan vi hente rows, cols vÃ¦rdier?
+        //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
         for (int k = 0; k < 3; k++) {
             for (int j = 0; j < 7; j++) {
                 overview.add(new JButton(""));
@@ -107,11 +107,11 @@ public class Main {
 
     public static void openMediaUI(){
         JPanel openMedia = new JPanel();
-        //Til nÃ¥r play(), nÃ¥r man har klikket ind pÃ¥ billederne
+        //Til når play(), når man har klikket ind på billederne
         MediaImpl m = new MediaImpl("","",new ArrayList<>(),0,false);
         JButton playButton = new JButton("play");
         playButton.addActionListener(e -> m.play("Afspiller: " + m.title));
 
-        //openMedia skal tilgÃ¥s nÃ¥r et element i overview (grid) klikkes
+        //openMedia skal tilgås når et element i overview (grid) klikkes
     }
 }
