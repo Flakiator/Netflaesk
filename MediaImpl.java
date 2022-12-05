@@ -3,9 +3,10 @@ public class MediaImpl implements Media{
 String title;
 String picture;
 List<String> genre;
-double score;
+String score;
+double year;
 boolean favorite;
-    public MediaImpl(String title, String picture, List<String> genre, double score, boolean favorite)
+    public MediaImpl(String title, double year, String picture, List<String> genre, String score, boolean favorite)
     {
         this.title = title;
         this.picture = picture;
