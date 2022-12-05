@@ -6,7 +6,7 @@ List<String> genre;
 String score;
 double year;
 boolean favorite;
-    public MediaImpl(String title, double year, String picture, List<String> genre, String score, boolean favorite)
+    public MediaImpl(String title, String year, String picture, List<String> genre, String score, boolean favorite)
     {
         this.title = title;
         this.picture = picture;
@@ -39,12 +39,12 @@ boolean favorite;
     {
         return this.title;
     }
-    public double getScore()
+    public String getScore()
     {
-        return 0;
+        return this.score;
     }
-    public String getGenre()
+    public List<String> getGenre()
     {
-        return null;
+        return this.genre;
     }
 }

@@ -1,3 +1,5 @@
+import java.util.List;
+
 public interface Media
 {
     void play(String message);
@@ -6,6 +8,6 @@ public interface Media
     void addToFavorites();
     boolean isFavorite();
     String getTitle();
-    double getScore();
-    String getGenre();
+    String getScore();
+    List<String> getGenre();
 }
