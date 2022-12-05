@@ -1,10 +1,10 @@
 import java.util.*;
-public class MediaImpl implements Media{
+public abstract class MediaImpl implements Media{
 String title;
 String picture;
 List<String> genre;
 String score;
-double year;
+String year;
 boolean favorite;
     public MediaImpl(String title, String year, String picture, List<String> genre, String score, boolean favorite)
     {
@@ -13,6 +13,7 @@ boolean favorite;
         this.genre = genre;
         this.score = score;
         this.favorite = favorite;
+        this.year = year;
     }
 
     public void play(String message)
@@ -46,5 +47,9 @@ boolean favorite;
     public List<String> getGenre()
     {
         return this.genre;
+    }
+
+    public List<String> getEpisodes() {
+        return null;
     }
 }

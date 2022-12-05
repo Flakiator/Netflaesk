@@ -10,4 +10,7 @@ public interface Media
     String getTitle();
     String getScore();
     List<String> getGenre();
+    List<String> getEpisodes();
+
+    int getSeasons();
 }
