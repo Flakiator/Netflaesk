@@ -4,16 +4,13 @@ public class Demo
 {
     public static void main(String[] args)
     {
-        Mediaregimpl loader = new Mediaregimpl();
+        Mediaregistryimpl loader = new Mediaregistryimpl();
 
-        List<Media> movies = loader.initializemovie();
-        List<Media> series = loader.initializeseries();
-
+        List<Movie> movies = loader.initializeMovie();
+        List<Series> series = loader.initializeSeries();
+        List<Media> medias = new ArrayList<>();
+        medias.addAll(movies);
+        medias.addAll(series);
         System.out.println(movies.get(0).getTitle());
-        System.out.println(movies.get(0).getScore());
-        System.out.println(movies.get(0).getSeasons());
-        System.out.println(movies.get(0).getEpisodes());
-        System.out.println(movies.get(0).getGenre());
-        System.out.println(series.get(0).getSeasons());
     }
 }

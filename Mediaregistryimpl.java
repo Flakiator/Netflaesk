@@ -1,17 +1,33 @@
 import java.util.*;
-public class Mediaregimpl implements Mediareg
+public class Mediaregistryimpl implements Mediaregistry
 {
     //indlæser database
     DataAcessImpl data = new DataAcessImpl();
     //initialize til film
-    public List<Media> initializemovie()
+    public List<Movie> initializeMovie()
     {
-        return initialize(data.loadMovies(), data.loadMPic());
+        List<Movie> m = new ArrayList<>();
+
+        List<Media> media = initialize(data.loadMovies(), data.loadMPic());
+
+        for (Media i: media)
+        {
+           m.add((Movie)i);
+        }
+        return m;
     }
     //initialize til serier
-    public List<Media> initializeseries()
+    public List<Series> initializeSeries()
     {
-        return initialize(data.loadSeries(), data.loadSPic());
+        List<Series> s = new ArrayList<>();
+
+        List<Media> media = initialize(data.loadSeries(), data.loadSPic());
+
+        for (Media i: media)
+        {
+            s.add((Series) i);
+        }
+        return s;
     }
     // Generel initializer
     public List<Media> initialize(List<String> load, List<String> picture)
@@ -20,7 +36,7 @@ public class Mediaregimpl implements Mediareg
         for (int i = 0; i < load.size();i++)
         {
             // Opdeler alle film (og deres, årstal genre osv. i en liste "elements")
-            String[] elements = load.get(i).split(";");
+            String[] elements = load.get(i).trim().split(";");
             //elements[0] = title
             //elements[1] = årstal
             //elements[2] = genre

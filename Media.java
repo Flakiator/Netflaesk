@@ -7,10 +7,6 @@ public interface Media
     Double getScore();
     List<String> getGenre();
 
-    // Disse to funktioner er kun seriesspecifikke, og det giver derfor ikke mening at have dem med i MediaInterfacet.
-    List<String> getEpisodes();
-
-    int getSeasons();
 }
 // Flere af disse skal over i main. Det her var lavet efter det gamle UML-diagram.
 /*
