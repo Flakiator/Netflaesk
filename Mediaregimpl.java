@@ -33,6 +33,7 @@ public class Mediaregimpl
             for (String g : genres) {
                 genre.add(g.trim());
             }
+            double score = Double.parseDouble(elements[3].trim().replace(',','.'));
             // Tager højde for om det er en series
             if (elements.length > 4)
             {
@@ -47,12 +48,13 @@ public class Mediaregimpl
                     episodes.add(s.substring(s.lastIndexOf("-") + 1).trim());
                 }
                 // Tilføjer serie objektet til liste over medier
-                medias.add(new Series(elements[0], elements[1], picture.get(i), genre, elements[3].trim(), false,episodes,season));
+
+                medias.add(new Series(elements[0], elements[1].trim(), picture.get(i), genre, score, false,episodes,season));
             }
             else
             {
                 // Tilføjer film objektet til liste over medier
-                medias.add(new Movie(elements[0], elements[1], picture.get(i), genre, elements[3], false));
+                medias.add(new Movie(elements[0], elements[1].trim(), picture.get(i), genre, score, false));
             }
         }
         return medias;

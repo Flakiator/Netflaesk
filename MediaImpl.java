@@ -8,10 +8,10 @@ public class MediaImpl implements Media{
 String title;
 String picture;
 List<String> genre;
-String score;
+Double score;
 String year;
 boolean favorite;
-    public MediaImpl(String title, String year, String picture, List<String> genre, String score, boolean favorite)
+    public MediaImpl(String title, String year, String picture, List<String> genre, Double score, boolean favorite)
     {
         this.title = title;
         this.picture = picture;
@@ -50,7 +50,7 @@ boolean favorite;
     {
         return this.title;
     }
-    public String getScore()
+    public Double getScore()
     {
         return this.score;
     }
