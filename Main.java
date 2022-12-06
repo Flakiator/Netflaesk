@@ -19,14 +19,13 @@ public class Main {
             //Gør så vores program rent faktisk lukker.
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             //Den har en standard size, ikke redigerbar af client
-            frame.setResizable(false);
             frame.setResizable(true);
 
             //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
 
             makePanel();
             makeMenuBar();
-            frame.setSize(800, 800); //x og y
+            frame.setSize(800,800);
             frame.setVisible(true); //frame bliver synlig
         }
 
