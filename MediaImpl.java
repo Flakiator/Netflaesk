@@ -1,65 +1,42 @@
 import java.util.*;
-public abstract class MediaImpl implements Media{
+public abstract class MediaImpl implements Media {
+        String title;
+        String picture;
+        List<String> genre;
+        Double score;
+        String year;
+        boolean favorite;
 
-import javax.swing.*;
+        public MediaImpl(String title, String year, String picture, List<String> genre, Double score, boolean favorite) {
+            this.title = title;
+            this.picture = picture;
+            this.genre = genre;
+            this.score = score;
+            this.favorite = favorite;
+            this.year = year;
+        }
 
-public class MediaImpl implements Media{
+        public void addToFavorites() {
 
-String title;
-String picture;
-List<String> genre;
-Double score;
-String year;
-boolean favorite;
-    public MediaImpl(String title, String year, String picture, List<String> genre, Double score, boolean favorite)
-    {
-        this.title = title;
-        this.picture = picture;
-        this.genre = genre;
-        this.score = score;
-        this.favorite = favorite;
-        this.year = year;
-    }
+        }
 
-    public void play(String message)
-    {
-    //Udkast til hvordan vores playfunktion ca skal laves (Dette er uden data/specificering af media!)
-        //Metoden er for nu "bundet" til makePanel() i Main
+        public boolean isFavorite() {
+            return false;
+        }
 
-            JOptionPane.showMessageDialog(null, "Afspiller: " + title,
-                    "Afspilningsvindue", JOptionPane.INFORMATION_MESSAGE);
-    }
+        public String getTitle() {
+            return this.title;
+        }
 
-    public void display()
-    {
+        public Double getScore() {
+            return this.score;
+        }
 
-    }
-    public void openMedia()
-    {
+        public List<String> getGenre() {
+            return this.genre;
+        }
 
-    }
-    public void addToFavorites()
-    {
-
-    }
-    public boolean isFavorite()
-    {
-        return false;
-    }
-    public String getTitle()
-    {
-        return this.title;
-    }
-    public Double getScore()
-    {
-        return this.score;
-    }
-    public List<String> getGenre()
-    {
-        return this.genre;
-    }
-
-    public List<String> getEpisodes() {
-        return null;
-    }
+        public List<String> getEpisodes() {
+            return null;
+        }
 }

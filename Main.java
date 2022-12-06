@@ -13,9 +13,8 @@ public class Main {
         makeFrame();
     }
 
-    private static void makeFrame() {
+    public static void makeFrame() {
 
-        private static void makeFrame () {
             frame = new JFrame("Netflæsk"); //Laver en frame
             //Gør så vores program rent faktisk lukker.
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,12 +26,11 @@ public class Main {
 
             makePanel();
             makeMenuBar();
-            openMediaUI();
             frame.setSize(800, 800); //x og y
             frame.setVisible(true); //frame bliver synlig
         }
 
-        private static void makeMenuBar () {
+        private static void makeMenuBar() {
             //Laver MenuBar
             JMenuBar menuBar = new JMenuBar();
             frame.setJMenuBar(menuBar);
@@ -54,8 +52,6 @@ public class Main {
             JLabel genreLabel = new JLabel("Genres: ");
             menuBar.add(genreLabel);
 
-
-            String[] genres = {"All", "Kategorierne..."};
 
             String[] genres = {"All", "Kategorierne..."};
 
@@ -124,14 +120,4 @@ public class Main {
             frame.add(overview);
         }
 
-        public static void openMediaUI () {
-            JPanel openMedia = new JPanel();
-            //Til når play(), når man har klikket ind på billederne
-            //MediaImpl m = new MediaImpl("","",new ArrayList<>(),0,false);
-            JButton playButton = new JButton("play");
-            // playButton.addActionListener(e -> m.play("Afspiller: " + m.title));
-
-            //openMedia skal tilgås når et element i overview (grid) klikkes
         }
-    }
-}
