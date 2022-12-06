@@ -7,6 +7,8 @@ public class Main {
     private static JFrame frame;
     private static JPanel overview;
 
+    private static JScrollPane scrollPane;
+
     public static void main(String[] args)
     {
         makeFrame();
@@ -17,7 +19,7 @@ public class Main {
         //Gør så vores program rent faktisk lukker.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Den har en standard size, ikke redigerbar af client
-        frame.setResizable(false);
+        frame.setResizable(true);
         //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
 
         makePanel();
@@ -90,17 +92,25 @@ public class Main {
 
     private static void makePanel() {
         overview = new JPanel();
-        overview.setLayout(new GridLayout(3, 7, 2, 1));
+
+        //Scrollable, som ikke rigtigt virker
+        scrollPane = new JScrollPane(overview);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        overview.setLayout(new GridLayout(3, 4, 2, 1));
         /*int mediaElements = loadmovies().size() + loadseries().size();
         for (int i = 0; i < mediaElements; i++)
         {
         }*/
         //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
         for (int k = 0; k < 3; k++) {
-            for (int j = 0; j < 7; j++) {
+            for (int j = 0; j < 4; j++) {
                 overview.add(new JButton(""));
             }
         }
+
+        frame.add(scrollPane);
         overview.setBackground(Color.lightGray);
         frame.add(overview);
     }
