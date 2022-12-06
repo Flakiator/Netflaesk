@@ -1,5 +1,5 @@
 import java.util.*;
-public class Mediaregimpl
+public class Mediaregimpl implements Mediareg
 {
     //indlæser database
     DataAcessImpl data = new DataAcessImpl();
@@ -60,4 +60,12 @@ public class Mediaregimpl
         return medias;
     }
 
+    public List<Media> search(String text) {
+        return null;
+    }
+
+    public List<Media> filter(String genre)
+    {
+        return null;
+    }
 }

@@ -10,6 +10,7 @@ public class Movie extends MediaImpl
         return null;
     }
 
+    @Override
     public int getSeasons()
     {
         return 0;
