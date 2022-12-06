@@ -1,5 +1,10 @@
 import java.util.*;
 public abstract class MediaImpl implements Media{
+
+import javax.swing.*;
+
+public class MediaImpl implements Media{
+
 String title;
 String picture;
 List<String> genre;
@@ -18,8 +23,13 @@ boolean favorite;
 
     public void play(String message)
     {
+    //Udkast til hvordan vores playfunktion ca skal laves (Dette er uden data/specificering af media!)
+        //Metoden er for nu "bundet" til makePanel() i Main
 
+            JOptionPane.showMessageDialog(null, "Afspiller: " + title,
+                    "Afspilningsvindue", JOptionPane.INFORMATION_MESSAGE);
     }
+
     public void display()
     {
 
