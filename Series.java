@@ -4,6 +4,8 @@ public class Series extends MediaImpl
 {
     private List<String> episodes;
     private int seasons;
+
+    private String mediatype = "Series";
     public Series(String title, String year, String picture, List<String> genre, double score, boolean favorite,List<String> episodes, int seasons) {
         super(title, year, picture, genre, score, favorite);
         this.episodes = episodes;
@@ -16,5 +18,10 @@ public class Series extends MediaImpl
     public int getSeasons()
     {
         return this.seasons;
+    }
+
+    String getMediaType()
+    {
+        return this.mediatype;
     }
 }

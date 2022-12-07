@@ -7,6 +7,8 @@ public abstract class MediaImpl implements Media {
     String year;
     boolean favorite;
 
+    String mediatype = "All";
+
     public MediaImpl(String title, String year, String picture, List<String> genre, Double score, boolean favorite) {
         this.title = title;
         this.picture = picture;
@@ -34,5 +36,10 @@ public abstract class MediaImpl implements Media {
 
     public List<String> getGenre() {
         return this.genre;
+    }
+
+    String getMediaType()
+    {
+        return this.mediatype;
     }
 }

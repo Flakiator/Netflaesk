@@ -10,11 +10,20 @@ public class Main {
 
     private static JScrollPane scrollPane;
 
+    private static JComboBox<String> genreBox;
+    private static JComboBox<String> mediaBox;
+
+    private static List<Movie> AllMovies;
+    private static List<Series> AllSeries;
+
     public static void main(String[] args) {
+        Mediaregistryimpl SingletonMediaregisty = new Mediaregistryimpl();
+        AllMovies = SingletonMediaregisty.initializeMovie();
+        AllSeries = SingletonMediaregisty.initializeSeries();
         makeFrame();
     }
 
-    public static void makeFrame() {
+        public static void makeFrame() {
 
             frame = new JFrame("Netflæsk"); //Laver en frame
             //Gør så vores program rent faktisk lukker.
@@ -56,7 +65,7 @@ public class Main {
             String[] genres = {"All", "Kategorierne..."};
 
             // Husk at tilføj <String>
-            JComboBox<String> genreBox = new JComboBox<>(genres);
+            genreBox = new JComboBox<>(genres);
             menuBar.add(genreBox);
 
             //Mellemrum efter genres
@@ -67,7 +76,7 @@ public class Main {
             menuBar.add(mediaLabel);
 
             String[] medias = {"All", "Movies", "Series"};
-            JComboBox<String> mediaBox = new JComboBox<>(medias);
+            mediaBox = new JComboBox<>(medias);
             menuBar.add(mediaBox);
 
             //mellemrum efter media
@@ -95,7 +104,7 @@ public class Main {
 
         }
 
-    public static void makePanel () {
+        public static void makePanel () {
             overview = new JPanel();
 
             //Scrollable, som ikke rigtigt virker
@@ -131,4 +140,4 @@ public class Main {
             frame.add(overview);
         }
 
-        }
+    }
