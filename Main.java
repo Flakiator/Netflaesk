@@ -10,7 +10,9 @@ public class Main {
 
     private static JScrollPane scrollPane;
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
+
         makeFrame();
     }
 
@@ -24,9 +26,10 @@ public class Main {
 
             //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
 
-            makePanel();
+
             makeMenuBar();
-            frame.setSize(800,800);
+            makePanel();
+            frame.pack();
             frame.setVisible(true); //frame bliver synlig
         }
 
@@ -97,14 +100,12 @@ public class Main {
 
     public static void makePanel () {
             overview = new JPanel();
-
             //Scrollable, som ikke rigtigt virker
             scrollPane = new JScrollPane(overview);
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
-            overview.setLayout(new GridLayout(3, 4, 2, 1));
-
+            //scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+            int rows = 0;
+            int columns = 0;
             // idé til oprettelse af knapper
             Mediaregistryimpl data = new Mediaregistryimpl();
             List<Movie> movies = data.initializeMovie();
@@ -112,23 +113,29 @@ public class Main {
             List<MediaImpl> medias = new ArrayList<>();
             medias.addAll(movies);
             medias.addAll(series);
-            int len = medias.size();
-            // ()
-            int dinmor = 0;
             //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
-            for (int k = 0; k < 3; k++) {
-                for (int j = 0; j < 4; j++) {
-                    if (dinmor < len)
-                    {
-                        overview.add(new JButton(medias.get(dinmor).getTitle()));
-                        dinmor++;
-                    }
-
-                }
-            }
+            makebuttons(medias);
             frame.add(scrollPane);
             overview.setBackground(Color.lightGray);
-            frame.add(overview);
-        }
 
+        }
+    public static void makebuttons(List<MediaImpl> medias)
+    {
+        double size = medias.size() / 7;
+        int rows = (int)Math.ceil(size);
+        int columns = 7;
+        int counter = 0;
+        overview.setLayout(new GridLayout(rows, columns, 2, 1));
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                ImageIcon icon = new ImageIcon(medias.get(counter).getPicture());
+                JButton button = new JButton(icon);
+                button.setPreferredSize(new Dimension(45,200));
+                overview.add(button);
+                counter++;
+            }
+        }
+    }
         }
