@@ -99,11 +99,6 @@ public class Main {
         }
 
     public static void makePanel () {
-            overview = new JPanel();
-            //Scrollable, som ikke rigtigt virker
-            scrollPane = new JScrollPane(overview);
-            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            //scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
             int rows = 0;
             int columns = 0;
             // idé til oprettelse af knapper
@@ -111,8 +106,9 @@ public class Main {
             List<Movie> movies = data.initializeMovie();
             List<Series> series = data.initializeSeries();
             List<MediaImpl> medias = new ArrayList<>();
+            List<MediaImpl> medias2 = new ArrayList<>();
             medias.addAll(movies);
-            medias.addAll(series);
+            medias2.addAll(series);
             //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
             makebuttons(medias);
             frame.add(scrollPane);
@@ -121,6 +117,10 @@ public class Main {
         }
     public static void makebuttons(List<MediaImpl> medias)
     {
+        overview = new JPanel();
+        //Scrollable, som ikke rigtigt virker
+        scrollPane = new JScrollPane(overview);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         double size = medias.size() / 7;
         int rows = (int)Math.ceil(size);
         int columns = 7;
@@ -131,8 +131,9 @@ public class Main {
             for (int j = 0; j < columns; j++)
             {
                 ImageIcon icon = new ImageIcon(medias.get(counter).getPicture());
-                JButton button = new JButton(icon);
+                JButton button = new JButton(medias.get(counter).getTitle(),icon);
                 button.setPreferredSize(new Dimension(45,200));
+
                 overview.add(button);
                 counter++;
             }
