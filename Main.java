@@ -124,6 +124,7 @@ public class Main {
         //Scrollbar
         scrollPane = new JScrollPane(overview);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         // makes gridlayout for the buttons to be displayed on
         double size = medias.size() / 7;
         int rows = (int) Math.ceil(size);
