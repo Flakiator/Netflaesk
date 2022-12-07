@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.io.*;
-import java.util.Scanner;
 
 public class DataAcessImpl implements DataAcess
 {
@@ -39,12 +37,16 @@ public class DataAcessImpl implements DataAcess
     public List<String> loadMovies()
     {
         String moviesPath = "Data/film.txt";
-        return loadMedia(moviesPath);
+        List<String> media = loadMedia(moviesPath);
+        Collections.sort(media);
+        return media;
     }
     public List<String> loadSeries()
     {
         String seriesPath = "Data/serier.txt";
-        return loadMedia(seriesPath);
+        List<String> media = loadMedia(seriesPath);
+        Collections.sort(media);
+        return media;
     }
 
     public List<String> loadPic(String path)

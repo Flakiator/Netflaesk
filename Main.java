@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     private static JFrame frame;
@@ -29,7 +30,7 @@ public class Main {
             frame.setVisible(true); //frame bliver synlig
         }
 
-        private static void makeMenuBar() {
+        public static void makeMenuBar() {
             //Laver MenuBar
             JMenuBar menuBar = new JMenuBar();
             frame.setJMenuBar(menuBar);
@@ -94,7 +95,7 @@ public class Main {
 
         }
 
-        private static void makePanel () {
+    public static void makePanel () {
             overview = new JPanel();
 
             //Scrollable, som ikke rigtigt virker
@@ -103,17 +104,28 @@ public class Main {
             scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
             overview.setLayout(new GridLayout(3, 4, 2, 1));
-        /*int mediaElements = loadmovies().size() + loadseries().size();
-        for (int i = 0; i < mediaElements; i++)
-        {
-        }*/
+
+            // idé til oprettelse af knapper
+            Mediaregistryimpl data = new Mediaregistryimpl();
+            List<Movie> movies = data.initializeMovie();
+            List<Series> series = data.initializeSeries();
+            List<MediaImpl> medias = new ArrayList<>();
+            medias.addAll(movies);
+            medias.addAll(series);
+            int len = medias.size();
+            // ()
+            int dinmor = 0;
             //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
             for (int k = 0; k < 3; k++) {
                 for (int j = 0; j < 4; j++) {
-                    overview.add(new JButton(""));
+                    if (dinmor < len)
+                    {
+                        overview.add(new JButton(medias.get(dinmor).getTitle()));
+                        dinmor++;
+                    }
+
                 }
             }
-
             frame.add(scrollPane);
             overview.setBackground(Color.lightGray);
             frame.add(overview);

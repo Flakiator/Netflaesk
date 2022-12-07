@@ -42,6 +42,7 @@ public class Mediaregistryimpl implements Mediaregistry
             //elements[2] = genre
             //elements[3] = score
             //elements[4] = sæson-episoder
+
             // Laver opdeler genrer i sin egen liste
             String[] genres = elements[2].split(",");
             // tilføjer dem til ArrayList
