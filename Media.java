@@ -6,7 +6,6 @@ public interface Media
     String getTitle();
     Double getScore();
     List<String> getGenre();
-
 }
 // Flere af disse skal over i main. Det her var lavet efter det gamle UML-diagram.
 /*
