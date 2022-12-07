@@ -29,8 +29,8 @@ public class Mediaregistryimpl implements Mediaregistry
         }
         return s;
     }
-    // Generel initializer
-    public List<Media> initialize(List<String> load, List<String> picture)
+    // Generel initializer bruges ikke i main (derfor private)
+    private List<Media> initialize(List<String> load, List<String> picture)
     {
         List<Media> medias = new ArrayList<>();
         for (int i = 0; i < load.size();i++)
