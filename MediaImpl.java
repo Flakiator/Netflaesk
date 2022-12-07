@@ -38,6 +38,11 @@ public abstract class MediaImpl implements Media {
         return this.genre;
     }
 
+    public String getPicture()
+    {
+        return this.picture;
+    }
+
     String getMediaType()
     {
         return this.mediatype;

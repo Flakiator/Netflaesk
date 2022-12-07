@@ -23,121 +23,128 @@ public class Main {
         makeFrame();
     }
 
-        public static void makeFrame() {
+    public static void makeFrame() {
 
-            frame = new JFrame("Netflæsk"); //Laver en frame
-            //Gør så vores program rent faktisk lukker.
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            //Den har en standard size, ikke redigerbar af client
-            frame.setResizable(true);
+        frame = new JFrame("Netflæsk"); //Laver en frame
+        //Gør så vores program rent faktisk lukker.
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Den har en standard size, ikke redigerbar af client
+        frame.setResizable(true);
 
-            //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
+        //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
 
-            makePanel();
-            makeMenuBar();
-            frame.setSize(800,800);
-            frame.setVisible(true); //frame bliver synlig
-        }
+        makePanel();
+        makeMenuBar();
+        frame.setSize(800, 800);
+        frame.setVisible(true); //frame bliver synlig
+    }
 
-        public static void makeMenuBar() {
-            //Laver MenuBar
-            JMenuBar menuBar = new JMenuBar();
-            frame.setJMenuBar(menuBar);
-            // Tilføjer mylist til menubar
-            JButton myList = new JButton("My List");
-            myList.addActionListener(e ->
-            {
-                System.out.println("MY LIST!!!");
-                // Kald ny JFrame evt. gennem en ny metode under makeMenuBar()
-            });
-            menuBar.add(myList);
+    public static void makeMenuBar() {
+        //Laver MenuBar
+        JMenuBar menuBar = new JMenuBar();
+        frame.setJMenuBar(menuBar);
+        // Tilføjer mylist til menubar
+        JButton myList = new JButton("My List");
+        myList.addActionListener(e ->
+        {
+            System.out.println("MY LIST!!!");
+            // Kald ny JFrame evt. gennem en ny metode under makeMenuBar()
+        });
+        menuBar.add(myList);
 
-            // tilføjer mellemrum
+        // tilføjer mellemrum
 
-            menuBar.add(new JToolBar.Separator(new Dimension(50, 0)));
-
-
-            //UI valg af Genre
-            JLabel genreLabel = new JLabel("Genres: ");
-            menuBar.add(genreLabel);
+        menuBar.add(new JToolBar.Separator(new Dimension(50, 0)));
 
 
-            String[] genres = {"All", "Kategorierne..."};
+        //UI valg af Genre
+        JLabel genreLabel = new JLabel("Genres: ");
+        menuBar.add(genreLabel);
 
-            // Husk at tilføj <String>
-            genreBox = new JComboBox<>(genres);
-            menuBar.add(genreBox);
 
-            //Mellemrum efter genres
-            menuBar.add(new JToolBar.Separator(new Dimension(15, 0)));
+        String[] genres = {"All", "Kategorierne..."};
 
-            //UI valg af Media
-            JLabel mediaLabel = new JLabel("Media: ");
-            menuBar.add(mediaLabel);
+        // Husk at tilføj <String>
+        genreBox = new JComboBox<>(genres);
+        menuBar.add(genreBox);
 
-            String[] medias = {"All", "Movies", "Series"};
-            mediaBox = new JComboBox<>(medias);
-            menuBar.add(mediaBox);
+        //Mellemrum efter genres
+        menuBar.add(new JToolBar.Separator(new Dimension(15, 0)));
 
-            //mellemrum efter media
-            menuBar.add(new JToolBar.Separator(new Dimension(30, 0)));
+        //UI valg af Media
+        JLabel mediaLabel = new JLabel("Media: ");
+        menuBar.add(mediaLabel);
 
-            // laver tekstfelt
-            JTextField searchBar = new JTextField("Type here...");
-            // laver focus listener så "type here" går væk
-            searchBar.addFocusListener(new FocusListener() {
+        String[] medias = {"All", "Movies", "Series"};
+        mediaBox = new JComboBox<>(medias);
+        menuBar.add(mediaBox);
 
-                public void focusGained(FocusEvent e) {
-                    searchBar.setText(null);
-                }
+        //mellemrum efter media
+        menuBar.add(new JToolBar.Separator(new Dimension(30, 0)));
 
-                public void focusLost(FocusEvent e) {
-                    searchBar.setText("Type here...");
-                }
-            });
-            //tilføjer tekstfelt
-            menuBar.add(searchBar);
+        // laver tekstfelt
+        JTextField searchBar = new JTextField("Type here...");
+        // laver focus listener så "type here" går væk
+        searchBar.addFocusListener(new FocusListener() {
 
-            // laver søgeknap
-            JButton searchButton = new JButton("Search");
-            menuBar.add(searchButton);
-
-        }
-
-        public static void makePanel () {
-            overview = new JPanel();
-
-            //Scrollable, som ikke rigtigt virker
-            scrollPane = new JScrollPane(overview);
-            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
-            overview.setLayout(new GridLayout(3, 4, 2, 1));
-
-            // idé til oprettelse af knapper
-            Mediaregistryimpl data = new Mediaregistryimpl();
-            List<Movie> movies = data.initializeMovie();
-            List<Series> series = data.initializeSeries();
-            List<MediaImpl> medias = new ArrayList<>();
-            medias.addAll(movies);
-            medias.addAll(series);
-            int len = medias.size();
-            // ()
-            int dinmor = 0;
-            //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
-            for (int k = 0; k < 3; k++) {
-                for (int j = 0; j < 4; j++) {
-                    if (dinmor < len)
-                    {
-                        overview.add(new JButton(medias.get(dinmor).getTitle()));
-                        dinmor++;
-                    }
-
-                }
+            public void focusGained(FocusEvent e) {
+                searchBar.setText(null);
             }
-            frame.add(scrollPane);
-            overview.setBackground(Color.lightGray);
-            frame.add(overview);
-        }
+
+            public void focusLost(FocusEvent e) {
+                searchBar.setText("Type here...");
+            }
+        });
+        //tilføjer tekstfelt
+        menuBar.add(searchBar);
+
+        // laver søgeknap
+        JButton searchButton = new JButton("Search");
+        menuBar.add(searchButton);
 
     }
+
+    public static void makePanel() {
+        int rows = 0;
+        int columns = 0;
+        // idé til oprettelse af knapper
+        List<MediaImpl> medias = new ArrayList<>();
+        medias.addAll(AllMovies);
+        medias.addAll(AllSeries);
+        //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
+        makebuttons(medias);
+        frame.add(scrollPane);
+        overview.setBackground(Color.lightGray);
+
+    }
+
+    public static void makebuttons(List<MediaImpl> medias) {
+        overview = new JPanel();
+        List<JButton> buttons = new ArrayList<>();
+        //Scrollbar
+        scrollPane = new JScrollPane(overview);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        // makes gridlayout for the buttons to be displayed on
+        double size = medias.size() / 7;
+        int rows = (int) Math.ceil(size);
+        int columns = 7;
+        int counter = 0;
+        overview.setLayout(new GridLayout(rows, columns, 2, 1));
+        // makes buttons
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                ImageIcon icon = new ImageIcon(medias.get(counter).getPicture());
+                JButton button = new JButton(icon);
+                button.setActionCommand(medias.get(counter).getTitle());
+                button.setPreferredSize(new Dimension(45, 200));
+                button.addActionListener(e ->
+                {
+                    System.out.println(button.getActionCommand());
+                });
+                buttons.add(button);
+                overview.add(button);
+                counter++;
+            }
+        }
+    }
+}
