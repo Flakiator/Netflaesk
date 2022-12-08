@@ -77,14 +77,22 @@ public class Mediaregistryimpl implements Mediaregistry
         return medias;
     }
 
-    public List<MediaImpl> search(String text) {
-        return null;
+    public List<MediaImpl> search(String SearchText, List<MediaImpl>FilteredeList)
+    {
+        List<MediaImpl> SortedBySearch = null;
+        SearchText = SearchText.toLowerCase();
+        for(MediaImpl currentMedia : FilteredeList) {
+            if (currentMedia.getTitle().toLowerCase().equals(SearchText)) {
+                SortedBySearch.add(currentMedia);
+            }
+        }
+        return SortedBySearch;
     }
 
     public List<MediaImpl> filter(String Genre, String Medietype, List<MediaImpl>AllMedia)
     {
 
-        List<MediaImpl> SortedMedia = null;
+        List<MediaImpl> FilteredMedia = null;
         //String Genre = (String) genreBox.getSelectedItem();
 
         // Tjekker for hvilken medietype, der skal vises.
@@ -93,7 +101,7 @@ public class Mediaregistryimpl implements Mediaregistry
             for(MediaImpl currentMedia : AllMedia) {
 
                 if (currentMedia.getGenre().contains(Genre)) {
-                    SortedMedia.add(currentMedia);
+                    FilteredMedia.add(currentMedia);
                 }
             }
         }
@@ -101,11 +109,11 @@ public class Mediaregistryimpl implements Mediaregistry
             for (MediaImpl currentMedia : AllMedia) {
                 if (currentMedia.getMediaType().equals(Medietype)) {
                     if (currentMedia.getGenre().contains(Genre)) {
-                        SortedMedia.add(currentMedia);
+                        FilteredMedia.add(currentMedia);
                     }
                 }
             }
         }
-        return SortedMedia;
+        return FilteredMedia;
     }
 }

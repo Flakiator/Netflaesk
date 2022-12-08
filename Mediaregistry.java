@@ -5,6 +5,6 @@ public interface Mediaregistry
         return null;
     }
 
-    public List<MediaImpl> search(String text);
+    public List<MediaImpl> search(String SearchText, List<MediaImpl>FilteredeList);
     public List<MediaImpl> filter(String Genre, String Medietype, List<MediaImpl>AllMedia);
 }
