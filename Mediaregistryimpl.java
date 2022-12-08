@@ -93,7 +93,7 @@ public class Mediaregistryimpl implements Mediaregistry
     public List<MediaImpl> filter(String Genre, String Medietype, List<MediaImpl>AllMedia)
     {
 
-        List<MediaImpl> FilteredMedia = null;
+        List<MediaImpl> FilteredMedia = new ArrayList<>();
         //String Genre = (String) genreBox.getSelectedItem();
 
         // Tjekker for hvilken medietype, der skal vises.
