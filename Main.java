@@ -92,7 +92,10 @@ public class Main {
             }
 
             public void focusLost(FocusEvent e) {
-                searchBar.setText("Type here...");
+                if (searchBar.getText().equals(""))
+                {
+                    searchBar.setText("Type here...");
+                }
             }
         });
         //tilføjer tekstfelt
@@ -100,6 +103,10 @@ public class Main {
 
         // laver søgeknap
         JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(e ->
+        {
+            System.out.println(searchBar.getText());
+        });
         menuBar.add(searchButton);
 
     }
