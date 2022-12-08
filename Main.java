@@ -105,8 +105,6 @@ public class Main {
     }
 
     public static void makePanel() {
-        int rows = 0;
-        int columns = 0;
         // idé til oprettelse af knapper
         List<MediaImpl> medias = new ArrayList<>();
         medias.addAll(AllMovies);
