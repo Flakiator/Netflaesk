@@ -15,11 +15,18 @@ public class Main {
 
     private static List<Movie> AllMovies;
     private static List<Series> AllSeries;
+    private static List<MediaImpl> allmedias;
+
+    private static List<MediaImpl> current;
+    private static Mediaregistryimpl SingletonMediaregisty;
 
     public static void main(String[] args) {
-        Mediaregistryimpl SingletonMediaregisty = new Mediaregistryimpl();
+        SingletonMediaregisty = new Mediaregistryimpl();
         AllMovies = SingletonMediaregisty.initializeMovie();
         AllSeries = SingletonMediaregisty.initializeSeries();
+        allmedias = new ArrayList<>(AllMovies);
+        allmedias.addAll(AllSeries);
+        current = new ArrayList<>(allmedias);
         makeFrame();
     }
 
@@ -32,8 +39,8 @@ public class Main {
         frame.setResizable(true);
 
         //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
-
         makePanel();
+        makebuttons(current);
         makeMenuBar();
         frame.setSize(800, 800);
         frame.setVisible(true); //frame bliver synlig
@@ -105,7 +112,18 @@ public class Main {
         JButton searchButton = new JButton("Search");
         searchButton.addActionListener(e ->
         {
-            System.out.println(searchBar.getText());
+            //makePanel(SingletonMediaregisty.search(searchBar.getText(), allmedias));
+            overview.removeAll();
+            if (searchBar.getText().equals("Type here..."))
+            {
+                makebuttons(allmedias);
+            }
+            else
+            {
+                makebuttons(SingletonMediaregisty.search(searchBar.getText(),allmedias));
+            }
+            overview.revalidate();
+            overview.repaint();
         });
         menuBar.add(searchButton);
 
@@ -113,32 +131,31 @@ public class Main {
 
     public static void makePanel() {
         // idé til oprettelse af knapper
-        List<MediaImpl> medias = new ArrayList<>();
-        medias.addAll(AllMovies);
-        medias.addAll(AllSeries);
         //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
-        makebuttons(medias);
+        overview = new JPanel();
+        //Scrollbar
+        scrollPane = new JScrollPane(overview);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         frame.add(scrollPane);
         overview.setBackground(Color.lightGray);
 
     }
 
     public static void makebuttons(List<MediaImpl> medias) {
-        overview = new JPanel();
-        List<JButton> buttons = new ArrayList<>();
-        //Scrollbar
-        scrollPane = new JScrollPane(overview);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+
         // makes gridlayout for the buttons to be displayed on
-        double size = medias.size() / 7;
-        int rows = (int) Math.ceil(size);
+        int rows = (int) (medias.size() / 7) + 1;
         int columns = 7;
         int counter = 0;
         overview.setLayout(new GridLayout(rows, columns, 2, 1));
         // makes buttons
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
+                if (counter == medias.size())
+                {
+                    break;
+                }
                 ImageIcon icon = new ImageIcon(medias.get(counter).getPicture());
                 JButton button = new JButton(icon);
                 button.setActionCommand(medias.get(counter).getTitle());
@@ -147,7 +164,6 @@ public class Main {
                 {
                     System.out.println(button.getActionCommand());
                 });
-                buttons.add(button);
                 overview.add(button);
                 counter++;
             }

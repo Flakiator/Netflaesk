@@ -79,10 +79,11 @@ public class Mediaregistryimpl implements Mediaregistry
 
     public List<MediaImpl> search(String SearchText, List<MediaImpl>FilteredeList)
     {
-        List<MediaImpl> SortedBySearch = null;
+        List<MediaImpl> SortedBySearch = new ArrayList<>();
         SearchText = SearchText.toLowerCase();
+        System.out.println(SearchText);
         for(MediaImpl currentMedia : FilteredeList) {
-            if (currentMedia.getTitle().toLowerCase().equals(SearchText)) {
+            if (currentMedia.getTitle().toLowerCase().contains(SearchText)) {
                 SortedBySearch.add(currentMedia);
             }
         }
