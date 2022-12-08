@@ -112,16 +112,19 @@ public class Main {
         JButton searchButton = new JButton("Search");
         searchButton.addActionListener(e ->
         {
-            //makePanel(SingletonMediaregisty.search(searchBar.getText(), allmedias));
+            // Fjerner ting fra panelet så det nye kan skrives
             overview.removeAll();
             if (searchBar.getText().equals("Type here..."))
             {
+                // udksriver alle medier hvis søgefeltet er tomt
                 makebuttons(allmedias);
             }
             else
             {
-                makebuttons(SingletonMediaregisty.search(searchBar.getText(),allmedias));
+                // Returnerer de film der passer til søgetekst
+                makebuttons(SingletonMediaregisty.search(searchBar.getText(),current));
             }
+            // Opdaterer paneltet
             overview.revalidate();
             overview.repaint();
         });
