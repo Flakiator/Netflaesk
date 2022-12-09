@@ -24,6 +24,7 @@ public class DataAcessImpl implements DataAcess
             }
             // Lukker myReader da vi nu har læst hele txt filen igennem
             myReader.close();
+            Collections.sort(media);
             return media;
             // tager højde for hvis filen ikke eksisterer
         } catch (FileNotFoundException e)
@@ -38,14 +39,12 @@ public class DataAcessImpl implements DataAcess
     {
         String moviesPath = "Data/film.txt";
         List<String> media = loadMedia(moviesPath);
-        Collections.sort(media);
         return media;
     }
     public List<String> loadSeries()
     {
         String seriesPath = "Data/serier.txt";
         List<String> media = loadMedia(seriesPath);
-        Collections.sort(media);
         return media;
     }
 
