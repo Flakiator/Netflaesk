@@ -1,3 +1,5 @@
+import org.w3c.dom.events.Event;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -85,6 +87,24 @@ public class Main {
         String[] medias = {"All", "Movies", "Series"};
         mediaBox = new JComboBox<>(medias);
         menuBar.add(mediaBox);
+
+
+        //Sortering imellem medier
+        mediaBox.addActionListener(e ->
+        {
+            // Fjerner ting fra panelet så det nye kan skrives
+            overview.removeAll();
+                if(e.getSource()==mediaBox){
+                    System.out.println(mediaBox.getSelectedItem());
+
+                    makebuttons(SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),
+                            mediaBox.getSelectedItem().toString(),current));
+
+            }
+            // Opdaterer paneltet
+            overview.revalidate();
+            overview.repaint();
+        });
 
         //mellemrum efter media
         menuBar.add(new JToolBar.Separator(new Dimension(30, 0)));
