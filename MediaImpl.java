@@ -9,13 +9,14 @@ public abstract class MediaImpl implements Media {
 
     String mediatype = "All";
 
-    public MediaImpl(String title, String year, String picture, List<String> genre, Double score, boolean favorite) {
+    public MediaImpl(String title, String year, String picture, List<String> genre, Double score, boolean favorite, String mediatype) {
         this.title = title;
         this.picture = picture;
         this.genre = genre;
         this.score = score;
         this.favorite = favorite;
         this.year = year;
+        this.mediatype = mediatype;
     }
 
     public void addToFavorites() {
@@ -23,7 +24,7 @@ public abstract class MediaImpl implements Media {
     }
 
     public boolean isFavorite() {
-        return false;
+        return this.favorite;
     }
 
     public String getTitle() {

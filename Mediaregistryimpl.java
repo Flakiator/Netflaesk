@@ -8,7 +8,7 @@ public class Mediaregistryimpl implements Mediaregistry
     {
         List<Movie> m = new ArrayList<>();
 
-        List<Media> media = initialize(data.loadMovies(), data.loadMPic());
+        List<MediaImpl> media = initialize(data.loadMovies(), data.loadMPic());
 
         for (Media i: media)
         {
@@ -21,7 +21,7 @@ public class Mediaregistryimpl implements Mediaregistry
     {
         List<Series> s = new ArrayList<>();
 
-        List<Media> media = initialize(data.loadSeries(), data.loadSPic());
+        List<MediaImpl> media = initialize(data.loadSeries(), data.loadSPic());
 
         for (Media i: media)
         {
@@ -30,9 +30,9 @@ public class Mediaregistryimpl implements Mediaregistry
         return s;
     }
     // Generel initializer bruges ikke i main (derfor private)
-    private List<Media> initialize(List<String> load, List<String> picture)
+    private List<MediaImpl> initialize(List<String> load, List<String> picture)
     {
-        List<Media> medias = new ArrayList<>();
+        List<MediaImpl> medias = new ArrayList<>();
         for (int i = 0; i < load.size();i++)
         {
             // Opdeler alle film (og deres, årstal genre osv. i en liste "elements")
@@ -66,12 +66,12 @@ public class Mediaregistryimpl implements Mediaregistry
                 }
                 // Tilføjer serie objektet til liste over medier
 
-                medias.add(new Series(elements[0], elements[1].trim(), picture.get(i), genre, score, false,episodes,season));
+                medias.add(new Series(elements[0], elements[1].trim(), picture.get(i), genre, score, false,episodes,season,"Series"));
             }
             else
             {
                 // Tilføjer film objektet til liste over medier
-                medias.add(new Movie(elements[0], elements[1].trim(), picture.get(i), genre, score, false));
+                medias.add(new Movie(elements[0], elements[1].trim(), picture.get(i), genre, score, false,"Movies"));
             }
         }
         return medias;
