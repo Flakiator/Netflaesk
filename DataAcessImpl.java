@@ -4,6 +4,12 @@ import java.io.*;
 public class DataAcessImpl implements DataAcess
 {
     //private String favorites = "Data/favorites.txt";
+    private String moviesPath = "Data/film.txt";
+    private String mPicPath = "Data/filmplakater";
+    private String seriesPath = "Data/serier.txt";
+    private String sPicPath = "Data/serieforsider";
+
+    private List<String> favorites = new ArrayList<>();
 
     public List<String> loadMedia(String path)
     {
@@ -37,13 +43,11 @@ public class DataAcessImpl implements DataAcess
 
     public List<String> loadMovies()
     {
-        String moviesPath = "Data/film.txt";
         List<String> media = loadMedia(moviesPath);
         return media;
     }
     public List<String> loadSeries()
     {
-        String seriesPath = "Data/serier.txt";
         List<String> media = loadMedia(seriesPath);
         return media;
     }
@@ -66,20 +70,17 @@ public class DataAcessImpl implements DataAcess
     }
     public List<String> loadMPic()
     {
-        String mPicPath = "Data/filmplakater";
         return loadPic(mPicPath);
     }
     public List<String> loadSPic()
     {
-        String sPicPath = "Data/serieforsider";
         return loadPic(sPicPath);
     }
     public List<String> loadFavorites()
     {
         return null;
     }
-    public void saveFavorites(List<String> favorites)
+    public void saveFavorite(String title)
     {
-
     }
 }

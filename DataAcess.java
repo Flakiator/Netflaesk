@@ -4,5 +4,5 @@ public interface DataAcess
     List<String> loadMedia(String path);
     List<String> loadPic(String path);
     List<String> loadFavorites();
-    void saveFavorites(List<String> favorites);
+    void saveFavorite(String title);
 }
