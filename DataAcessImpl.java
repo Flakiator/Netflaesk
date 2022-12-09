@@ -62,6 +62,7 @@ public class DataAcessImpl implements DataAcess
         {
             mediaPic.add(String.valueOf(allFiles[i]));
         }
+        Collections.sort(mediaPic);
         return mediaPic;
     }
     public List<String> loadMPic()
