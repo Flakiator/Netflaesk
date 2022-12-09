@@ -137,7 +137,7 @@ public class Main {
             if (searchBar.getText().equals("Type here..."))
             {
                 // udksriver alle medier hvis søgefeltet er tomt
-                makebuttons(allmedias);
+                makebuttons(current);
             }
             else
             {
