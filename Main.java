@@ -79,7 +79,8 @@ public class Main {
         {
             System.out.println(genreBox.getSelectedItem());
             overview.removeAll();
-            makebuttons(SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allmedias));
+            current = SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allmedias);
+            makebuttons(current);
             overview.revalidate();
             overview.repaint();
         });
@@ -98,29 +99,12 @@ public class Main {
         {
             System.out.println(genreBox.getSelectedItem());
             overview.removeAll();
-            makebuttons(SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allmedias));
+            current = SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allmedias);
+            makebuttons(current);
             overview.revalidate();
             overview.repaint();
         });
         menuBar.add(mediaBox);
-
-
-        //Sortering imellem medier
-        mediaBox.addActionListener(e ->
-        {
-            // Fjerner ting fra panelet så det nye kan skrives
-            overview.removeAll();
-                if(e.getSource()==mediaBox){
-                    System.out.println(mediaBox.getSelectedItem());
-
-                    makebuttons(SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),
-                            mediaBox.getSelectedItem().toString(),current));
-
-            }
-            // Opdaterer paneltet
-            overview.revalidate();
-            overview.repaint();
-        });
 
         //mellemrum efter media
         menuBar.add(new JToolBar.Separator(new Dimension(30, 0)));
