@@ -15,6 +15,7 @@ public class Main {
     private static JComboBox<String> genreBox;
     private static JComboBox<String> mediaBox;
 
+    private static JTextField searchBar;
     private static List<Movie> AllMovies;
     private static List<Series> AllSeries;
     private static List<MediaImpl> allmedias;
@@ -70,7 +71,8 @@ public class Main {
         JLabel genreLabel = new JLabel("Genres: ");
         menuBar.add(genreLabel);
 
-
+        // laver tekstfelt
+        JTextField searchBar = new JTextField("Type here...");
         String[] genres = {"All", "Action"};
 
         // Husk at tilføj <String>
@@ -80,6 +82,7 @@ public class Main {
             System.out.println(genreBox.getSelectedItem());
             overview.removeAll();
             current = SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allmedias);
+            searchBar.setText("Searching for: "  + genreBox.getSelectedItem().toString() + " " + mediaBox.getSelectedItem().toString());
             makebuttons(current);
             overview.revalidate();
             overview.repaint();
@@ -100,6 +103,7 @@ public class Main {
             System.out.println(genreBox.getSelectedItem());
             overview.removeAll();
             current = SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allmedias);
+            searchBar.setText("Searching for: "  + genreBox.getSelectedItem().toString() + " " + mediaBox.getSelectedItem().toString());
             makebuttons(current);
             overview.revalidate();
             overview.repaint();
@@ -109,9 +113,8 @@ public class Main {
         //mellemrum efter media
         menuBar.add(new JToolBar.Separator(new Dimension(30, 0)));
 
-        // laver tekstfelt
-        JTextField searchBar = new JTextField("Type here...");
-        // laver focus listener så "type here" går væk
+
+        // laver focus listener på searchbar så "type here" går væk
         searchBar.addFocusListener(new FocusListener() {
 
             public void focusGained(FocusEvent e) {
@@ -119,10 +122,7 @@ public class Main {
             }
 
             public void focusLost(FocusEvent e) {
-                if (searchBar.getText().equals(""))
-                {
-                    searchBar.setText("Type here...");
-                }
+                searchBar.setText("Type here...");
             }
         });
         //tilføjer tekstfelt
