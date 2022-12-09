@@ -15,7 +15,7 @@ public class Main {
     private static JComboBox<String> genreBox;
     private static JComboBox<String> mediaBox;
 
-    private static JTextField searchBar;
+    private static JTextField searchBar = new JTextField("Type here...");
     private static List<Movie> AllMovies;
     private static List<Series> AllSeries;
     private static List<MediaImpl> allmedias;
@@ -66,13 +66,10 @@ public class Main {
 
         menuBar.add(new JToolBar.Separator(new Dimension(50, 0)));
 
-
         //UI valg af Genre
         JLabel genreLabel = new JLabel("Genres: ");
         menuBar.add(genreLabel);
 
-        // laver tekstfelt
-        JTextField searchBar = new JTextField("Type here...");
         String[] genres = {"All", "Action"};
 
         // Husk at tilføj <String>
@@ -80,12 +77,7 @@ public class Main {
         genreBox.addActionListener(e ->
         {
             System.out.println(genreBox.getSelectedItem());
-            overview.removeAll();
-            current = SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allmedias);
-            searchBar.setText("Searching for: "  + genreBox.getSelectedItem().toString() + " " + mediaBox.getSelectedItem().toString());
-            makebuttons(current);
-            overview.revalidate();
-            overview.repaint();
+            makeMenuBoxFunctionality();
         });
         menuBar.add(genreBox);
 
@@ -100,13 +92,7 @@ public class Main {
         mediaBox = new JComboBox<>(medias);
         mediaBox.addActionListener(e ->
         {
-            System.out.println(genreBox.getSelectedItem());
-            overview.removeAll();
-            current = SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allmedias);
-            searchBar.setText("Searching for: "  + genreBox.getSelectedItem().toString() + " " + mediaBox.getSelectedItem().toString());
-            makebuttons(current);
-            overview.revalidate();
-            overview.repaint();
+            makeMenuBoxFunctionality();
         });
         menuBar.add(mediaBox);
 
@@ -151,7 +137,16 @@ public class Main {
         menuBar.add(searchButton);
 
     }
-
+    public static void makeMenuBoxFunctionality()
+    {
+        System.out.println(genreBox.getSelectedItem());
+        overview.removeAll();
+        current = SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allmedias);
+        searchBar.setText("Searching for: "  + genreBox.getSelectedItem().toString() + " " + mediaBox.getSelectedItem().toString());
+        makebuttons(current);
+        overview.revalidate();
+        overview.repaint();
+    }
     public static void makePanel() {
         // idé til oprettelse af knapper
         //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
