@@ -16,20 +16,20 @@ public class Main {
     private static JComboBox<String> mediaBox;
 
     private static JTextField searchBar = new JTextField("Type here...");
-    private static List<Movie> AllMovies;
-    private static List<Series> AllSeries;
-    private static List<MediaImpl> allmedias;
+    private static List<Movie> allMovies;
+    private static List<Series> allSeries;
+    private static List<MediaImpl> allMedias;
 
     private static List<MediaImpl> current;
-    private static Mediaregistryimpl SingletonMediaregisty;
+    private static Mediaregistryimpl mediaReg;
 
     public static void main(String[] args) {
-        SingletonMediaregisty = new Mediaregistryimpl();
-        AllMovies = SingletonMediaregisty.initializeMovie();
-        AllSeries = SingletonMediaregisty.initializeSeries();
-        allmedias = new ArrayList<>(AllMovies);
-        allmedias.addAll(AllSeries);
-        current = new ArrayList<>(allmedias);
+        mediaReg = new Mediaregistryimpl();
+        allMovies = mediaReg.initializeMovie();
+        allSeries = mediaReg.initializeSeries();
+        allMedias = new ArrayList<>(allMovies);
+        allMedias.addAll(allSeries);
+        current = new ArrayList<>(allMedias);
         makeFrame();
     }
 
@@ -128,7 +128,7 @@ public class Main {
             else
             {
                 // Returnerer de film der passer til søgetekst
-                makebuttons(SingletonMediaregisty.search(searchBar.getText(),current));
+                makebuttons(mediaReg.search(searchBar.getText(),current));
             }
             // Opdaterer paneltet
             overview.revalidate();
@@ -141,7 +141,7 @@ public class Main {
     {
         System.out.println(genreBox.getSelectedItem());
         overview.removeAll();
-        current = SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allmedias);
+        current = mediaReg.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allMedias);
         searchBar.setText("Searching for: "  + genreBox.getSelectedItem().toString() + " " + mediaBox.getSelectedItem().toString());
         makebuttons(current);
         overview.revalidate();

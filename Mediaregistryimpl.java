@@ -77,35 +77,32 @@ public class Mediaregistryimpl implements Mediaregistry
         return medias;
     }
 
-    public List<MediaImpl> search(String SearchText, List<MediaImpl>FilteredeList)
+    public List<MediaImpl> search(String searchText, List<MediaImpl>filteredList)
     {
         List<MediaImpl> SortedBySearch = new ArrayList<>();
-        SearchText = SearchText.toLowerCase();
-        System.out.println(SearchText);
-        for(MediaImpl currentMedia : FilteredeList) {
-            if (currentMedia.getTitle().toLowerCase().contains(SearchText)) {
+        searchText = searchText.toLowerCase();
+        System.out.println(searchText);
+        for(MediaImpl currentMedia : filteredList) {
+            if (currentMedia.getTitle().toLowerCase().contains(searchText)) {
                 SortedBySearch.add(currentMedia);
             }
         }
         return SortedBySearch;
     }
 
-    public List<MediaImpl> filter(String Genre, String Medietype, List<MediaImpl>AllMedia)
+    public List<MediaImpl> filter(String genre, String Medietype, List<MediaImpl>AllMedia)
     {
-
-        List<MediaImpl> FilteredMedia = new ArrayList<>();
-        //String Genre = (String) genreBox.getSelectedItem();
-
+        List<MediaImpl> filteredMedia = new ArrayList<>();
         // Tjekker for hvilken medietype, der skal vises.
         if(Medietype == "All")
         {
             for(MediaImpl currentMedia : AllMedia) {
-                if (Genre == "All")
+                if (genre == "All")
                 {
-                    FilteredMedia.add(currentMedia);
+                    filteredMedia.add(currentMedia);
                 }
-                else if (currentMedia.getGenre().contains(Genre)) {
-                    FilteredMedia.add(currentMedia);
+                else if (currentMedia.getGenre().contains(genre)) {
+                    filteredMedia.add(currentMedia);
                 }
             }
         }
@@ -113,16 +110,16 @@ public class Mediaregistryimpl implements Mediaregistry
         {
             for (MediaImpl currentMedia : AllMedia) {
                 if (currentMedia.getMediaType().equals(Medietype)) {
-                    if (Genre == "All")
+                    if (genre == "All")
                     {
-                        FilteredMedia.add(currentMedia);
+                        filteredMedia.add(currentMedia);
                     }
-                    else if (currentMedia.getGenre().contains(Genre)) {
-                        FilteredMedia.add(currentMedia);
+                    else if (currentMedia.getGenre().contains(genre)) {
+                        filteredMedia.add(currentMedia);
                     }
                 }
             }
         }
-        return FilteredMedia;
+        return filteredMedia;
     }
 }
