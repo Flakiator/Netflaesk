@@ -108,7 +108,6 @@ public class Main {
             }
 
             public void focusLost(FocusEvent e) {
-                searchBar.setText("Type here...");
             }
         });
         //tilføjer tekstfelt
@@ -127,8 +126,16 @@ public class Main {
             }
             else
             {
-                // Returnerer de film der passer til søgetekst
-                makebuttons(mediaReg.search(searchBar.getText(),current));
+                if (searchBar.getText().contains("Searching for:"))
+                {
+                    makebuttons(current);
+                }
+                else
+                {
+                    // Returnerer de film der passer til søgetekst
+                    makebuttons(mediaReg.search(searchBar.getText(),current));
+                }
+
             }
             // Opdaterer paneltet
             overview.revalidate();

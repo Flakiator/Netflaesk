@@ -18,4 +18,5 @@ public class Series extends MediaImpl
     {
         return this.seasons;
     }
+
 }
