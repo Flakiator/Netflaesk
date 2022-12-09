@@ -76,7 +76,6 @@ public class Main {
         genreBox = new JComboBox<>(genres);
         genreBox.addActionListener(e ->
         {
-            System.out.println(genreBox.getSelectedItem());
             makeMenuBoxFunctionality();
         });
         menuBar.add(genreBox);
@@ -146,7 +145,6 @@ public class Main {
     }
     public static void makeMenuBoxFunctionality()
     {
-        System.out.println(genreBox.getSelectedItem());
         overview.removeAll();
         current = mediaReg.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allMedias);
         searchBar.setText("Searching for: "  + genreBox.getSelectedItem().toString() + " " + mediaBox.getSelectedItem().toString());
