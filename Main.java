@@ -69,10 +69,18 @@ public class Main {
         menuBar.add(genreLabel);
 
 
-        String[] genres = {"All", "Kategorierne..."};
+        String[] genres = {"All", "Action"};
 
         // Husk at tilføj <String>
         genreBox = new JComboBox<>(genres);
+        genreBox.addActionListener(e ->
+        {
+            System.out.println(genreBox.getSelectedItem());
+            overview.removeAll();
+            makebuttons(SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allmedias));
+            overview.revalidate();
+            overview.repaint();
+        });
         menuBar.add(genreBox);
 
         //Mellemrum efter genres
@@ -84,6 +92,14 @@ public class Main {
 
         String[] medias = {"All", "Movies", "Series"};
         mediaBox = new JComboBox<>(medias);
+        mediaBox.addActionListener(e ->
+        {
+            System.out.println(genreBox.getSelectedItem());
+            overview.removeAll();
+            makebuttons(SingletonMediaregisty.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allmedias));
+            overview.revalidate();
+            overview.repaint();
+        });
         menuBar.add(mediaBox);
 
         //mellemrum efter media

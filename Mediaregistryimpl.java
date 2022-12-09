@@ -100,16 +100,24 @@ public class Mediaregistryimpl implements Mediaregistry
         if(Medietype == "All")
         {
             for(MediaImpl currentMedia : AllMedia) {
-
-                if (currentMedia.getGenre().contains(Genre)) {
+                if (Genre == "All")
+                {
+                    FilteredMedia.add(currentMedia);
+                }
+                else if (currentMedia.getGenre().contains(Genre)) {
                     FilteredMedia.add(currentMedia);
                 }
             }
         }
-        else {
+        else
+        {
             for (MediaImpl currentMedia : AllMedia) {
                 if (currentMedia.getMediaType().equals(Medietype)) {
-                    if (currentMedia.getGenre().contains(Genre)) {
+                    if (Genre == "All")
+                    {
+                        FilteredMedia.add(currentMedia);
+                    }
+                    else if (currentMedia.getGenre().contains(Genre)) {
                         FilteredMedia.add(currentMedia);
                     }
                 }
