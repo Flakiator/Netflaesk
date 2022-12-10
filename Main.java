@@ -191,7 +191,7 @@ public class Main {
                 button.addActionListener(e ->
                         {
                             System.out.println(button.getActionCommand());
-                            mediaReg.addToFavorites(button.getActionCommand(),allMedias);
+                            mediaReg.addToFavorites(button.getActionCommand(),current);
                         });
 
                 overview.add(button);

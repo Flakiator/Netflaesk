@@ -6,7 +6,7 @@ public class Mediaregistryimpl implements Mediaregistry
     //indlæser database
     private DataAccessImpl data = new DataAccessImpl();
     private List<String> favorites;
-
+    // sætter favorites til den lokale favorit txt fil
     {
         try {
             favorites = data.loadFavorites();
@@ -48,7 +48,6 @@ public class Mediaregistryimpl implements Mediaregistry
         List<MediaImpl> medias = new ArrayList<>();
         for (int i = 0; i < load.size();i++)
         {
-            boolean favorite = false;
             // Opdeler alle film (og deres, årstal genre osv. i en liste "elements")
             String[] elements = load.get(i).trim().split(";");
             //elements[0] = title
@@ -57,9 +56,12 @@ public class Mediaregistryimpl implements Mediaregistry
             //elements[3] = score
             //elements[4] = sæson-episoder
 
-            // Tjekker om mediet er på favorit listen
+            // sætter favorite til false hvis de ikke er på den lokale favorit liste
+            boolean favorite = false;
+            // Tjekker om mediet er på den lokale favorit liste
             if (favorites.contains(elements[0]))
             {
+                // hvis det er skal objektet intialiseres som favorit
                 favorite = true;
             }
             // Laver opdeler genrer i sin egen liste
@@ -163,8 +165,8 @@ public class Mediaregistryimpl implements Mediaregistry
         }
         return genres;
     }
-
     public void addToFavorites(String title,List<MediaImpl> media) {
+        // tilføjer titlen til favoritlisten jo mindre den allerede er der
         if (!favorites.contains(title))
         {
             favorites.add(title);
@@ -173,26 +175,30 @@ public class Mediaregistryimpl implements Mediaregistry
         {
             if (m.getTitle().equals(title))
             {
+                // Sætter favorit status til true på objektet
                 m.setFavorite(true);
             }
         }
 
         try {
+            // opdaterer lokal favort liste
             data.updateFavorite(favorites);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
     public void removeFromFavorites(String title, List<MediaImpl> media) throws IOException {
+        // fjerner titlen fra favorit listen i mediaregistry
         favorites.remove(title);
         for (MediaImpl m: media)
         {
             if (m.getTitle().equals(title))
             {
+                // sætter mediet til false på objektet
                 m.setFavorite(false);
             }
         }
+        // opdaterer den lokale favorit liste
         data.updateFavorite(favorites);
     }
 }

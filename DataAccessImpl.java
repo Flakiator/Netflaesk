@@ -79,6 +79,7 @@ public class DataAccessImpl implements DataAccess
         Scanner myReader = new Scanner(file);
         while (myReader.hasNextLine())
         {
+            // Tilføjer hver titel i den lokale favorit liste til favorites
             String title = myReader.nextLine();
             favorites.add(title);
         }
@@ -88,9 +89,10 @@ public class DataAccessImpl implements DataAccess
         // Laver en printwriter og en filewriter
         FileWriter fileWriter = new FileWriter("Data/favorites.txt");
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        for(String media: favorites)
+        for(String title: favorites)
         {
-            printWriter.println(media);
+            // skriver titlerne der står i favorites
+            printWriter.println(title);
         }
         printWriter.close();
     }
