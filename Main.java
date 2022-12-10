@@ -144,10 +144,15 @@ public class Main {
     }
     public static void makeMenuBoxFunctionality()
     {
+        // fjerner elementer fra vinduet så der ikke bliver skrevet oven på de gamle knapper
         overview.removeAll();
+        // opdaterer current listen til medier der overholder de filtrer burgeren har tilvalgt
         current = mediaReg.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allMedias);
+        // Sætter teksten i søgefeltet så brugeren ved at de søger efter de filtrer
         searchBar.setText("Searching for: "  + genreBox.getSelectedItem().toString() + " " + mediaBox.getSelectedItem().toString());
+        // Laver knapperne så de passer med current listen
         makebuttons(current);
+        // opdaterer vinduet
         overview.revalidate();
         overview.repaint();
     }
