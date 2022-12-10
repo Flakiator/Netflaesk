@@ -94,10 +94,10 @@ public class Mediaregistryimpl implements Mediaregistry
     {
         List<MediaImpl> filteredMedia = new ArrayList<>();
         // Tjekker for hvilken medietype, der skal vises.
-        if(Medietype == "All")
+        if(Medietype.equals("All"))
         {
             for(MediaImpl currentMedia : AllMedia) {
-                if (genre == "All")
+                if (genre.equals("All"))
                 {
                     filteredMedia.add(currentMedia);
                 }
@@ -110,7 +110,7 @@ public class Mediaregistryimpl implements Mediaregistry
         {
             for (MediaImpl currentMedia : AllMedia) {
                 if (currentMedia.getMediaType().equals(Medietype)) {
-                    if (genre == "All")
+                    if (genre.equals("All"))
                     {
                         filteredMedia.add(currentMedia);
                     }
@@ -132,9 +132,8 @@ public class Mediaregistryimpl implements Mediaregistry
             List<String> tmp = m.getGenre();
             for (String genre: tmp)
             {
-                if (genresl.contains(genre))
-                {
-                }
+                if (genresl.contains(genre));
+
                 else genresl.add(genre);
             }
         }

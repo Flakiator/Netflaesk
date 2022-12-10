@@ -1,5 +1,3 @@
-import org.w3c.dom.events.Event;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -10,14 +8,10 @@ public class Main {
     private static JFrame frame;
     private static JPanel overview;
 
-    private static JScrollPane scrollPane;
-
     private static JComboBox<String> genreBox;
     private static JComboBox<String> mediaBox;
 
     private static JTextField searchBar = new JTextField("Type here...");
-    private static List<Movie> allMovies;
-    private static List<Series> allSeries;
     private static List<MediaImpl> allMedias;
 
     private static List<MediaImpl> current;
@@ -25,8 +19,8 @@ public class Main {
 
     public static void main(String[] args) {
         mediaReg = new Mediaregistryimpl();
-        allMovies = mediaReg.initializeMovie();
-        allSeries = mediaReg.initializeSeries();
+        List<Movie> allMovies = mediaReg.initializeMovie();
+        List<Series> allSeries = mediaReg.initializeSeries();
         // Samler medier i en liste
         allMedias = new ArrayList<>(allMovies);
         allMedias.addAll(allSeries);
@@ -74,9 +68,7 @@ public class Main {
 
         genreBox = new JComboBox<>(genres);
         genreBox.addActionListener(e ->
-        {
-            makeMenuBoxFunctionality();
-        });
+                makeMenuBoxFunctionality());
         menuBar.add(genreBox);
 
         //Mellemrum efter genres
@@ -89,9 +81,7 @@ public class Main {
         String[] medias = {"All", "Movies", "Series"};
         mediaBox = new JComboBox<>(medias);
         mediaBox.addActionListener(e ->
-        {
-            makeMenuBoxFunctionality();
-        });
+                makeMenuBoxFunctionality());
         menuBar.add(mediaBox);
 
         //mellemrum efter media
@@ -161,7 +151,7 @@ public class Main {
         //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
         overview = new JPanel();
         //Scrollbar
-        scrollPane = new JScrollPane(overview);
+        JScrollPane scrollPane = new JScrollPane(overview);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         frame.add(scrollPane);
@@ -172,7 +162,7 @@ public class Main {
     public static void makebuttons(List<MediaImpl> medias) {
 
         // makes gridlayout for the buttons to be displayed on
-        int rows = (int) (medias.size() / 7) + 1;
+        int rows = (medias.size() / 7) + 1;
         int columns = 7;
         int counter = 0;
         overview.setLayout(new GridLayout(rows, columns, 2, 1));
@@ -188,9 +178,7 @@ public class Main {
                 button.setActionCommand(medias.get(counter).getTitle());
                 button.setPreferredSize(new Dimension(45, 200));
                 button.addActionListener(e ->
-                {
-                    System.out.println(button.getActionCommand());
-                });
+                        System.out.println(button.getActionCommand()));
                 overview.add(button);
                 counter++;
             }

@@ -3,11 +3,6 @@ import java.io.*;
 
 public class DataAcessImpl implements DataAcess
 {
-    //private String favorites = "Data/favorites.txt";
-    private String moviesPath = "Data/film.txt";
-    private String mPicPath = "Data/filmplakater";
-    private String seriesPath = "Data/serier.txt";
-    private String sPicPath = "Data/serieforsider";
 
     private List<String> favorites = new ArrayList<>();
 
@@ -43,13 +38,14 @@ public class DataAcessImpl implements DataAcess
 
     public List<String> loadMovies()
     {
-        List<String> media = loadMedia(moviesPath);
-        return media;
+        //private String favorites = "Data/favorites.txt";
+        String moviesPath = "Data/film.txt";
+        return loadMedia(moviesPath);
     }
     public List<String> loadSeries()
     {
-        List<String> media = loadMedia(seriesPath);
-        return media;
+        String seriesPath = "Data/serier.txt";
+        return loadMedia(seriesPath);
     }
 
     public List<String> loadPic(String path)
@@ -57,23 +53,24 @@ public class DataAcessImpl implements DataAcess
         // Laver en liste billede navnene kan stå i
         List<String> mediaPic = new ArrayList<>();
         // Giver file navnet på vejen til filen
-        File file = new File(path);
+        File filepath = new File(path);
         // bruger gemmer alle billede navnene i en liste "allFiles" med listFiles metoden
-        File[] allFiles = file.listFiles();
+        File[] allPictures = filepath.listFiles();
         // itererer gennem allFiles og gemmer navnene på billederne i "mediaPic"
-        for (int i = 0; i < allFiles.length; i++)
-        {
-            mediaPic.add(String.valueOf(allFiles[i]));
+        for (File picture : allPictures) {
+            mediaPic.add(String.valueOf(picture));
         }
         Collections.sort(mediaPic);
         return mediaPic;
     }
     public List<String> loadMPic()
     {
+        String mPicPath = "Data/filmplakater";
         return loadPic(mPicPath);
     }
     public List<String> loadSPic()
     {
+        String sPicPath = "Data/serieforsider";
         return loadPic(sPicPath);
     }
     public List<String> loadFavorites()
