@@ -1,8 +1,20 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 public class Mediaregistryimpl implements Mediaregistry
 {
     //indlæser database
-    DataAccessImpl data = new DataAccessImpl();
+    private DataAccessImpl data = new DataAccessImpl();
+    private List<String> favorites;
+
+    {
+        try {
+            favorites = data.loadFavorites();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     //initialize til film
     public List<Movie> initializeMovie()
     {
@@ -32,9 +44,11 @@ public class Mediaregistryimpl implements Mediaregistry
     // Generel initializer bruges ikke i main (derfor private)
     private List<MediaImpl> initialize(List<String> load, List<String> picture)
     {
+
         List<MediaImpl> medias = new ArrayList<>();
         for (int i = 0; i < load.size();i++)
         {
+            boolean favorite = false;
             // Opdeler alle film (og deres, årstal genre osv. i en liste "elements")
             String[] elements = load.get(i).trim().split(";");
             //elements[0] = title
@@ -43,6 +57,11 @@ public class Mediaregistryimpl implements Mediaregistry
             //elements[3] = score
             //elements[4] = sæson-episoder
 
+            // Tjekker om mediet er på favorit listen
+            if (favorites.contains(elements[0]))
+            {
+                favorite = true;
+            }
             // Laver opdeler genrer i sin egen liste
             String[] genres = elements[2].split(",");
             // tilføjer dem til ArrayList
@@ -66,12 +85,12 @@ public class Mediaregistryimpl implements Mediaregistry
                 }
                 // Tilføjer serie objektet til liste over medier
 
-                medias.add(new Series(elements[0], elements[1].trim(), picture.get(i), genre, score, false,episodes,season,"Series"));
+                medias.add(new Series(elements[0], elements[1].trim(), picture.get(i), genre, score, favorite,episodes,season,"Series"));
             }
             else
             {
                 // Tilføjer film objektet til liste over medier
-                medias.add(new Movie(elements[0], elements[1].trim(), picture.get(i), genre, score, false,"Movies"));
+                medias.add(new Movie(elements[0], elements[1].trim(), picture.get(i), genre, score, favorite,"Movies"));
             }
         }
         return medias;
@@ -143,5 +162,37 @@ public class Mediaregistryimpl implements Mediaregistry
             genres[i] = genresl.get(i);
         }
         return genres;
+    }
+
+    public void addToFavorites(String title,List<MediaImpl> media) {
+        if (!favorites.contains(title))
+        {
+            favorites.add(title);
+        }
+        for (MediaImpl m: media)
+        {
+            if (m.getTitle().equals(title))
+            {
+                m.setFavorite(true);
+            }
+        }
+
+        try {
+            data.updateFavorite(favorites);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void removeFromFavorites(String title, List<MediaImpl> media) throws IOException {
+        favorites.remove(title);
+        for (MediaImpl m: media)
+        {
+            if (m.getTitle().equals(title))
+            {
+                m.setFavorite(false);
+            }
+        }
+        data.updateFavorite(favorites);
     }
 }

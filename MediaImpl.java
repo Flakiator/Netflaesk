@@ -18,10 +18,6 @@ public abstract class MediaImpl implements Media {
         this.mediatype = mediatype;
     }
 
-    public void addToFavorites() {
-
-    }
-
     public boolean isFavorite() {
         return this.favorite;
     }
@@ -42,8 +38,12 @@ public abstract class MediaImpl implements Media {
     {
         return this.picture;
     }
-    String getMediaType()
+    public String getMediaType()
     {
         return this.mediatype;
+    }
+    public void setFavorite(boolean status)
+    {
+        this.favorite = status;
     }
 }

@@ -4,8 +4,6 @@ import java.io.*;
 public class DataAccessImpl implements DataAccess
 {
 
-    private List<String> favorites = new ArrayList<>();
-
     public List<String> loadMedia(String path)
     {
         // Laver en liste medie navnene kan stå i
@@ -73,11 +71,28 @@ public class DataAccessImpl implements DataAccess
         String sPicPath = "Data/serieforsider";
         return loadPic(sPicPath);
     }
-    public List<String> loadFavorites()
-    {
-        return null;
+    public List<String> loadFavorites() throws FileNotFoundException {
+        List<String> favorites = new ArrayList<>();
+        // Giver file navnet på vejen til filen
+        File file = new File("Data/favorites.txt");
+        // Laver et scanner objekt
+        Scanner myReader = new Scanner(file);
+        while (myReader.hasNextLine())
+        {
+            String title = myReader.nextLine();
+            favorites.add(title);
+        }
+        return favorites;
     }
-    public void saveFavorite(String title)
-    {
+    public void updateFavorite(List<String> favorites) throws IOException {
+        // Laver en printwriter og en filewriter
+        FileWriter fileWriter = new FileWriter("Data/favorites.txt");
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        for(String media: favorites)
+        {
+            printWriter.println(media);
+        }
+        printWriter.close();
     }
+
 }

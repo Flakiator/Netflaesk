@@ -16,6 +16,7 @@ public class Main {
 
     private static List<MediaImpl> current;
     private static Mediaregistryimpl mediaReg;
+    private static List<MediaImpl> favorites = new ArrayList<>();
 
     public static void main(String[] args) {
         mediaReg = new Mediaregistryimpl();
@@ -51,8 +52,18 @@ public class Main {
         JButton myList = new JButton("My List");
         myList.addActionListener(e ->
         {
-            System.out.println("MY LIST!!!");
-            // Kald ny JFrame evt. gennem en ny metode under makeMenuBar()
+            for (MediaImpl media: allMedias)
+            {
+                // If the media has the status favorite and the favorite list does not allready contain it add it
+                if (media.isFavorite() && !favorites.contains(media))
+                {
+                    favorites.add(media);
+                }
+            }
+            overview.removeAll();
+            makebuttons(favorites);
+            overview.revalidate();
+            overview.repaint();
         });
         menuBar.add(myList);
 
@@ -178,7 +189,11 @@ public class Main {
                 button.setActionCommand(medias.get(counter).getTitle());
                 button.setPreferredSize(new Dimension(45, 200));
                 button.addActionListener(e ->
-                        System.out.println(button.getActionCommand()));
+                        {
+                            System.out.println(button.getActionCommand());
+                            mediaReg.addToFavorites(button.getActionCommand(),allMedias);
+                        });
+
                 overview.add(button);
                 counter++;
             }

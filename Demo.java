@@ -1,16 +1,18 @@
+import java.io.IOException;
 import java.util.*;
 
 public class Demo
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
         Mediaregistryimpl loader = new Mediaregistryimpl();
 
         List<Movie> movies = loader.initializeMovie();
         List<Series> series = loader.initializeSeries();
-        List<Media> medias = new ArrayList<>();
+        List<MediaImpl> medias = new ArrayList<>();
         medias.addAll(movies);
         medias.addAll(series);
-        System.out.println(movies.get(0).getTitle());
+        loader.addToFavorites(medias.get(1).getTitle(),medias);
+        loader.removeFromFavorites(medias.get(0).getTitle(), medias);
+        System.out.println(medias.get(1).isFavorite());
     }
 }
