@@ -122,4 +122,27 @@ public class Mediaregistryimpl implements Mediaregistry
         }
         return filteredMedia;
     }
+
+    public String[] getAllGenre(List<MediaImpl> medias)
+    {
+        List<String> genresl = new ArrayList<>();
+        genresl.add("All");
+        for (MediaImpl m : medias)
+        {
+            List<String> tmp = m.getGenre();
+            for (String genre: tmp)
+            {
+                if (genresl.contains(genre))
+                {
+                }
+                else genresl.add(genre);
+            }
+        }
+        String[] genres = new String[genresl.size()];
+        for (int i = 0; i < genres.length; i++)
+        {
+            genres[i] = genresl.get(i);
+        }
+        return genres;
+    }
 }

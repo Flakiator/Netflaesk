@@ -27,6 +27,7 @@ public class Main {
         mediaReg = new Mediaregistryimpl();
         allMovies = mediaReg.initializeMovie();
         allSeries = mediaReg.initializeSeries();
+        // Samler medier i en liste
         allMedias = new ArrayList<>(allMovies);
         allMedias.addAll(allSeries);
         current = new ArrayList<>(allMedias);
@@ -48,7 +49,6 @@ public class Main {
         frame.setSize(800, 800);
         frame.setVisible(true); //frame bliver synlig
     }
-
     public static void makeMenuBar() {
         //Laver MenuBar
         JMenuBar menuBar = new JMenuBar();
@@ -70,9 +70,8 @@ public class Main {
         JLabel genreLabel = new JLabel("Genres: ");
         menuBar.add(genreLabel);
 
-        String[] genres = {"All", "Action"};
+        String[] genres = mediaReg.getAllGenre(allMedias);
 
-        // Husk at tilføj <String>
         genreBox = new JComboBox<>(genres);
         genreBox.addActionListener(e ->
         {
