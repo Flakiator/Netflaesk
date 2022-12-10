@@ -1,5 +1,5 @@
 import java.util.*;
-public interface DataAcess
+public interface DataAccess
 {
     List<String> loadMedia(String path);
     List<String> loadPic(String path);

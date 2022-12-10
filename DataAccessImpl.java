@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class DataAcessImpl implements DataAcess
+public class DataAccessImpl implements DataAccess
 {
 
     private List<String> favorites = new ArrayList<>();

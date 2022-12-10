@@ -2,7 +2,7 @@ import java.util.*;
 public class Mediaregistryimpl implements Mediaregistry
 {
     //indlæser database
-    DataAcessImpl data = new DataAcessImpl();
+    DataAccessImpl data = new DataAccessImpl();
     //initialize til film
     public List<Movie> initializeMovie()
     {
