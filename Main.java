@@ -245,7 +245,7 @@ public class Main {
     // Åbner et nyt vindue for det medie man har trykket på
     public static void openMedia(MediaImpl currentMedia)
     {
-        //Media currentMedia = allMedias.get(103); // Denne linje skal slettes, og den skal bare være med som parameter i stedet.
+        // laver ny frame
         popup = new JFrame("Netflæsk"); //Laver en frame
         // Panel til at afspille
         JPanel popuppanel = new JPanel(new GridBagLayout());
@@ -337,6 +337,7 @@ public class Main {
                 favorites.add(media);
             }
         }
+        // opdaterer overview
         overview.removeAll();
         makebuttons(favorites);
         overview.revalidate();
