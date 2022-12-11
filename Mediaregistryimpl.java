@@ -181,13 +181,17 @@ public class Mediaregistryimpl implements Mediaregistry
         }
     }
 
-    public void removeFromFavorites(MediaImpl media) throws IOException {
+    public void removeFromFavorites(MediaImpl media) {
         String title = media.getTitle();
         // fjerner titlen fra favorit listen i mediaregistry
         favorites.remove(title);
         // sætter mediet til false på objektet
         media.setFavorite(false);
         // opdaterer den lokale favorit liste
-        data.updateFavorite(favorites);
+        try {
+            data.updateFavorite(favorites);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

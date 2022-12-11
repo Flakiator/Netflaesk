@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -18,6 +17,8 @@ public class Main {
     private static List<MediaImpl> current;
     private static Mediaregistryimpl mediaReg;
     private static List<MediaImpl> favorites = new ArrayList<>();
+
+    private static String state = "Main";
 
     public static void main(String[] args) {
         mediaReg = new Mediaregistryimpl();
@@ -53,20 +54,8 @@ public class Main {
         JButton myList = new JButton("My List");
         myList.addActionListener(e ->
         {
-            // clearer favorites listen så medier der ikke er favorit længere bliver fjernet
-            favorites.removeAll(allMedias);
-            for (MediaImpl media: allMedias)
-            {
-                // If the media has the status favorite and the favorite list does not allready contain it add it
-                if (media.isFavorite())
-                {
-                    favorites.add(media);
-                }
-            }
-            overview.removeAll();
-            makebuttons(favorites);
-            overview.revalidate();
-            overview.repaint();
+            state = "My List";
+            Makemylist();
         });
         menuBar.add(myList);
 
@@ -82,7 +71,10 @@ public class Main {
 
         genreBox = new JComboBox<>(genres);
         genreBox.addActionListener(e ->
-                makeMenuBoxFunctionality());
+                {
+                    state = "Main";
+                    makeMenuBoxFunctionality();
+                });
         menuBar.add(genreBox);
 
         //Mellemrum efter genres
@@ -95,12 +87,15 @@ public class Main {
         String[] medias = {"All", "Movies", "Series"};
         mediaBox = new JComboBox<>(medias);
         mediaBox.addActionListener(e ->
-                makeMenuBoxFunctionality());
+                {
+                    state = "Main";
+                    makeMenuBoxFunctionality();
+                });
+
         menuBar.add(mediaBox);
 
         //mellemrum efter media
         menuBar.add(new JToolBar.Separator(new Dimension(30, 0)));
-
 
         // laver focus listener på searchbar så "type here" går væk
         searchBar.addFocusListener(new FocusListener() {
@@ -121,6 +116,7 @@ public class Main {
         {
             // Fjerner ting fra panelet så det nye kan skrives
             overview.removeAll();
+            state = "Main";
             if (searchBar.getText().equals("Type here..."))
             {
                 // udksriver alle medier hvis søgefeltet er tomt
@@ -146,6 +142,8 @@ public class Main {
         menuBar.add(searchButton);
 
     }
+
+
     public static void makeMenuBoxFunctionality()
     {
         // fjerner elementer fra vinduet så der ikke bliver skrevet oven på de gamle knapper
@@ -198,7 +196,6 @@ public class Main {
                 button.addActionListener(e ->
                         {
                             popup.dispose();
-                            mediaReg.addToFavorites(button.getmedia());
                             openMedia(button.getmedia());
                         });
                 c.gridx++;
@@ -224,27 +221,54 @@ public class Main {
         popup.setResizable(false);
         popup.setLocation(MouseInfo.getPointerInfo().getLocation());
         JButton playButton = new JButton("Play");
-
-        if(currentMedia.isFavorite()) {
-            JButton AddRemoveList = new JButton("Add to my list");
-        }
-        else {
-            JButton AddRemoveList = new JButton("Remove from my list");
-        }
         // JButton currentMedia
         playButton.addActionListener(e ->
         {
             // Skal erstattes med playfunktionen.
             System.out.println("PlaycurrentMedia");
         });
+        // Knap til at fjerne/tilføje film til ens liste
+        JButton AddRemoveList = new JButton("");
+        if(currentMedia.isFavorite()) {
 
+             AddRemoveList.setText("Remove from my list");
+        }
+        else {
+             AddRemoveList.setText("Add to my list");
+        }
+        // Tilføjer eller fjerner til favorit liste
+        AddRemoveList.addActionListener(e ->
+        {
+            popuppanel.remove(AddRemoveList);
+            if (currentMedia.isFavorite())
+            {
+                AddRemoveList.setText("Add to my list");
+                mediaReg.removeFromFavorites(currentMedia);
+            }
+            else
+            {
+                AddRemoveList.setText("Remove from my list");
+                mediaReg.addToFavorites(currentMedia);
+            }
+            // Opdaterer knapperne hvis brugeren er inde på listen mens de fjerner mediet
+            if (state.equals("My List"))
+            {
+                Makemylist();
+            }
+            popuppanel.revalidate();
+            popuppanel.repaint();
+            c.gridx = 0;
+            c.gridy = 2;
+            popuppanel.add(AddRemoveList,c);
+        });
         img.setIcon(new ImageIcon(currentMedia.getPicture()));
         c.gridx = 0;
         c.gridy = 0;
         popuppanel.add(img,c);
-        c.gridx = 0;
         c.gridy = 1;
         popuppanel.add(playButton,c);
+        c.gridy = 2;
+        popuppanel.add(AddRemoveList,c);
 
         //frame.getContentPane(panel);
         if(currentMedia.getMediaType().equals("Series"))
@@ -266,5 +290,23 @@ public class Main {
             System.out.println("PlaycurrentMedia");
         });
          */
+    }
+
+    private static void Makemylist() {
+
+        // clearer favorites listen så medier der ikke er favorit længere bliver fjernet
+        favorites.removeAll(allMedias);
+        for (MediaImpl media: allMedias)
+        {
+            // If the media has the status favorite and the favorite list does not allready contain it add it
+            if (media.isFavorite())
+            {
+                favorites.add(media);
+            }
+        }
+        overview.removeAll();
+        makebuttons(favorites);
+        overview.revalidate();
+        overview.repaint();
     }
 }
