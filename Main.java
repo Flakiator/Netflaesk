@@ -52,10 +52,12 @@ public class Main {
         JButton myList = new JButton("My List");
         myList.addActionListener(e ->
         {
+            // clearer favorites listen så medier der ikke er favorit længere bliver fjernet
+            favorites.removeAll(allMedias);
             for (MediaImpl media: allMedias)
             {
                 // If the media has the status favorite and the favorite list does not allready contain it add it
-                if (media.isFavorite() && !favorites.contains(media))
+                if (media.isFavorite())
                 {
                     favorites.add(media);
                 }
