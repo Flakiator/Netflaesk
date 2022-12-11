@@ -197,7 +197,6 @@ public class Main {
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         frame.add(scrollPane);
         overview.setBackground(Color.lightGray);
-
     }
 
     // Laver de knapper/medier der skal vises og kunne trykkes på
@@ -266,47 +265,14 @@ public class Main {
             System.out.println("PlaycurrentMedia");
         });
         // Knap til at fjerne/tilføje film til ens liste
-        JButton AddRemoveList = new JButton("");
-        if(currentMedia.isFavorite()) {
+        makeAddRemoveList(c,popuppanel,currentMedia);
 
-             AddRemoveList.setText("Remove from my list");
-        }
-        else {
-             AddRemoveList.setText("Add to my list");
-        }
-        // Tilføjer eller fjerner til favorit liste
-        AddRemoveList.addActionListener(e ->
-        {
-            popuppanel.remove(AddRemoveList);
-            if (currentMedia.isFavorite())
-            {
-                AddRemoveList.setText("Add to my list");
-                mediaReg.removeFromFavorites(currentMedia);
-            }
-            else
-            {
-                AddRemoveList.setText("Remove from my list");
-                mediaReg.addToFavorites(currentMedia);
-            }
-            // Opdaterer knapperne hvis brugeren er inde på listen mens de fjerner mediet
-            if (state.equals("My List"))
-            {
-                Makemylist();
-            }
-            popuppanel.revalidate();
-            popuppanel.repaint();
-            c.gridx = 0;
-            c.gridy = 2;
-            popuppanel.add(AddRemoveList,c);
-        });
         img.setIcon(new ImageIcon(currentMedia.getPicture()));
         c.gridx = 0;
         c.gridy = 0;
         popuppanel.add(img,c);
         c.gridy = 1;
         popuppanel.add(playButton,c);
-        c.gridy = 2;
-        popuppanel.add(AddRemoveList,c);
 
         //frame.getContentPane(panel);
         if(currentMedia.getMediaType().equals("Series"))
@@ -338,5 +304,47 @@ public class Main {
         makebuttons(favorites);
         overview.revalidate();
         overview.repaint();
+    }
+
+    private static void makeAddRemoveList(GridBagConstraints c,JPanel popuppanel,MediaImpl currentMedia)
+    {
+        // sætter constraints til hvor knappen skal være
+        c.gridx = 0;
+        c.gridy = 2;
+        // Laver en button
+        JButton AddRemoveList = new JButton("");
+        if(currentMedia.isFavorite()) {
+
+            AddRemoveList.setText("Remove from my list");
+        }
+        else {
+            AddRemoveList.setText("Add to my list");
+        }
+        // Tilføjer eller fjerner til favorit liste
+        AddRemoveList.addActionListener(e ->
+        {
+            popuppanel.remove(AddRemoveList);
+            if (currentMedia.isFavorite())
+            {
+                AddRemoveList.setText("Add to my list");
+                mediaReg.removeFromFavorites(currentMedia);
+            }
+            else
+            {
+                AddRemoveList.setText("Remove from my list");
+                mediaReg.addToFavorites(currentMedia);
+            }
+            // Opdaterer knapperne hvis brugeren er inde på listen mens de fjerner mediet
+            if (state.equals("My List"))
+            {
+                Makemylist();
+            }
+            popuppanel.revalidate();
+            popuppanel.repaint();
+            c.gridx = 0;
+            c.gridy = 2;
+            popuppanel.add(AddRemoveList,c);
+        });
+        popuppanel.add(AddRemoveList,c);
     }
 }
