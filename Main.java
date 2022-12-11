@@ -187,7 +187,7 @@ public class Main {
                     break;
                 }
                 ImageIcon icon = new ImageIcon(medias.get(counter).getPicture());
-                JButton button = new JButton(icon);
+                MediaButton button = new MediaButton(icon, medias.get(counter));
                 button.setActionCommand(medias.get(counter).getTitle());
                 button.setPreferredSize(new Dimension(45, 200));
                 button.addActionListener(e ->
@@ -204,15 +204,16 @@ public class Main {
     }
     public static void openMedia(/*MediaImpl currentMedia*/)
     {
+        JFrame popup = new JFrame();
         Media currentMedia = allMedias.get(103); // Denne linje skal slettes, og den skal bare være med som parameter i stedet.
-        frame = new JFrame("Netflæsk"); //Laver en frame
+        popup = new JFrame("Netflæsk"); //Laver en frame
         //Gør så vores program rent faktisk lukker.
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        popup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Den har en standard size, ikke redigerbar af client
-        frame.setResizable(false);
-        frame.setSize(300, 500);
-        frame.setLocation(MouseInfo.getPointerInfo().getLocation());
-        JButton playButton = new JButton(currentMedia.getTitle());
+        popup.setResizable(false);
+        popup.setSize(300, 500);
+        popup.setLocation(MouseInfo.getPointerInfo().getLocation());
+        JButton playButton = new JButton("Play");
 
         if(currentMedia.isFavorite()) {
             JButton AddRemoveList = new JButton("Add to my list");
@@ -233,14 +234,14 @@ public class Main {
             //frame.add(playButton);
 
             ImageIcon icon = new ImageIcon(currentMedia.getPicture());
-            J
-            imagePanel.add(icon);
-            frame.add(new JLabel((new ImageIcon(currentMedia.getPicture()))));
+            //J
+            //imagePanel.add(icon);
+            popup.add(new JLabel(icon));
             //frame.add(currentMedia.getPicture());
             //panel.add(currentMedia.getPicture());
             buttonpanel.add(playButton);
 
-            frame.add(buttonpanel);
+            popup.add(buttonpanel);
             //frame.getContentPane(panel);
         }
         else if(currentMedia instanceof Movie)
@@ -252,7 +253,7 @@ public class Main {
                 System.out.println("PlaycurrentMedia");
             });
         }
-        frame.setVisible(true); //frame bliver synlig
+        popup.setVisible(true); //frame bliver synlig
         /*
         JButton Play = new JButton("My List");
         Play.addActionListener(e ->
