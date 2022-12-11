@@ -165,7 +165,8 @@ public class Mediaregistryimpl implements Mediaregistry
         }
         return genres;
     }
-    public void addToFavorites(String title,MediaImpl media) {
+    public void addToFavorites(MediaImpl media) {
+        String title = media.getTitle();
         // tilføjer titlen til favoritlisten jo mindre den allerede er der
         if (!favorites.contains(title))
         {
@@ -180,7 +181,8 @@ public class Mediaregistryimpl implements Mediaregistry
         }
     }
 
-    public void removeFromFavorites(String title, MediaImpl media) throws IOException {
+    public void removeFromFavorites(MediaImpl media) throws IOException {
+        String title = media.getTitle();
         // fjerner titlen fra favorit listen i mediaregistry
         favorites.remove(title);
         // sætter mediet til false på objektet

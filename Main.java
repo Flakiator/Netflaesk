@@ -203,7 +203,7 @@ public class Main {
                                 }
                             }
                             System.out.println(button.getActionCommand());
-                            mediaReg.addToFavorites(button.getActionCommand(),current);
+                            mediaReg.addToFavorites(current);
                             openMedia(current);
                         });
 
