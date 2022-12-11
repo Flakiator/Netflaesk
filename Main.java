@@ -57,7 +57,7 @@ public class Main {
             {
 
                 // If the media has the status favorite and the favorite list does not allready contain it add it
-                if (media.isFavorite() && !favorites.contains(media))
+                if (media.isFavorite())
                 {
                     favorites.add(media);
                 }
