@@ -39,9 +39,9 @@ public class Main {
         frame.setResizable(true);
 
         //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
+        makeMenuBar();
         makePanel();
         makebuttons(current);
-        makeMenuBar();
         frame.setSize(800, 800);
         frame.setVisible(true); //frame bliver synlig
     }
@@ -175,12 +175,16 @@ public class Main {
 
     public static void makebuttons(List<MediaImpl> medias) {
 
-        // makes gridlayout for the buttons to be displayed on
-        int rows = (medias.size() / 7) + 1;
         int columns = 7;
+        // makes gridlayout for the buttons to be displayed on
+        int rows = (medias.size() / columns) + 1;
+        //int columns = 7;
         int counter = 0;
-        overview.setLayout(new GridLayout(rows, columns, 2, 1));
+        overview.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
         // makes buttons
+        c.gridx = 0;
+        c.gridy = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 if (counter == medias.size())
@@ -190,7 +194,7 @@ public class Main {
                 ImageIcon icon = new ImageIcon(medias.get(counter).getPicture());
                 JButton button = new JButton(icon);
                 button.setActionCommand(medias.get(counter).getTitle());
-                button.setPreferredSize(new Dimension(45, 200));
+                button.setPreferredSize(new Dimension(100, 200));
                 button.addActionListener(e ->
                         {
                             // Finder det current media der er for den nuværende knap man har trykket på
@@ -206,10 +210,12 @@ public class Main {
                             mediaReg.addToFavorites(current);
                             openMedia(current);
                         });
-
-                overview.add(button);
+                c.gridx++;
+                overview.add(button, c);
                 counter++;
             }
+            c.gridx = 0;
+            c.gridy++;
         }
     }
     public static void openMedia(MediaImpl currentMedia)
@@ -217,7 +223,8 @@ public class Main {
         //Media currentMedia = allMedias.get(103); // Denne linje skal slettes, og den skal bare være med som parameter i stedet.
         JFrame popup = new JFrame("Netflæsk"); //Laver en frame
         // Panel til at afspille
-        JPanel popuppanel = new JPanel();
+        JPanel popuppanel = new JPanel(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
         // Plakat af filmen
         JLabel img = new JLabel();
         //Gør så vores program rent faktisk lukker.
@@ -241,8 +248,12 @@ public class Main {
         });
 
         img.setIcon(new ImageIcon(currentMedia.getPicture()));
-        popuppanel.add(img);
-        popuppanel.add(playButton);
+        c.gridx = 0;
+        c.gridy = 0;
+        popuppanel.add(img,c);
+        c.gridx = 0;
+        c.gridy = 1;
+        popuppanel.add(playButton,c);
 
         //frame.getContentPane(panel);
         if(currentMedia.getMediaType().equals("Series"))
