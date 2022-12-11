@@ -34,6 +34,8 @@ public class Main {
     public static void makeFrame() {
 
         frame = new JFrame("Netflæsk"); //Laver en frame
+        ImageIcon img = new ImageIcon("logo.png");
+        frame.setIconImage(img.getImage());
         //Gør så vores program rent faktisk lukker.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Den har IKKE en standard size, ER redigerbar af client
@@ -45,6 +47,7 @@ public class Main {
         makePanel();
         makebuttons(current);
         // Sætter størrelsen på vinduet og gør det synligt
+        overview.setBackground(Color.darkGray);
         frame.setSize(850, 800);
         frame.setVisible(true); //frame bliver synlig
     }
