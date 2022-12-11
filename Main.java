@@ -52,8 +52,10 @@ public class Main {
         JButton myList = new JButton("My List");
         myList.addActionListener(e ->
         {
+            favorites.removeAll(allMedias);
             for (MediaImpl media: allMedias)
             {
+
                 // If the media has the status favorite and the favorite list does not allready contain it add it
                 if (media.isFavorite() && !favorites.contains(media))
                 {
