@@ -8,7 +8,7 @@ import java.util.List;
 public class Main {
     private static JFrame frame;
     private static JPanel overview;
-
+    private static JFrame popup = new JFrame("Netflæsk"); //Laver en frame
     private static JComboBox<String> genreBox;
     private static JComboBox<String> mediaBox;
 
@@ -42,7 +42,7 @@ public class Main {
         makeMenuBar();
         makePanel();
         makebuttons(current);
-        frame.setSize(800, 800);
+        frame.setSize(850, 800);
         frame.setVisible(true); //frame bliver synlig
     }
     public static void makeMenuBar() {
@@ -175,7 +175,7 @@ public class Main {
 
     public static void makebuttons(List<MediaImpl> medias) {
         
-        int columns = 7;
+        int columns = 8;
         // makes gridlayout for the buttons to be displayed on
         int rows = (medias.size() / columns) + 1;
         //int columns = 7;
@@ -197,6 +197,7 @@ public class Main {
                 button.setPreferredSize(new Dimension(100, 200));
                 button.addActionListener(e ->
                         {
+                            popup.dispose();
                             mediaReg.addToFavorites(button.getmedia());
                             openMedia(button.getmedia());
                         });
@@ -211,14 +212,14 @@ public class Main {
     public static void openMedia(MediaImpl currentMedia)
     {
         //Media currentMedia = allMedias.get(103); // Denne linje skal slettes, og den skal bare være med som parameter i stedet.
-        JFrame popup = new JFrame("Netflæsk"); //Laver en frame
+        popup = new JFrame("Netflæsk"); //Laver en frame
         // Panel til at afspille
         JPanel popuppanel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         // Plakat af filmen
         JLabel img = new JLabel();
-        //Gør så vores program rent faktisk lukker.
-        popup.dispatchEvent(new WindowEvent(popup, WindowEvent.WINDOW_CLOSING));
+        //Gør så vores popup kan lukkes
+        popup.setDefaultCloseOperation(popup.DISPOSE_ON_CLOSE);
         //Den har en standard size, ikke redigerbar af client
         popup.setResizable(false);
         popup.setLocation(MouseInfo.getPointerInfo().getLocation());
