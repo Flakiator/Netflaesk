@@ -194,7 +194,7 @@ public class Main {
                 ImageIcon icon = new ImageIcon(medias.get(counter).getPicture());
                 MediaButton button = new MediaButton(icon, medias.get(counter));
                 button.setActionCommand(medias.get(counter).getTitle());
-                button.setPreferredSize(new Dimension(45, 200));
+                button.setPreferredSize(new Dimension(100, 200));
                 button.addActionListener(e ->
                         {
                             mediaReg.addToFavorites(button.getmedia());
