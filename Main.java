@@ -39,10 +39,12 @@ public class Main {
         //Den har IKKE en standard size, ER redigerbar af client
         frame.setResizable(true);
 
-        //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
+        // Laver først menubar der kan filtrer medier
         makeMenuBar();
+        // Laver panelet og knapperne til at vise medier
         makePanel();
         makebuttons(current);
+        // Sætter størrelsen på vinduet og gør det synligt
         frame.setSize(850, 800);
         frame.setVisible(true); //frame bliver synlig
     }
@@ -50,6 +52,23 @@ public class Main {
         //Laver MenuBar
         JMenuBar menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
+        // definerer genrer og medier så de kan blive reset hvis der bliver klikket på home knappen
+        String[] genres = mediaReg.getAllGenre(allMedias);
+        String[] medias = {"All", "Movies", "Series"};
+        // Laver en hjem knap
+        JButton homebutton = new JButton("Home");
+        homebutton.addActionListener(e ->
+        {
+            // sætter state til Main
+            state = "Main";
+            // Nulstiller genrebox og mediabox så det begge står som All
+            genreBox.setSelectedItem(genres[0]);
+            mediaBox.setSelectedItem(medias[0]);
+            // Opdaterer listen af knapper ud fra de valgte filtrer
+            makeMenuBoxFunctionality();
+        });
+        // tilføjer home knappen til menubar
+        menuBar.add(homebutton);
         // Tilføjer mylist til menubar
         JButton myList = new JButton("My List");
         myList.addActionListener(e ->
@@ -67,8 +86,6 @@ public class Main {
         JLabel genreLabel = new JLabel("Genres: ");
         menuBar.add(genreLabel);
 
-        String[] genres = mediaReg.getAllGenre(allMedias);
-
         genreBox = new JComboBox<>(genres);
         genreBox.addActionListener(e ->
                 {
@@ -84,7 +101,7 @@ public class Main {
         JLabel mediaLabel = new JLabel("Media: ");
         menuBar.add(mediaLabel);
 
-        String[] medias = {"All", "Movies", "Series"};
+
         mediaBox = new JComboBox<>(medias);
         mediaBox.addActionListener(e ->
                 {
@@ -158,21 +175,26 @@ public class Main {
         overview.revalidate();
         overview.repaint();
     }
+
+    // Laver panelet som skal indeholde medierne
     public static void makePanel() {
         // idé til oprettelse af knapper
         //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
         overview = new JPanel();
-        //Scrollbar
+        // Laver en Scrollbar
         JScrollPane scrollPane = new JScrollPane(overview);
+        // Sætter den til at være vertikal
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        // Gør dens hastighed større
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         frame.add(scrollPane);
         overview.setBackground(Color.lightGray);
 
     }
 
+    // Laver de knapper/medier der skal vises og kunne trykkes på
     public static void makebuttons(List<MediaImpl> medias) {
-        
+        // definerer hvor mange medier per linje vi vil have
         int columns = 8;
         // makes gridlayout for the buttons to be displayed on
         int rows = (medias.size() / columns) + 1;
@@ -189,23 +211,31 @@ public class Main {
                 {
                     break;
                 }
+                // laver billede til knap
                 ImageIcon icon = new ImageIcon(medias.get(counter).getPicture());
                 MediaButton button = new MediaButton(icon, medias.get(counter));
-                button.setActionCommand(medias.get(counter).getTitle());
+                // Sætter størrelse på knappen
                 button.setPreferredSize(new Dimension(100, 200));
+                // Gør så der kommer et popup når man trykker på knappen
                 button.addActionListener(e ->
                         {
+                            // Fjerner gammelt popup (Hvis der er et)
                             popup.dispose();
                             openMedia(button.getmedia());
                         });
+                // Rykker ét felt hen på x aksen
                 c.gridx++;
                 overview.add(button, c);
                 counter++;
             }
+            //Nulstiller x aksen
             c.gridx = 0;
+            // Rykker én hen ad y aksen
             c.gridy++;
         }
     }
+
+    // Åbner et nyt vindue for det medie man har trykket på
     public static void openMedia(MediaImpl currentMedia)
     {
         //Media currentMedia = allMedias.get(103); // Denne linje skal slettes, og den skal bare være med som parameter i stedet.
