@@ -34,7 +34,7 @@ public class Main {
         frame = new JFrame("Netflæsk"); //Laver en frame
         //Gør så vores program rent faktisk lukker.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //Den har en standard size, ikke redigerbar af client
+        //Den har IKKE en standard size, ER redigerbar af client
         frame.setResizable(true);
 
         //frame.getContentPane().setBackground(Color.white); //Kan også laves med 'new Color'.
@@ -192,11 +192,72 @@ public class Main {
                         {
                             System.out.println(button.getActionCommand());
                             mediaReg.addToFavorites(button.getActionCommand(),current);
+                            openMedia();
                         });
 
                 overview.add(button);
                 counter++;
             }
         }
+    }
+    public static void openMedia(/*MediaImpl currentMedia*/)
+    {
+        Media currentMedia = allMedias.get(103); // Denne linje skal slettes, og den skal bare være med som parameter i stedet.
+        frame = new JFrame("Netflæsk"); //Laver en frame
+        //Gør så vores program rent faktisk lukker.
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Den har en standard size, ikke redigerbar af client
+        frame.setResizable(false);
+        frame.setSize(300, 500);
+        frame.setLocation(MouseInfo.getPointerInfo().getLocation());
+        JButton playButton = new JButton(currentMedia.getTitle());
+
+        if(currentMedia.isFavorite()) {
+            JButton AddRemoveList = new JButton("Add to my list");
+        }
+        else {
+            JButton AddRemoveList = new JButton("Revome from my list");
+        }
+        JPanel buttonpanel = new JPanel();
+        JPanel imagePanel = new JPanel();
+        if(currentMedia instanceof Series)
+        {
+            // JButton currentMedia
+            playButton.addActionListener(e ->
+            {
+                // Skal erstattes med playfunktionen.
+                System.out.println("PlaycurrentMedia");
+            });
+            //frame.add(playButton);
+
+            ImageIcon icon = new ImageIcon(currentMedia.getPicture());
+            J
+            imagePanel.add(icon);
+            frame.add(new JLabel((new ImageIcon(currentMedia.getPicture()))));
+            //frame.add(currentMedia.getPicture());
+            //panel.add(currentMedia.getPicture());
+            buttonpanel.add(playButton);
+
+            frame.add(buttonpanel);
+            //frame.getContentPane(panel);
+        }
+        else if(currentMedia instanceof Movie)
+        {
+            // JButton currentMedia
+            playButton.addActionListener(e ->
+            {
+                // Skal erstattes med playfunktionen.
+                System.out.println("PlaycurrentMedia");
+            });
+        }
+        frame.setVisible(true); //frame bliver synlig
+        /*
+        JButton Play = new JButton("My List");
+        Play.addActionListener(e ->
+        {
+            // Skal erstattes med playfunktionen.
+            System.out.println("PlaycurrentMedia");
+        });
+         */
     }
 }
