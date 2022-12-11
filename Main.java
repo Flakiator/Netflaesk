@@ -174,7 +174,7 @@ public class Main {
     }
 
     public static void makebuttons(List<MediaImpl> medias) {
-
+        
         int columns = 7;
         // makes gridlayout for the buttons to be displayed on
         int rows = (medias.size() / columns) + 1;
@@ -192,23 +192,13 @@ public class Main {
                     break;
                 }
                 ImageIcon icon = new ImageIcon(medias.get(counter).getPicture());
-                JButton button = new JButton(icon);
+                MediaButton button = new MediaButton(icon, medias.get(counter));
                 button.setActionCommand(medias.get(counter).getTitle());
-                button.setPreferredSize(new Dimension(100, 200));
+                button.setPreferredSize(new Dimension(45, 200));
                 button.addActionListener(e ->
                         {
-                            // Finder det current media der er for den nuværende knap man har trykket på
-                            MediaImpl current = null;
-                            for(MediaImpl m : allMedias)
-                            {
-                                if (m.getTitle().equals(button.getActionCommand()))
-                                {
-                                    current = m;
-                                }
-                            }
-                            System.out.println(button.getActionCommand());
-                            mediaReg.addToFavorites(current);
-                            openMedia(current);
+                            mediaReg.addToFavorites(button.getmedia());
+                            openMedia(button.getmedia());
                         });
                 c.gridx++;
                 overview.add(button, c);
