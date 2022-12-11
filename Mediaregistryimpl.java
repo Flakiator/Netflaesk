@@ -165,39 +165,26 @@ public class Mediaregistryimpl implements Mediaregistry
         }
         return genres;
     }
-    public void addToFavorites(String title,List<MediaImpl> media) {
+    public void addToFavorites(String title,MediaImpl media) {
         // tilføjer titlen til favoritlisten jo mindre den allerede er der
         if (!favorites.contains(title))
         {
             favorites.add(title);
         }
-        for (MediaImpl m: media)
-        {
-            if (m.getTitle().equals(title))
-            {
-                // Sætter favorit status til true på objektet
-                m.setFavorite(true);
-            }
-        }
-
+            // Sætter favorit status til true på objektet
+            media.setFavorite(true);
         try {
-            // opdaterer lokal favort liste
             data.updateFavorite(favorites);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    public void removeFromFavorites(String title, List<MediaImpl> media) throws IOException {
+
+    public void removeFromFavorites(String title, MediaImpl media) throws IOException {
         // fjerner titlen fra favorit listen i mediaregistry
         favorites.remove(title);
-        for (MediaImpl m: media)
-        {
-            if (m.getTitle().equals(title))
-            {
-                // sætter mediet til false på objektet
-                m.setFavorite(false);
-            }
-        }
+        // sætter mediet til false på objektet
+        media.setFavorite(false);
         // opdaterer den lokale favorit liste
         data.updateFavorite(favorites);
     }

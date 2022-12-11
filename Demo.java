@@ -11,8 +11,8 @@ public class Demo
         List<MediaImpl> medias = new ArrayList<>();
         medias.addAll(movies);
         medias.addAll(series);
-        loader.addToFavorites(medias.get(1).getTitle(),medias);
-        loader.removeFromFavorites(medias.get(0).getTitle(), medias);
+        loader.addToFavorites(medias.get(1).getTitle(),medias.get(1));
+        loader.removeFromFavorites(medias.get(0).getTitle(), medias.get(0));
         System.out.println(medias.get(1).isFavorite());
     }
 }

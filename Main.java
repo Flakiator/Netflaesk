@@ -193,9 +193,18 @@ public class Main {
                 button.setPreferredSize(new Dimension(45, 200));
                 button.addActionListener(e ->
                         {
+                            // Finder det current media der er for den nuværende knap man har trykket på
+                            MediaImpl current = null;
+                            for(MediaImpl m : allMedias)
+                            {
+                                if (m.getTitle().equals(button.getActionCommand()))
+                                {
+                                    current = m;
+                                }
+                            }
                             System.out.println(button.getActionCommand());
                             mediaReg.addToFavorites(button.getActionCommand(),current);
-                            openMedia();
+                            openMedia(current);
                         });
 
                 overview.add(button);
@@ -203,53 +212,48 @@ public class Main {
             }
         }
     }
-    public static void openMedia(/*MediaImpl currentMedia*/)
+    public static void openMedia(MediaImpl currentMedia)
     {
-        Media currentMedia = allMedias.get(103); // Denne linje skal slettes, og den skal bare være med som parameter i stedet.
+        //Media currentMedia = allMedias.get(103); // Denne linje skal slettes, og den skal bare være med som parameter i stedet.
         JFrame popup = new JFrame("Netflæsk"); //Laver en frame
+        // Panel til at afspille
+        JPanel popuppanel = new JPanel();
+        // Plakat af filmen
+        JLabel img = new JLabel();
         //Gør så vores program rent faktisk lukker.
         popup.dispatchEvent(new WindowEvent(popup, WindowEvent.WINDOW_CLOSING));
         //Den har en standard size, ikke redigerbar af client
         popup.setResizable(false);
         popup.setLocation(MouseInfo.getPointerInfo().getLocation());
-        JButton playButton = new JButton(currentMedia.getTitle());
+        JButton playButton = new JButton("Play");
 
         if(currentMedia.isFavorite()) {
             JButton AddRemoveList = new JButton("Add to my list");
         }
         else {
-            JButton AddRemoveList = new JButton("Revome from my list");
+            JButton AddRemoveList = new JButton("Remove from my list");
         }
-        JPanel buttonpanel = new JPanel();
-        if(currentMedia instanceof Series)
+        // JButton currentMedia
+        playButton.addActionListener(e ->
         {
-            // JButton currentMedia
-            playButton.addActionListener(e ->
-            {
-                // Skal erstattes med playfunktionen.
-                System.out.println("PlaycurrentMedia");
-            });
-            //frame.add(playButton);
-            JLabel img = new JLabel();
-            img.setIcon(new ImageIcon(currentMedia.getPicture()));
-            popup.getContentPane().add(img, BorderLayout.CENTER);
-            //frame.add(currentMedia.getPicture());
-            //panel.add(currentMedia.getPicture());
-            buttonpanel.add(playButton);
+            // Skal erstattes med playfunktionen.
+            System.out.println("PlaycurrentMedia");
+        });
 
-            popup.getContentPane().add(buttonpanel, BorderLayout.EAST);
+        img.setIcon(new ImageIcon(currentMedia.getPicture()));
+        popuppanel.add(img);
+        popuppanel.add(playButton);
 
-            //frame.getContentPane(panel);
-        }
-        else if(currentMedia instanceof Movie)
+        //frame.getContentPane(panel);
+        if(currentMedia.getMediaType().equals("Series"))
         {
-            // JButton currentMedia
-            playButton.addActionListener(e ->
-            {
-                // Skal erstattes med playfunktionen.
-                System.out.println("PlaycurrentMedia");
-            });
+
         }
+        else if(currentMedia.getMediaType().equals("Movie"))
+        {
+
+        }
+        popup.getContentPane().add(popuppanel);
         popup.setSize(300, 500);
         popup.setVisible(true); //frame bliver synlig
         /*
