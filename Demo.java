@@ -1,3 +1,8 @@
+import Domain.MediaImpl;
+import Domain.Mediaregistryimpl;
+import Domain.Movie;
+import Domain.Series;
+
 import java.io.IOException;
 import java.util.*;
 

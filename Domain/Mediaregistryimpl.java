@@ -1,3 +1,7 @@
+package Domain;
+
+import Database.DataAccessImpl;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
@@ -87,7 +91,7 @@ public class Mediaregistryimpl implements Mediaregistry
                 }
                 // Tilføjer serie objektet til liste over medier
 
-                medias.add(new Series(elements[0], elements[1].trim(), picture.get(i), genre, score, favorite,episodes,season,"Series"));
+                medias.add(new Series(elements[0], elements[1].trim(), picture.get(i), genre, score, favorite,episodes,season,"Domain.Series"));
             }
             else
             {

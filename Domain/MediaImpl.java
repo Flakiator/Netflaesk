@@ -1,3 +1,5 @@
+package Domain;
+
 import java.util.*;
 public abstract class MediaImpl implements Media {
     String title;

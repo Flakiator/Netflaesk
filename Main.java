@@ -1,3 +1,8 @@
+import Domain.MediaImpl;
+import Domain.Mediaregistryimpl;
+import Domain.Movie;
+import Domain.Series;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -34,7 +39,7 @@ public class Main {
     public static void makeFrame() {
 
         frame = new JFrame("Netflæsk"); //Laver en frame
-        ImageIcon img = new ImageIcon("logo.png");
+        ImageIcon img = new ImageIcon("Data/logo.png");
         frame.setIconImage(img.getImage());
         //Gør så vores program rent faktisk lukker.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,7 +62,7 @@ public class Main {
         frame.setJMenuBar(menuBar);
         // definerer genrer og medier så de kan blive reset hvis der bliver klikket på home knappen
         String[] genres = mediaReg.getAllGenre(allMedias);
-        String[] medias = {"All", "Movies", "Series"};
+        String[] medias = {"All", "Movies", "Domain.Series"};
         // Laver en hjem knap
         JButton homebutton = new JButton("Home");
         homebutton.addActionListener(e ->
@@ -100,8 +105,8 @@ public class Main {
         //Mellemrum efter genres
         menuBar.add(new JToolBar.Separator(new Dimension(15, 0)));
 
-        //UI valg af Media
-        JLabel mediaLabel = new JLabel("Media: ");
+        //UI valg af Domain.Media
+        JLabel mediaLabel = new JLabel("Domain.Media: ");
         menuBar.add(mediaLabel);
 
 
@@ -241,7 +246,7 @@ public class Main {
     // Åbner et nyt vindue for det medie man har trykket på
     public static void openMedia(MediaImpl currentMedia)
     {
-        //Media currentMedia = allMedias.get(103); // Denne linje skal slettes, og den skal bare være med som parameter i stedet.
+        //Domain.Media currentMedia = allMedias.get(103); // Denne linje skal slettes, og den skal bare være med som parameter i stedet.
         popup = new JFrame("Netflæsk"); //Laver en frame
         // Panel til at afspille
         JPanel popuppanel = new JPanel(new GridBagLayout());
@@ -304,25 +309,17 @@ public class Main {
         popuppanel.add(AddRemoveList,c);
 
         //frame.getContentPane(panel);
-        if(currentMedia.getMediaType().equals("Series"))
+        if(currentMedia.getMediaType().equals("Domain.Series"))
         {
 
         }
-        else if(currentMedia.getMediaType().equals("Movie"))
+        else if(currentMedia.getMediaType().equals("Domain.Movie"))
         {
 
         }
         popup.getContentPane().add(popuppanel);
         popup.setSize(300, 500);
         popup.setVisible(true); //frame bliver synlig
-        /*
-        JButton Play = new JButton("My List");
-        Play.addActionListener(e ->
-        {
-            // Skal erstattes med playfunktionen.
-            System.out.println("PlaycurrentMedia");
-        });
-         */
     }
 
     private static void Makemylist() {

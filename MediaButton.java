@@ -1,5 +1,6 @@
+import Domain.MediaImpl;
+
 import javax.swing.*;
-import java.awt.*;
 
 class MediaButton extends JButton {
     MediaImpl media;
