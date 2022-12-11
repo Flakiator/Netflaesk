@@ -277,7 +277,44 @@ public class Main {
         //frame.getContentPane(panel);
         if(currentMedia.getMediaType().equals("Series"))
         {
+            // season Label og Box
+            Series currentSeries = (Series)currentMedia;
+            JLabel seasonLabel = new JLabel("Season: ");
+            //currentSeries.getSeasons();
+            c.gridx = 0;
+            c.gridy = 3;
+            popuppanel.add(seasonLabel, c);
+            String[] seasons = new String[currentSeries.getSeasons()];
+            for(int i = 0; i < seasons.length; i++)
+            {
+                seasons[i] = Integer.toString(i+1);
+            }
+            JComboBox seasonBox = new JComboBox<>(seasons);
+            c.gridx = 1;
+            c.gridy = 3;
+            popuppanel.add(seasonBox, c);
 
+
+            //episode Label og Box
+            JLabel episodeLabel = new JLabel("Episode: ");;
+            c.gridx = 0;
+            c.gridy = 4;
+            popuppanel.add(episodeLabel, c);
+
+            List<String>Episodeliste = currentSeries.getEpisodes();
+            String[] episodes = new String[Integer.parseInt(Episodeliste.get(Integer.parseInt(seasonBox.getSelectedItem().toString())-1))];
+            //currentSeries.getEpisodes()
+            for(int i = 0; i < episodes.length; i++)
+            {
+                episodes[i] = Integer.toString(i+1);
+            }
+            c.gridx = 1;
+            c.gridy = 4;
+            popuppanel.add(seasonLabel, c);
+
+            JComboBox episodeBox = new JComboBox<>(episodes);
+            popuppanel.add(episodeBox, c);
+            //popuppanel.add();
         }
         else if(currentMedia.getMediaType().equals("Movie"))
         {
