@@ -91,12 +91,12 @@ public class Mediaregistryimpl implements Mediaregistry
                 }
                 // Tilføjer serie objektet til liste over medier
 
-                medias.add(new Series(elements[0], elements[1].trim(), picture.get(i), genre, score, favorite,episodes,season,"Domain.Series"));
+                medias.add(new Series(elements[0], elements[1].trim(), picture.get(i), genre, score, favorite,episodes,season,"Series"));
             }
             else
             {
                 // Tilføjer film objektet til liste over medier
-                medias.add(new Movie(elements[0], elements[1].trim(), picture.get(i), genre, score, favorite,"Movies"));
+                medias.add(new Movie(elements[0], elements[1].trim(), picture.get(i), genre, score, favorite,"Movie"));
             }
         }
         return medias;
