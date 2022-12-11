@@ -301,8 +301,8 @@ public class Main {
             c.gridy = 4;
             popuppanel.add(episodeLabel, c);
 
-            List<String>Episodeliste = currentSeries.getEpisodes();
-            String[] episodes = new String[Integer.parseInt(Episodeliste.get(Integer.parseInt(seasonBox.getSelectedItem().toString())-1))];
+
+            String[] episodes = currentSeries.getEpisodes();
             //currentSeries.getEpisodes()
             for(int i = 0; i < episodes.length; i++)
             {

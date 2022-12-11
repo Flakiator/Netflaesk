@@ -13,8 +13,9 @@ public class Series extends MediaImpl
         this.seasons = seasons;
     }
 
-    public List<String> getEpisodes() {
-        return this.episodes;
+    public String[] getEpisodes() {
+        String[] episodea = this.episodes.toArray(new String[0]);
+        return episodea;
     }
     public int getSeasons()
     {
