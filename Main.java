@@ -13,7 +13,6 @@ public class Main {
     private static JFrame frame;
     private static JPanel overview;
     private static JFrame popup = new JFrame("Netflæsk"); //Laver en frame
-    private static JPanel popuppanel;
     private static JComboBox<String> genreBox;
     private static JComboBox<String> mediaBox;
 
