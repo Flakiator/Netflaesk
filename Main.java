@@ -364,11 +364,6 @@ public class Main {
             seasons[i] = Integer.toString(i+1);
         }
         JComboBox seasonBox = new JComboBox<>(seasons);
-        c.gridx = 1;
-        c.gridy = 3;
-
-
-        popuppanel.add(seasonBox, c);
 
         //episode Label og Box
         JLabel episodeLabel = new JLabel("Episode: ");;
@@ -385,12 +380,28 @@ public class Main {
         {
             episodes[i] = i+1 + "";
         }
+
+        seasonBox.addActionListener(e ->
+        {
+
+        });
         c.gridx = 1;
-        c.gridy = 4;
+        c.gridy = 3;
+        popuppanel.add(seasonBox, c);
+
+        c.gridx = 0;
+        c.gridy = 3;
         popuppanel.add(seasonLabel, c);
 
         JComboBox episodeBox = new JComboBox<>(episodes);
+        c.gridx = 1;
+        c.gridy = 4;
         popuppanel.add(episodeBox, c);
-        //popuppanel.add();
+    }
+
+    private static String[] makeEpisodes()
+    {
+
+        return null;
     }
 }
