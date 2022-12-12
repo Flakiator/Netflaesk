@@ -24,6 +24,8 @@ public class Main {
     private static Mediaregistryimpl mediaReg;
     private static List<MediaImpl> favorites = new ArrayList<>();
 
+    private static JComboBox seasonBox;
+
     private static String state = "Main";
 
     public static void main(String[] args) {
@@ -258,11 +260,25 @@ public class Main {
         //Den har en standard size, ikke redigerbar af client
         popup.setResizable(false);
         popup.setLocation(MouseInfo.getPointerInfo().getLocation());
+
         JButton playButton = new JButton("Play");
         // JButton currentMedia
         playButton.addActionListener(e ->
         {
-            // Skal erstattes med playfunktionen.
+            //Playfunktion Til Series
+           if(currentMedia.getMediaType().equals("Series")){
+               int getEpi = episodeBox.getSelectedIndex() + 1;
+               int getSeason = seasonBox.getSelectedIndex() + 1;
+
+               JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle() + " E: " +
+                       getEpi + " S: " + getSeason , "Afspilning",JOptionPane.INFORMATION_MESSAGE);
+
+           } else {
+        //Playfunktion Til movies
+               JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle(),
+                       "Afspilning",JOptionPane.INFORMATION_MESSAGE);
+           }
+
             System.out.println("PlaycurrentMedia");
         });
         // Knap til at fjerne/tilføje film til ens liste
@@ -305,7 +321,7 @@ public class Main {
         {
             seasons[i] = Integer.toString(i+1);
         }
-        JComboBox seasonBox = new JComboBox<>(seasons);
+        seasonBox = new JComboBox<>(seasons);
 
         //episode Label og Box
         JLabel episodeLabel = new JLabel("Episode: ");
