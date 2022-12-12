@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GRPRO-Projectt:jar4">
+    <output-path>$PROJECT_DIR$/out/artifacts/GRPRO_Projectt_jar4</output-path>
+    <root id="archive" name="GRPRO-Projectt.jar">
+      <element id="module-output" name="GRPRO-Projectt" />
+    </root>
+  </artifact>
+</component>
