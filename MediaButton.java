@@ -9,7 +9,7 @@ class MediaButton extends JButton {
         super(icon);
         this.media = media;
     }
-    MediaImpl getmedia()
+    MediaImpl getMedia()
     {
         return media;
     }

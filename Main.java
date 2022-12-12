@@ -16,7 +16,7 @@ public class Main {
     private static JComboBox<String> genreBox;
     private static JComboBox<String> mediaBox;
 
-    private static JTextField searchBar = new JTextField("Type here...");
+    private static JTextField searchBar = new JTextField("Searching for: All movies and series.");
     private static List<MediaImpl> allMedias;
 
     private static List<MediaImpl> current;
@@ -186,7 +186,12 @@ public class Main {
         // opdaterer current listen til medier der overholder de filtrer burgeren har tilvalgt
         current = mediaReg.filter(genreBox.getSelectedItem().toString(),mediaBox.getSelectedItem().toString(),allMedias);
         // Sætter teksten i søgefeltet så brugeren ved at de søger efter de filtrer
-        searchBar.setText("Searching for: "  + genreBox.getSelectedItem().toString() + " " + mediaBox.getSelectedItem().toString());
+        if (genreBox.getSelectedItem().toString().equals("All") && mediaBox.getSelectedItem().toString().equals("All")) {
+            searchBar.setText("Searching for: All movies and series.");
+        }
+        else {
+            searchBar.setText("Searching for: " + genreBox.getSelectedItem().toString() + " " + mediaBox.getSelectedItem().toString());
+        }
         // Laver knapperne så de passer med current listen
         makebuttons(current);
         // opdaterer vinduet
@@ -238,7 +243,7 @@ public class Main {
                         {
                             // Fjerner gammelt popup (Hvis der er et)
                             popup.dispose();
-                            openMedia(button.getmedia());
+                            openMedia(button.getMedia());
                         });
                 // Rykker ét felt hen på x aksen
                 c.gridx++;
