@@ -30,16 +30,14 @@ public class Main {
 
     public static void main(String[] args) {
         mediaReg = new Mediaregistryimpl();
-        List<Movie> allMovies = mediaReg.initializeMovie();
-        List<Series> allSeries = mediaReg.initializeSeries();
         // Samler medier i en liste
-        allMedias = new ArrayList<>(allMovies);
-        allMedias.addAll(allSeries);
+        allMedias = new ArrayList<>(mediaReg.initializeMovie());
+        allMedias.addAll(mediaReg.initializeSeries());
         current = new ArrayList<>(allMedias);
         makeFrame();
     }
 
-    public static void makeFrame() {
+    private static void makeFrame() {
 
         frame = new JFrame("Netflæsk"); //Laver en frame
         ImageIcon img = new ImageIcon("Data/logo.png");
@@ -59,7 +57,7 @@ public class Main {
         frame.setSize(850, 800);
         frame.setVisible(true); //frame bliver synlig
     }
-    public static void makeMenuBar() {
+    private static void makeMenuBar() {
         //Laver MenuBar
         JMenuBar menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
@@ -172,7 +170,7 @@ public class Main {
     }
 
 
-    public static void makeMenuBoxFunctionality()
+    private static void makeMenuBoxFunctionality()
     {
         // fjerner elementer fra vinduet så der ikke bliver skrevet oven på de gamle knapper
         overview.removeAll();
@@ -188,7 +186,7 @@ public class Main {
     }
 
     // Laver panelet som skal indeholde medierne
-    public static void makePanel() {
+    private static void makePanel() {
         // idé til oprettelse af knapper
         //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
         overview = new JPanel();
@@ -203,7 +201,7 @@ public class Main {
     }
 
     // Laver de knapper/medier der skal vises og kunne trykkes på
-    public static void makebuttons(List<MediaImpl> medias) {
+    private static void makebuttons(List<MediaImpl> medias) {
         // definerer hvor mange medier per linje vi vil have
         int columns = 8;
         // makes gridlayout for the buttons to be displayed on
@@ -246,7 +244,7 @@ public class Main {
     }
 
     // Åbner et nyt vindue for det medie man har trykket på
-    public static void openMedia(MediaImpl currentMedia)
+    private static void openMedia(MediaImpl currentMedia)
     {
         // laver ny frame
         popup = new JFrame("Netflæsk"); //Laver en frame
