@@ -349,6 +349,9 @@ public class Main {
         });
         popuppanel.add(AddRemoveList,c);
     }
+
+    // Gør episodeBox global (ellers kan den ikke bruges i ActionListener
+    private static JComboBox episodeBox = new JComboBox<>();
     private static void makeSeriesComboboxes(GridBagConstraints c,JPanel popuppanel,MediaImpl currentMedia)
     {
         // season Label og Box
@@ -366,24 +369,27 @@ public class Main {
         JComboBox seasonBox = new JComboBox<>(seasons);
 
         //episode Label og Box
-        JLabel episodeLabel = new JLabel("Episode: ");;
+        JLabel episodeLabel = new JLabel("Episode: ");
         c.gridx = 0;
         c.gridy = 4;
         popuppanel.add(episodeLabel, c);
 
 
-        String[] episodeseasons = currentSeries.getEpisodes();
-        int episodeammount = Integer.parseInt(episodeseasons[seasonBox.getSelectedIndex()]);
-        String[] episodes =  new String[episodeammount];
-        //currentSeries.getEpisodes()
-        for(int i = 0; i < episodeammount; i++)
-        {
-            episodes[i] = i+1 + "";
-        }
-
+        String[] episodes = makeEpisodes(currentSeries,seasonBox.getSelectedIndex());
+        episodeBox = new JComboBox<>(episodes);
+        c.gridx = 1;
+        c.gridy = 4;
+        popuppanel.add(episodeBox, c);
         seasonBox.addActionListener(e ->
         {
-
+            popuppanel.remove(episodeBox);
+            episodeBox.removeAllItems();
+            episodeBox = new JComboBox<>(makeEpisodes(currentSeries,seasonBox.getSelectedIndex()));
+            c.gridx = 1;
+            c.gridy = 4;
+            popuppanel.add(episodeBox,c);
+            popuppanel.revalidate();
+            popuppanel.repaint();
         });
         c.gridx = 1;
         c.gridy = 3;
@@ -392,16 +398,18 @@ public class Main {
         c.gridx = 0;
         c.gridy = 3;
         popuppanel.add(seasonLabel, c);
-
-        JComboBox episodeBox = new JComboBox<>(episodes);
-        c.gridx = 1;
-        c.gridy = 4;
-        popuppanel.add(episodeBox, c);
     }
 
-    private static String[] makeEpisodes()
+    private static String[] makeEpisodes(Series currentSeries, int season)
     {
-
-        return null;
+        String[] episodeseasons = currentSeries.getEpisodes();
+        int episodeammount = Integer.parseInt(episodeseasons[season]);
+        String[] episodes =  new String[episodeammount];
+        //currentSeries.getEpisodes()
+        for(int i = 0; i < episodeammount; i++)
+        {
+            episodes[i] = i+1 + "";
+        }
+        return episodes;
     }
 }
