@@ -14,7 +14,7 @@ public class DataAccessImpl implements DataAccess
             // Giver file navnet på vejen til filen
             File file = new File(path);
             // Laver et scanner objekt
-            Scanner myReader = new Scanner(file);
+            Scanner myReader = new Scanner(file, "windows-1252");
             // Laver et while loop der bliver ved indtil der ikke er flere linjer i txt filen
             while (myReader.hasNextLine())
             {
