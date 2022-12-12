@@ -267,8 +267,8 @@ public class Main {
                int getEpi = episodeBox.getSelectedIndex() + 1;
                int getSeason = seasonBox.getSelectedIndex() + 1;
 
-               JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle() + " E: " +
-                       getEpi + " S: " + getSeason , "Afspilning",JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle() + " Episode: " +
+                       getEpi + " Sæson: " + getSeason , "Afspilning",JOptionPane.INFORMATION_MESSAGE);
 
            } else {
         //Playfunktion Til movies
