@@ -21,6 +21,7 @@ public class Main {
 
     private static List<MediaImpl> current;
     private static Mediaregistryimpl mediaReg;
+
     private static List<MediaImpl> favorites = new ArrayList<>();
 
     private static JComboBox seasonBox;
@@ -33,6 +34,15 @@ public class Main {
         allMedias = new ArrayList<>(mediaReg.initializeMovie());
         allMedias.addAll(mediaReg.initializeSeries());
         current = new ArrayList<>(allMedias);
+        // tjekker all medie objekter igennem og tilføjer dem hvis de er sat som favoritter på den lokale favoritliste
+        for (MediaImpl media: allMedias)
+        {
+            // If the media has the status favorite and the favorite list does not allready contain it add it
+            if (media.isFavorite())
+            {
+                favorites.add(media);
+            }
+        }
         makeFrame();
     }
 
@@ -387,11 +397,13 @@ public class Main {
             {
                 AddRemoveList.setText("Add to my list");
                 mediaReg.removeFromFavorites(currentMedia);
+                favorites.remove(currentMedia);
             }
             else
             {
                 AddRemoveList.setText("Remove from my list");
                 mediaReg.addToFavorites(currentMedia);
+                favorites.add(currentMedia);
             }
             // Opdaterer knapperne hvis brugeren er inde på listen mens de fjerner mediet
             if (state.equals("My List"))
@@ -407,17 +419,6 @@ public class Main {
         popuppanel.add(AddRemoveList,c);
     }
     private static void Makemylist() {
-
-        // clearer favorites listen så medier der ikke er favorit længere bliver fjernet
-        favorites.removeAll(allMedias);
-        for (MediaImpl media: allMedias)
-        {
-            // If the media has the status favorite and the favorite list does not allready contain it add it
-            if (media.isFavorite())
-            {
-                favorites.add(media);
-            }
-        }
         // opdaterer overview
         overview.removeAll();
         makebuttons(favorites);
