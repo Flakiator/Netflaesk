@@ -289,67 +289,6 @@ public class Main {
         popup.setVisible(true); //frame bliver synlig
     }
 
-    private static void Makemylist() {
-
-        // clearer favorites listen så medier der ikke er favorit længere bliver fjernet
-        favorites.removeAll(allMedias);
-        for (MediaImpl media: allMedias)
-        {
-            // If the media has the status favorite and the favorite list does not allready contain it add it
-            if (media.isFavorite())
-            {
-                favorites.add(media);
-            }
-        }
-        // opdaterer overview
-        overview.removeAll();
-        makebuttons(favorites);
-        overview.revalidate();
-        overview.repaint();
-    }
-
-    private static void makeAddRemoveList(GridBagConstraints c,JPanel popuppanel,MediaImpl currentMedia)
-    {
-        // sætter constraints til hvor knappen skal være
-        c.gridx = 0;
-        c.gridy = 2;
-        // Laver en button
-        JButton AddRemoveList = new JButton("");
-        if(currentMedia.isFavorite()) {
-
-            AddRemoveList.setText("Remove from my list");
-        }
-        else {
-            AddRemoveList.setText("Add to my list");
-        }
-        // Tilføjer eller fjerner til favorit liste
-        AddRemoveList.addActionListener(e ->
-        {
-            popuppanel.remove(AddRemoveList);
-            if (currentMedia.isFavorite())
-            {
-                AddRemoveList.setText("Add to my list");
-                mediaReg.removeFromFavorites(currentMedia);
-            }
-            else
-            {
-                AddRemoveList.setText("Remove from my list");
-                mediaReg.addToFavorites(currentMedia);
-            }
-            // Opdaterer knapperne hvis brugeren er inde på listen mens de fjerner mediet
-            if (state.equals("My List"))
-            {
-                Makemylist();
-            }
-            popuppanel.revalidate();
-            popuppanel.repaint();
-            c.gridx = 0;
-            c.gridy = 2;
-            popuppanel.add(AddRemoveList,c);
-        });
-        popuppanel.add(AddRemoveList,c);
-    }
-
     // Gør episodeBox global (ellers kan den ikke bruges i ActionListener
     private static JComboBox episodeBox = new JComboBox<>();
     private static void makeSeriesComboboxes(GridBagConstraints c,JPanel popuppanel,MediaImpl currentMedia)
@@ -411,5 +350,65 @@ public class Main {
             episodes[i] = i+1 + "";
         }
         return episodes;
+    }
+
+    private static void makeAddRemoveList(GridBagConstraints c,JPanel popuppanel,MediaImpl currentMedia)
+    {
+        // sætter constraints til hvor knappen skal være
+        c.gridx = 0;
+        c.gridy = 2;
+        // Laver en button
+        JButton AddRemoveList = new JButton("");
+        if(currentMedia.isFavorite()) {
+
+            AddRemoveList.setText("Remove from my list");
+        }
+        else {
+            AddRemoveList.setText("Add to my list");
+        }
+        // Tilføjer eller fjerner til favorit liste
+        AddRemoveList.addActionListener(e ->
+        {
+            popuppanel.remove(AddRemoveList);
+            if (currentMedia.isFavorite())
+            {
+                AddRemoveList.setText("Add to my list");
+                mediaReg.removeFromFavorites(currentMedia);
+            }
+            else
+            {
+                AddRemoveList.setText("Remove from my list");
+                mediaReg.addToFavorites(currentMedia);
+            }
+            // Opdaterer knapperne hvis brugeren er inde på listen mens de fjerner mediet
+            if (state.equals("My List"))
+            {
+                Makemylist();
+            }
+            popuppanel.revalidate();
+            popuppanel.repaint();
+            c.gridx = 0;
+            c.gridy = 2;
+            popuppanel.add(AddRemoveList,c);
+        });
+        popuppanel.add(AddRemoveList,c);
+    }
+    private static void Makemylist() {
+
+        // clearer favorites listen så medier der ikke er favorit længere bliver fjernet
+        favorites.removeAll(allMedias);
+        for (MediaImpl media: allMedias)
+        {
+            // If the media has the status favorite and the favorite list does not allready contain it add it
+            if (media.isFavorite())
+            {
+                favorites.add(media);
+            }
+        }
+        // opdaterer overview
+        overview.removeAll();
+        makebuttons(favorites);
+        overview.revalidate();
+        overview.repaint();
     }
 }
