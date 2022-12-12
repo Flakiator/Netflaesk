@@ -31,8 +31,8 @@ public class Main {
     public static void main(String[] args) {
         mediaReg = new Mediaregistryimpl();
         // Samler medier i en liste
-        allMedias = new ArrayList<>(mediaReg.initializeMovie());
-        allMedias.addAll(mediaReg.initializeSeries());
+        allMedias = new ArrayList<>(mediaReg.initializeSeries());
+        allMedias.addAll(mediaReg.initializeMovie());
         current = new ArrayList<>(allMedias);
         // tjekker all medie objekter igennem og tilføjer dem hvis de er sat som favoritter på den lokale favoritliste
         for (MediaImpl media: allMedias)
