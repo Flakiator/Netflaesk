@@ -13,6 +13,7 @@ public class Main {
     private static JFrame frame;
     private static JPanel overview;
     private static JFrame popup = new JFrame("Netflæsk"); //Laver en frame
+    private static JPanel popuppanel;
     private static JComboBox<String> genreBox;
     private static JComboBox<String> mediaBox;
 
@@ -277,44 +278,7 @@ public class Main {
         //frame.getContentPane(panel);
         if(currentMedia.getMediaType().equals("Series"))
         {
-            // season Label og Box
-            Series currentSeries = (Series)currentMedia;
-            JLabel seasonLabel = new JLabel("Season: ");
-            //currentSeries.getSeasons();
-            c.gridx = 0;
-            c.gridy = 3;
-            popuppanel.add(seasonLabel, c);
-            String[] seasons = new String[currentSeries.getSeasons()];
-            for(int i = 0; i < seasons.length; i++)
-            {
-                seasons[i] = Integer.toString(i+1);
-            }
-            JComboBox seasonBox = new JComboBox<>(seasons);
-            c.gridx = 1;
-            c.gridy = 3;
-            popuppanel.add(seasonBox, c);
-
-
-            //episode Label og Box
-            JLabel episodeLabel = new JLabel("Episode: ");;
-            c.gridx = 0;
-            c.gridy = 4;
-            popuppanel.add(episodeLabel, c);
-
-
-            String[] episodes = currentSeries.getEpisodes();
-            //currentSeries.getEpisodes()
-            for(int i = 0; i < episodes.length; i++)
-            {
-                episodes[i] = Integer.toString(i+1);
-            }
-            c.gridx = 1;
-            c.gridy = 4;
-            popuppanel.add(seasonLabel, c);
-
-            JComboBox episodeBox = new JComboBox<>(episodes);
-            popuppanel.add(episodeBox, c);
-            //popuppanel.add();
+            makeSeriesComboboxes(c,popuppanel,currentMedia);
         }
         else if(currentMedia.getMediaType().equals("Movie"))
         {
@@ -384,5 +348,49 @@ public class Main {
             popuppanel.add(AddRemoveList,c);
         });
         popuppanel.add(AddRemoveList,c);
+    }
+    private static void makeSeriesComboboxes(GridBagConstraints c,JPanel popuppanel,MediaImpl currentMedia)
+    {
+        // season Label og Box
+        Series currentSeries = (Series)currentMedia;
+        JLabel seasonLabel = new JLabel("Season: ");
+        //currentSeries.getSeasons();
+        c.gridx = 0;
+        c.gridy = 3;
+        popuppanel.add(seasonLabel, c);
+        String[] seasons = new String[currentSeries.getSeasons()];
+        for(int i = 0; i < seasons.length; i++)
+        {
+            seasons[i] = Integer.toString(i+1);
+        }
+        JComboBox seasonBox = new JComboBox<>(seasons);
+        c.gridx = 1;
+        c.gridy = 3;
+
+
+        popuppanel.add(seasonBox, c);
+
+        //episode Label og Box
+        JLabel episodeLabel = new JLabel("Episode: ");;
+        c.gridx = 0;
+        c.gridy = 4;
+        popuppanel.add(episodeLabel, c);
+
+
+        String[] episodeseasons = currentSeries.getEpisodes();
+        int episodeammount = Integer.parseInt(episodeseasons[seasonBox.getSelectedIndex()]);
+        String[] episodes =  new String[episodeammount];
+        //currentSeries.getEpisodes()
+        for(int i = 0; i < episodeammount; i++)
+        {
+            episodes[i] = i+1 + "";
+        }
+        c.gridx = 1;
+        c.gridy = 4;
+        popuppanel.add(seasonLabel, c);
+
+        JComboBox episodeBox = new JComboBox<>(episodes);
+        popuppanel.add(episodeBox, c);
+        //popuppanel.add();
     }
 }
