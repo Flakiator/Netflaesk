@@ -8,7 +8,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class Client_UI {
     private static JFrame frame;
     private static JPanel overview;
     private static JFrame popup = new JFrame("Netflæsk"); //Laver en frame
