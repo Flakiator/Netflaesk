@@ -23,7 +23,7 @@ public class ClientUI {
 
     private static List<MediaImpl> favorites = new ArrayList<>();
 
-    private static JComboBox seasonBox ;
+    private static JComboBox<String> seasonBox ;
 
     private static String state = "Main";
 
