@@ -18,38 +18,13 @@ public class Mediaregistryimpl implements Mediaregistry
             throw new RuntimeException(e);
         }
     }
-
-    //initialize til film
-    public List<Movie> initializeMovie()
-    {
-        List<Movie> m = new ArrayList<>();
-
-        List<MediaImpl> media = initialize(data.loadMovies(), data.loadMPic());
-
-        for (Media i: media)
-        {
-           m.add((Movie)i);
-        }
-        return m;
-    }
-    //initialize til serier
-    public List<Series> initializeSeries()
-    {
-        List<Series> s = new ArrayList<>();
-
-        List<MediaImpl> media = initialize(data.loadSeries(), data.loadSPic());
-
-        for (Media i: media)
-        {
-            s.add((Series) i);
-        }
-        return s;
-    }
-
+    //initialize til alle medier
     public List<MediaImpl> initializeAllMedia()
     {
-        List<MediaImpl> allmedia = new ArrayList<>(initializeSeries());
-        allmedia.addAll(initializeMovie());
+        List<MediaImpl> series = initialize(data.loadSeries(), data.loadSPic());
+        List<MediaImpl> movies = initialize(data.loadMovies(), data.loadMPic());
+        List<MediaImpl> allmedia = new ArrayList<>(series);
+        allmedia.addAll(movies);
         return allmedia;
 
     }
