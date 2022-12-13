@@ -18,31 +18,15 @@ public class Mediaregistryimpl implements Mediaregistry
             throw new RuntimeException(e);
         }
     }
-
-    //initialize til film
-    public List<Movie> initializeMovie() throws FileNotFoundException {
-        List<Movie> m = new ArrayList<>();
-
-        List<MediaImpl> media = initialize(data.loadMovies(), data.loadMPic());
-
-        for (Media i: media)
-        {
-           m.add((Movie)i);
-        }
-        return m;
-    }
-    //initialize til serier
-    public List<Series> initializeSeries() throws FileNotFoundException
+    //initialize til alle medier
+    public List<MediaImpl> initializeAllMedia()
     {
-        List<Series> s = new ArrayList<>();
+        List<MediaImpl> series = initialize(data.loadSeries(), data.loadSPic());
+        List<MediaImpl> movies = initialize(data.loadMovies(), data.loadMPic());
+        List<MediaImpl> allmedia = new ArrayList<>(series);
+        allmedia.addAll(movies);
+        return allmedia;
 
-        List<MediaImpl> media = initialize(data.loadSeries(), data.loadSPic());
-
-        for (Media i: media)
-        {
-            s.add((Series) i);
-        }
-        return s;
     }
     // Generel initializer bruges ikke i main (derfor private)
     private List<MediaImpl> initialize(List<String> load, List<String> picture)
@@ -60,13 +44,9 @@ public class Mediaregistryimpl implements Mediaregistry
             //elements[4] = sæson-episoder
 
             // sætter favorite til false hvis de ikke er på den lokale favorit liste
-            boolean favorite = false;
+            boolean favorite = favorites.contains(elements[0]);
             // Tjekker om mediet er på den lokale favorit liste
-            if (favorites.contains(elements[0]))
-            {
-                // hvis det er skal objektet intialiseres som favorit
-                favorite = true;
-            }
+            // hvis det er skal objektet intialiseres som favorit
             // Laver opdeler genrer i sin egen liste
             String[] genres = elements[2].split(",");
             // tilføjer dem til ArrayList
@@ -154,12 +134,7 @@ public class Mediaregistryimpl implements Mediaregistry
                 else genresl.add(genre);
             }
         }
-        String[] genres = new String[genresl.size()];
-        for (int i = 0; i < genres.length; i++)
-        {
-            genres[i] = genresl.get(i);
-        }
-        return genres;
+        return genresl.toArray(new String[0]);
     }
     public void addToFavorites(MediaImpl media) {
         String title = media.getTitle();

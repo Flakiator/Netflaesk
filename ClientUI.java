@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class ClientUI {
     private static JFrame frame;
     private static JPanel overview;
     private static JFrame popup = new JFrame("Netflæsk"); //Laver en frame
@@ -25,13 +25,14 @@ public class Main {
 
     private static List<MediaImpl> favorites = new ArrayList<>();
 
-    private static JComboBox seasonBox;
+    private static JComboBox<String> seasonBox ;
 
     private static String state = "Main";
 
     public static void main(String[] args) {
         mediaReg = new Mediaregistryimpl();
         // Samler medier i en liste
+        allMedias = mediaReg.initializeAllMedia();
         try {
             allMedias = new ArrayList<>(mediaReg.initializeSeries());
             allMedias.addAll(mediaReg.initializeMovie());
@@ -68,7 +69,7 @@ public class Main {
         makebuttons(current);
         // Sætter størrelsen på vinduet og gør det synligt
         overview.setBackground(Color.darkGray);
-        frame.setSize(1500, 800);
+        frame.setSize(950, 800);
         frame.setVisible(true); //frame bliver synlig
     }
     private static void makeMenuBar() {
@@ -183,7 +184,6 @@ public class Main {
 
     }
 
-
     private static void makeMenuBoxFunctionality()
     {
         // fjerner elementer fra vinduet så der ikke bliver skrevet oven på de gamle knapper
@@ -206,7 +206,7 @@ public class Main {
 
     // Laver panelet som skal indeholde medierne
     private static void makePanel() {
-        // idé til oprettelse af knapper
+        // Idé til oprettelse af knapper
         //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
         overview = new JPanel();
         // Laver en Scrollbar
@@ -279,21 +279,7 @@ public class Main {
         // JButton currentMedia
         playButton.addActionListener(e ->
         {
-            //Playfunktion Til Series
-           if(currentMedia.getMediaType().equals("Series")){
-               int getEpisode = episodeBox.getSelectedIndex() + 1;
-               int getSeason = seasonBox.getSelectedIndex() + 1;
-
-               JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle() + " Sæson: " + getSeason  + " Episode: " +
-                       getEpisode, "Afspilning",JOptionPane.INFORMATION_MESSAGE);
-
-           } else {
-        //Playfunktion Til movies
-               JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle(),
-                       "Afspilning",JOptionPane.INFORMATION_MESSAGE);
-           }
-
-            System.out.println("PlaycurrentMedia");
+            playVideo(currentMedia);
         });
         // Knap til at fjerne/tilføje film til ens liste
         makeAddRemoveList(c,popuppanel,currentMedia);
@@ -309,10 +295,6 @@ public class Main {
         if(currentMedia.getMediaType().equals("Series"))
         {
             makeSeriesComboboxes(c,popuppanel,currentMedia);
-        }
-        else if(currentMedia.getMediaType().equals("Movie"))
-        {
-
         }
         popup.getContentPane().add(popuppanel);
         popup.setSize(300, 500);
@@ -431,5 +413,24 @@ public class Main {
         makebuttons(favorites);
         overview.revalidate();
         overview.repaint();
+    }
+
+    private static void playVideo(MediaImpl currentMedia)
+    {
+        //Playfunktion Til Series
+        if(currentMedia.getMediaType().equals("Series")){
+            int getEpisode = episodeBox.getSelectedIndex() + 1;
+            int getSeason = seasonBox.getSelectedIndex() + 1;
+
+            JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle() + " Sæson: " + getSeason  + " Episode: " +
+                    getEpisode, "Afspilning",JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+            //Playfunktion Til movies
+            JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle(),
+                    "Afspilning",JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        System.out.println("PlaycurrentMedia");
     }
 }
