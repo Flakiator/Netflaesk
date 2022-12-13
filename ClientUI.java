@@ -61,7 +61,7 @@ public class ClientUI {
         makebuttons(current);
         // Sætter størrelsen på vinduet og gør det synligt
         overview.setBackground(Color.darkGray);
-        frame.setSize(850, 800);
+        frame.setSize(950, 800);
         frame.setVisible(true); //frame bliver synlig
     }
     private static void makeMenuBar() {
@@ -176,7 +176,6 @@ public class ClientUI {
 
     }
 
-
     private static void makeMenuBoxFunctionality()
     {
         // fjerner elementer fra vinduet så der ikke bliver skrevet oven på de gamle knapper
@@ -272,21 +271,7 @@ public class ClientUI {
         // JButton currentMedia
         playButton.addActionListener(e ->
         {
-            //Playfunktion Til Series
-           if(currentMedia.getMediaType().equals("Series")){
-               int getEpisode = episodeBox.getSelectedIndex() + 1;
-               int getSeason = seasonBox.getSelectedIndex() + 1;
-
-               JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle() + " Sæson: " + getSeason  + " Episode: " +
-                       getEpisode, "Afspilning",JOptionPane.INFORMATION_MESSAGE);
-
-           } else {
-        //Playfunktion Til movies
-               JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle(),
-                       "Afspilning",JOptionPane.INFORMATION_MESSAGE);
-           }
-
-            System.out.println("PlaycurrentMedia");
+            playVideo(currentMedia);
         });
         // Knap til at fjerne/tilføje film til ens liste
         makeAddRemoveList(c,popuppanel,currentMedia);
@@ -420,5 +405,24 @@ public class ClientUI {
         makebuttons(favorites);
         overview.revalidate();
         overview.repaint();
+    }
+
+    private static void playVideo(MediaImpl currentMedia)
+    {
+        //Playfunktion Til Series
+        if(currentMedia.getMediaType().equals("Series")){
+            int getEpisode = episodeBox.getSelectedIndex() + 1;
+            int getSeason = seasonBox.getSelectedIndex() + 1;
+
+            JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle() + " Sæson: " + getSeason  + " Episode: " +
+                    getEpisode, "Afspilning",JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+            //Playfunktion Til movies
+            JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle(),
+                    "Afspilning",JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        System.out.println("PlaycurrentMedia");
     }
 }
