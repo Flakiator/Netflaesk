@@ -6,11 +6,10 @@ import java.io.*;
 public class DataAccessImpl implements DataAccess
 {
 
-    public List<String> loadMedia(String path)
+    public List<String> loadMedia(String path) throws FileNotFoundException
     {
         // Laver en liste medie navnene kan stå i
         List<String> media = new ArrayList<>();
-        try {
             // Giver file navnet på vejen til filen
             File file = new File(path);
             // Laver et scanner objekt
@@ -28,21 +27,15 @@ public class DataAccessImpl implements DataAccess
             Collections.sort(media);
             return media;
             // tager højde for hvis filen ikke eksisterer
-        } catch (FileNotFoundException e)
-        {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-            return null;
-        }
     }
 
-    public List<String> loadMovies()
+    public List<String> loadMovies() throws FileNotFoundException
     {
         //private String favorites = "Data/favorites.txt";
         String moviesPath = "Data/film.txt";
         return loadMedia(moviesPath);
     }
-    public List<String> loadSeries()
+    public List<String> loadSeries() throws FileNotFoundException
     {
         String seriesPath = "Data/serier.txt";
         return loadMedia(seriesPath);

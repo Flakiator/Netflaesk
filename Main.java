@@ -6,6 +6,7 @@ import Domain.Series;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +32,12 @@ public class Main {
     public static void main(String[] args) {
         mediaReg = new Mediaregistryimpl();
         // Samler medier i en liste
-        allMedias = new ArrayList<>(mediaReg.initializeSeries());
-        allMedias.addAll(mediaReg.initializeMovie());
+        try {
+            allMedias = new ArrayList<>(mediaReg.initializeSeries());
+            allMedias.addAll(mediaReg.initializeMovie());
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
         current = new ArrayList<>(allMedias);
         // tjekker all medie objekter igennem og tilføjer dem hvis de er sat som favoritter på den lokale favoritliste
         for (MediaImpl media: allMedias)

@@ -20,8 +20,7 @@ public class Mediaregistryimpl implements Mediaregistry
     }
 
     //initialize til film
-    public List<Movie> initializeMovie()
-    {
+    public List<Movie> initializeMovie() throws FileNotFoundException {
         List<Movie> m = new ArrayList<>();
 
         List<MediaImpl> media = initialize(data.loadMovies(), data.loadMPic());
@@ -33,7 +32,7 @@ public class Mediaregistryimpl implements Mediaregistry
         return m;
     }
     //initialize til serier
-    public List<Series> initializeSeries()
+    public List<Series> initializeSeries() throws FileNotFoundException
     {
         List<Series> s = new ArrayList<>();
 
