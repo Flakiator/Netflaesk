@@ -3,13 +3,13 @@ import Domain.MediaImpl;
 import javax.swing.*;
 
 class MediaButton extends JButton {
-    MediaImpl media;
+    private MediaImpl media;
     MediaButton(Icon icon, MediaImpl media)
     {
         super(icon);
         this.media = media;
     }
-    MediaImpl getMedia()
+    public MediaImpl getMedia()
     {
         return media;
     }
