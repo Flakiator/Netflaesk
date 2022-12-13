@@ -2,6 +2,7 @@ package Domain;
 
 import Database.DataAccessImpl;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
@@ -19,7 +20,7 @@ public class Mediaregistryimpl implements Mediaregistry
         }
     }
     //initialize til alle medier
-    public List<MediaImpl> initializeAllMedia()
+    public List<MediaImpl> initializeAllMedia() throws FileNotFoundException
     {
         List<MediaImpl> series = initialize(data.loadSeries(), data.loadSPic());
         List<MediaImpl> movies = initialize(data.loadMovies(), data.loadMPic());

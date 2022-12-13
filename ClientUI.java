@@ -32,10 +32,9 @@ public class ClientUI {
     public static void main(String[] args) {
         mediaReg = new Mediaregistryimpl();
         // Samler medier i en liste
-        allMedias = mediaReg.initializeAllMedia();
+
         try {
-            allMedias = new ArrayList<>(mediaReg.initializeSeries());
-            allMedias.addAll(mediaReg.initializeMovie());
+            allMedias = mediaReg.initializeAllMedia();
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null,e.getMessage());
         }
