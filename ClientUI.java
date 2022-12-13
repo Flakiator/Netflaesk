@@ -68,7 +68,7 @@ public class ClientUI {
         makebuttons(current);
         // Sætter størrelsen på vinduet og gør det synligt
         overview.setBackground(Color.darkGray);
-        frame.setSize(950, 800);
+        frame.setSize(1250, 800);
         frame.setVisible(true); //frame bliver synlig
     }
     private static void makeMenuBar() {
@@ -240,7 +240,7 @@ public class ClientUI {
                 ImageIcon icon = new ImageIcon(medias.get(counter).getPicture());
                 MediaButton button = new MediaButton(icon, medias.get(counter));
                 // Sætter størrelse på knappen
-                button.setPreferredSize(new Dimension(100, 200));
+                button.setPreferredSize(new Dimension(140, 209));
                 // Gør så der kommer et popup når man trykker på knappen
                 button.addActionListener(e ->
                         {
