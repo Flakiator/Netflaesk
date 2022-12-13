@@ -115,36 +115,29 @@ public class Mediaregistryimpl implements Mediaregistry
         return SortedBySearch;
     }
 
-    public List<MediaImpl> filter(String genre, String Medietype, List<MediaImpl>AllMedia)
+    public List<MediaImpl> filter(String genre, String Mediatype, List<MediaImpl>AllMedia)
     {
         List<MediaImpl> filteredMedia = new ArrayList<>();
-        // Tjekker for hvilken medietype, der skal vises.
-        if(Medietype.equals("All"))
-        {
+            // Tjekker for hvilken medietype, der skal vises.
             for(MediaImpl currentMedia : AllMedia) {
-                if (genre.equals("All"))
-                {
-                    filteredMedia.add(currentMedia);
-                }
-                else if (currentMedia.getGenre().contains(genre)) {
-                    filteredMedia.add(currentMedia);
-                }
-            }
-        }
-        else
-        {
-            for (MediaImpl currentMedia : AllMedia) {
-                if (currentMedia.getMediaType().equals(Medietype)) {
-                    if (genre.equals("All"))
-                    {
+                if (Mediatype.equals("All")){
+                    if (genre.equals("All")) {
                         filteredMedia.add(currentMedia);
-                    }
-                    else if (currentMedia.getGenre().contains(genre)) {
+                    } else if (currentMedia.getGenre().contains(genre)) {
                         filteredMedia.add(currentMedia);
                     }
                 }
+                else {
+                    if (currentMedia.getMediaType().equals(Mediatype)) {
+                        if (genre.equals("All")) {
+                            filteredMedia.add(currentMedia);
+                        }
+                        else if (currentMedia.getGenre().contains(genre)) {
+                            filteredMedia.add(currentMedia);
+                        }
+                    }
+                }
             }
-        }
         return filteredMedia;
     }
 

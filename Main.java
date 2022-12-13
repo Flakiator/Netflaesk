@@ -63,7 +63,7 @@ public class Main {
         makebuttons(current);
         // Sætter størrelsen på vinduet og gør det synligt
         overview.setBackground(Color.darkGray);
-        frame.setSize(850, 800);
+        frame.setSize(1500, 800);
         frame.setVisible(true); //frame bliver synlig
     }
     private static void makeMenuBar() {
@@ -220,12 +220,11 @@ public class Main {
         int columns = 8;
         // makes gridlayout for the buttons to be displayed on
         int rows = (medias.size() / columns) + 1;
-        //int columns = 7;
+        // Holder styr på hvilket medie index vi er på
         int counter = 0;
         overview.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         // makes buttons
-        c.gridx = 0;
         c.gridy = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -245,13 +244,11 @@ public class Main {
                             popup.dispose();
                             openMedia(button.getMedia());
                         });
-                // Rykker ét felt hen på x aksen
-                c.gridx++;
                 overview.add(button, c);
                 counter++;
             }
             //Nulstiller x aksen
-            c.gridx = 0;
+            //c.gridx = 0;
             // Rykker én hen ad y aksen
             c.gridy++;
         }
@@ -279,11 +276,11 @@ public class Main {
         {
             //Playfunktion Til Series
            if(currentMedia.getMediaType().equals("Series")){
-               int getEpi = episodeBox.getSelectedIndex() + 1;
+               int getEpisode = episodeBox.getSelectedIndex() + 1;
                int getSeason = seasonBox.getSelectedIndex() + 1;
 
                JOptionPane.showMessageDialog(null,"Afspiller: " + currentMedia.getTitle() + " Sæson: " + getSeason  + " Episode: " +
-                       getEpi, "Afspilning",JOptionPane.INFORMATION_MESSAGE);
+                       getEpisode, "Afspilning",JOptionPane.INFORMATION_MESSAGE);
 
            } else {
         //Playfunktion Til movies
