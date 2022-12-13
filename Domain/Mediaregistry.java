@@ -3,7 +3,7 @@ package Domain;
 import java.util.*;
 public interface Mediaregistry
 {
-    private List<MediaImpl> initialize(List<String> load, List<String> picture) {
+    private List<MediaImpl> initializeAllMedia() {
         return null;
     }
 

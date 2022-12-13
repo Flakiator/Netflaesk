@@ -1,6 +1,5 @@
 import Domain.MediaImpl;
 import Domain.Mediaregistryimpl;
-import Domain.Movie;
 import Domain.Series;
 
 import javax.swing.*;
@@ -24,15 +23,14 @@ public class Main {
 
     private static List<MediaImpl> favorites = new ArrayList<>();
 
-    private static JComboBox seasonBox;
+    private static JComboBox seasonBox ;
 
     private static String state = "Main";
 
     public static void main(String[] args) {
         mediaReg = new Mediaregistryimpl();
         // Samler medier i en liste
-        allMedias = new ArrayList<>(mediaReg.initializeSeries());
-        allMedias.addAll(mediaReg.initializeMovie());
+        allMedias = mediaReg.initializeAllMedia();
         current = new ArrayList<>(allMedias);
         // tjekker all medie objekter igennem og tilføjer dem hvis de er sat som favoritter på den lokale favoritliste
         for (MediaImpl media: allMedias)
@@ -63,7 +61,7 @@ public class Main {
         makebuttons(current);
         // Sætter størrelsen på vinduet og gør det synligt
         overview.setBackground(Color.darkGray);
-        frame.setSize(1500, 800);
+        frame.setSize(850, 800);
         frame.setVisible(true); //frame bliver synlig
     }
     private static void makeMenuBar() {
@@ -201,7 +199,7 @@ public class Main {
 
     // Laver panelet som skal indeholde medierne
     private static void makePanel() {
-        // idé til oprettelse af knapper
+        // Idé til oprettelse af knapper
         //Kører for-loop som adder button for hver row og coloum. Kan vi hente rows, cols værdier?
         overview = new JPanel();
         // Laver en Scrollbar
@@ -304,10 +302,6 @@ public class Main {
         if(currentMedia.getMediaType().equals("Series"))
         {
             makeSeriesComboboxes(c,popuppanel,currentMedia);
-        }
-        else if(currentMedia.getMediaType().equals("Movie"))
-        {
-
         }
         popup.getContentPane().add(popuppanel);
         popup.setSize(300, 500);

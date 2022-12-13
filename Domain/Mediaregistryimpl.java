@@ -45,6 +45,14 @@ public class Mediaregistryimpl implements Mediaregistry
         }
         return s;
     }
+
+    public List<MediaImpl> initializeAllMedia()
+    {
+        List<MediaImpl> allmedia = new ArrayList<>(initializeSeries());
+        allmedia.addAll(initializeMovie());
+        return allmedia;
+
+    }
     // Generel initializer bruges ikke i main (derfor private)
     private List<MediaImpl> initialize(List<String> load, List<String> picture)
     {
@@ -61,13 +69,9 @@ public class Mediaregistryimpl implements Mediaregistry
             //elements[4] = sæson-episoder
 
             // sætter favorite til false hvis de ikke er på den lokale favorit liste
-            boolean favorite = false;
+            boolean favorite = favorites.contains(elements[0]);
             // Tjekker om mediet er på den lokale favorit liste
-            if (favorites.contains(elements[0]))
-            {
-                // hvis det er skal objektet intialiseres som favorit
-                favorite = true;
-            }
+            // hvis det er skal objektet intialiseres som favorit
             // Laver opdeler genrer i sin egen liste
             String[] genres = elements[2].split(",");
             // tilføjer dem til ArrayList
@@ -155,12 +159,7 @@ public class Mediaregistryimpl implements Mediaregistry
                 else genresl.add(genre);
             }
         }
-        String[] genres = new String[genresl.size()];
-        for (int i = 0; i < genres.length; i++)
-        {
-            genres[i] = genresl.get(i);
-        }
-        return genres;
+        return genresl.toArray(new String[0]);
     }
     public void addToFavorites(MediaImpl media) {
         String title = media.getTitle();
