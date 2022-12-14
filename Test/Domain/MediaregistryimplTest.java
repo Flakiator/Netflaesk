@@ -1,32 +1,64 @@
 package Domain;
 
-import org.junit.Test;
+import Database.DataAccessImpl;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import java.io.FileNotFoundException;
 
-public class MediaregistryimplTest {
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-    @Test
-    public void initializeAllMedia() {
+class MediaregistryimplTest {
+
+    DataAccessImpl database;
+    Mediaregistryimpl mediaReg;
+    @BeforeEach
+    void setUp() {
+        database = new DataAccessImpl();
+        mediaReg = new Mediaregistryimpl();
+    }
+
+    @AfterEach
+    void tearDown() {
+        database = null;
+        mediaReg = null;
     }
 
     @Test
-    public void search() {
+    void initializeAllMedia() {
+        int medias = 0;
+        int movies = 1;
+        int series = 2;
+        try {
+            medias = mediaReg.initializeAllMedia().size();
+            movies = database.loadMovies().size();
+            series = database.loadSeries().size();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        // ser om der er lige mange medier læst i data basen som der bliver lavet om til objekter
+        assertEquals(medias,series+movies);
     }
 
     @Test
-    public void filter() {
+    void search() {
     }
 
     @Test
-    public void getAllGenre() {
+    void filter() {
     }
 
     @Test
-    public void addToFavorites() {
+    void getAllGenre() {
     }
 
     @Test
-    public void removeFromFavorites() {
+    void addToFavorites() {
+    }
+
+    @Test
+    void removeFromFavorites() {
     }
 }
