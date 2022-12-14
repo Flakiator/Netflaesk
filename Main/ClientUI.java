@@ -1,6 +1,7 @@
+package Main;
+
 import Domain.MediaImpl;
 import Domain.Mediaregistryimpl;
-import Domain.Movie;
 import Domain.Series;
 
 import javax.swing.*;

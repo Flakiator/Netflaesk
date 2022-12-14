@@ -1,3 +1,5 @@
+package Main;
+
 import Domain.MediaImpl;
 
 import javax.swing.*;
