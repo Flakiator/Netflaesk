@@ -130,9 +130,10 @@ public class Mediaregistryimpl implements Mediaregistry
             List<String> tmp = m.getGenre();
             for (String genre: tmp)
             {
-                if (genresl.contains(genre));
-
-                else genresl.add(genre);
+                if (!genresl.contains(genre))
+                {
+                    genresl.add(genre);
+                }
             }
         }
         return genresl.toArray(new String[0]);

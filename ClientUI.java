@@ -300,7 +300,7 @@ public class ClientUI {
         popup.setVisible(true); //frame bliver synlig
     }
 
-    // Gør episodeBox global (ellers kan den ikke bruges i ActionListener
+    // Gør episodeBox global (ellers kan den ikke bruges i ActionListener)
     private static JComboBox episodeBox = new JComboBox<>();
     private static void makeSeriesComboboxes(GridBagConstraints c,JPanel popuppanel,MediaImpl currentMedia)
     {
