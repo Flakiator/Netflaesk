@@ -272,7 +272,7 @@ public class ClientUI {
 
         // Titel på filmen
         JLabel title = new JLabel(currentMedia.getTitle());
-        JLabel year = new JLabel("Release: " + currentMedia.getYear());
+        JLabel year = new JLabel(currentMedia.getYear());
         JLabel score = new JLabel("Rating: " + currentMedia.getScore().toString());
         //Gør så vores popup kan lukkes
         popup.setDefaultCloseOperation(popup.DISPOSE_ON_CLOSE);

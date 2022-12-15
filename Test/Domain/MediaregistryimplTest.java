@@ -39,7 +39,7 @@ class MediaregistryimplTest {
             System.out.println(e.getMessage());
         }
         // ser om der er lige mange medier læst i data basen som der bliver lavet om til objekter
-        assertEquals(medias,series+movies);
+        assertEquals(medias,series + movies);
     }
 
     @Test
