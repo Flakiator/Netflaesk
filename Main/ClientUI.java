@@ -318,7 +318,7 @@ public class ClientUI {
             makeSeriesComboboxes(c,popuppanel,currentMedia);
         }
         popup.getContentPane().add(popuppanel);
-        popup.setSize(600, 240);
+        popup.setSize(700, 240);
         popup.setVisible(true); //frame bliver synlig
     }
 
