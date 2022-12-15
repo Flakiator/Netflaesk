@@ -281,7 +281,7 @@ public class ClientUI {
         popup.setDefaultCloseOperation(popup.DISPOSE_ON_CLOSE);
         //Den har en standard size, ikke redigerbar af client
         popup.setResizable(false);
-        popup.setLocation(MouseInfo.getPointerInfo().getLocation());
+        popup.setLocationRelativeTo(null);
 
         JButton playButton = new JButton("Play");
         // JButton currentMedia
