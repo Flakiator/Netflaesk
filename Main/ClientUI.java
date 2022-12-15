@@ -293,13 +293,13 @@ public class ClientUI {
         img.setIcon(new ImageIcon(currentMedia.getPicture()));
         c.gridx = 0;
         c.gridy = 0;
-        c.anchor = c.LINE_START;
-        c.fill = c.HORIZONTAL;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1.0;
         popuppanel.add(img,c);
         c.fill = 0;
         c.weighty = 5.0;
-        c.anchor = c.CENTER;
+        c.anchor = GridBagConstraints.CENTER;
         c.gridheight = 1;
         c.gridx = 1;
         c.gridy = 0;
@@ -323,14 +323,14 @@ public class ClientUI {
     }
 
     // Gør episodeBox global (ellers kan den ikke bruges i ActionListener)
-    private static JComboBox episodeBox = new JComboBox<>();
+    private static JComboBox<String> episodeBox = new JComboBox<>();
     private static void makeSeriesComboboxes(GridBagConstraints c,JPanel popuppanel,MediaImpl currentMedia)
     {
         // season Label og Box
         Series currentSeries = (Series)currentMedia;
         JLabel seasonLabel = new JLabel("Season: ");
         //currentSeries.getSeasons();
-        c.anchor = c.LINE_END;
+        c.anchor = GridBagConstraints.LINE_END;
         c.gridx = 1;
         c.gridy = 5;
         popuppanel.add(seasonLabel, c);
@@ -386,7 +386,7 @@ public class ClientUI {
         // sætter constraints til hvor knappen skal være
         c.gridx = 1;
         c.gridy = 5;
-        c.anchor = c.CENTER;
+        c.anchor = GridBagConstraints.CENTER;
         // Laver en button
         JButton AddRemoveList = new JButton("");
         if(currentMedia.isFavorite()) {
@@ -421,7 +421,7 @@ public class ClientUI {
             popuppanel.repaint();
             c.gridx = 1;
             c.gridy = 5;
-            c.anchor = c.CENTER;
+            c.anchor = GridBagConstraints.CENTER;
             popuppanel.add(AddRemoveList,c);
         });
         popuppanel.add(AddRemoveList,c);
