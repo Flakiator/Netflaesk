@@ -43,7 +43,7 @@ public class ClientUI {
         // tjekker all medie objekter igennem og tilføjer dem hvis de er sat som favoritter på den lokale favoritliste
         for (MediaImpl media: allMedias)
         {
-            // If the media has the status favorite and the favorite list does not allready contain it add it
+            // Hvis media har favorite som true tilføjes den til favorites listen
             if (media.isFavorite())
             {
                 favorites.add(media);
@@ -66,9 +66,10 @@ public class ClientUI {
         makeMenuBar();
         // Laver panelet og knapperne til at vise medier
         makePanel();
+        // Laver knapper/medier til panelet
         makebuttons(current);
-        // Sætter størrelsen på vinduet og gør det synligt
         overview.setBackground(Color.darkGray);
+        // Sætter størrelsen på vinduet og gør det synligt
         frame.setSize(1250, 800);
         frame.setVisible(true); //frame bliver synlig
     }
@@ -103,7 +104,6 @@ public class ClientUI {
         menuBar.add(myList);
 
         // tilføjer mellemrum
-
         menuBar.add(new JToolBar.Separator(new Dimension(50, 0)));
 
         //UI valg af Genre
@@ -149,7 +149,6 @@ public class ClientUI {
             }
         });
 
-        //tilføjer tekstfelt
         menuBar.add(searchBar);
 
         // laver søgeknap
@@ -224,13 +223,14 @@ public class ClientUI {
     private static void makebuttons(List<MediaImpl> medias) {
         // definerer hvor mange medier per linje vi vil have
         int columns = 8;
-        // makes gridlayout for the buttons to be displayed on
+        // beregner antal rækker ud fra mængden af medier
         int rows = (medias.size() / columns) + 1;
-        // Holder styr på hvilket medie index vi er på
+        // Counter holder styr på hvilket medie index vi er på
         int counter = 0;
+        // Laver et gridBagLayout
         overview.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        // makes buttons
+        // Laver knapper i et nested for loop
         c.gridy = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -248,6 +248,7 @@ public class ClientUI {
                         {
                             // Fjerner gammelt popup (Hvis der er et)
                             popup.dispose();
+                            // Laver popup til detaljeret informaiton om medie
                             openMedia(button.getMedia());
                         });
                 overview.add(button, c);
@@ -291,6 +292,7 @@ public class ClientUI {
 
 
         img.setIcon(new ImageIcon(currentMedia.getPicture()));
+        // placerer elementer i vinduet
         c.gridx = 0;
         c.gridy = 0;
         c.anchor = GridBagConstraints.LINE_START;
@@ -311,7 +313,7 @@ public class ClientUI {
         c.gridy = 4;
         popuppanel.add(playButton,c);
         makeAddRemoveList(c,popuppanel,currentMedia);
-        //frame.getContentPane(panel);
+        // Hvis mediet er en serie så lav ComboBokse til at skifte episode og sæson
         if(currentMedia.getMediaType().equals("Series"))
         {
             makeSeriesComboboxes(c,popuppanel,currentMedia);
@@ -346,6 +348,7 @@ public class ClientUI {
         c.gridy = 6;
         popuppanel.add(episodeLabel, c);
         c.weightx = 0.25;
+        // Laver liste af episoder for den valgte sæson
         String[] episodes = makeEpisodes(currentSeries,seasonBox.getSelectedIndex());
         episodeBox = new JComboBox<>(episodes);
         c.gridx = 2;
