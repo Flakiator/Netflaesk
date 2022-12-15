@@ -288,7 +288,7 @@ public class ClientUI {
         playButton.addActionListener(e ->
                 playVideo(currentMedia));
         // Knap til at fjerne/tilføje film til ens liste
-        makeAddRemoveList(c,popuppanel,currentMedia);
+
 
         img.setIcon(new ImageIcon(currentMedia.getPicture()));
         c.gridx = 0;
@@ -310,8 +310,7 @@ public class ClientUI {
         popuppanel.add(score,c);
         c.gridy = 4;
         popuppanel.add(playButton,c);
-        c.weighty = 0;
-
+        makeAddRemoveList(c,popuppanel,currentMedia);
         //frame.getContentPane(panel);
         if(currentMedia.getMediaType().equals("Series"))
         {
@@ -347,7 +346,6 @@ public class ClientUI {
         c.gridy = 6;
         popuppanel.add(episodeLabel, c);
         c.weightx = 0.25;
-        c.ipadx = 15;
         String[] episodes = makeEpisodes(currentSeries,seasonBox.getSelectedIndex());
         episodeBox = new JComboBox<>(episodes);
         c.gridx = 2;
@@ -359,6 +357,9 @@ public class ClientUI {
             episodeBox = new JComboBox<>(makeEpisodes(currentSeries,seasonBox.getSelectedIndex()));
             c.gridx = 2;
             c.gridy = 6;
+            c.weightx = 0.25;
+            c.gridheight = 1;
+            c.anchor = GridBagConstraints.LINE_END;
             popuppanel.add(episodeBox,c);
             popuppanel.revalidate();
             popuppanel.repaint();
