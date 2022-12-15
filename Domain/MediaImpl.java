@@ -32,6 +32,8 @@ public abstract class MediaImpl implements Media {
         return this.score;
     }
 
+    public String getYear(){ return this.year;}
+
     public List<String> getGenre() {
         return this.genre;
     }

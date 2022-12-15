@@ -269,6 +269,11 @@ public class ClientUI {
         GridBagConstraints c = new GridBagConstraints();
         // Plakat af filmen
         JLabel img = new JLabel();
+
+        // Titel på filmen
+        JLabel title = new JLabel(currentMedia.getTitle());
+        JLabel year = new JLabel("Release: " + currentMedia.getYear());
+        JLabel score = new JLabel("Rating: " + currentMedia.getScore().toString());
         //Gør så vores popup kan lukkes
         popup.setDefaultCloseOperation(popup.DISPOSE_ON_CLOSE);
         //Den har en standard size, ikke redigerbar af client
@@ -278,9 +283,7 @@ public class ClientUI {
         JButton playButton = new JButton("Play");
         // JButton currentMedia
         playButton.addActionListener(e ->
-        {
-            playVideo(currentMedia);
-        });
+                playVideo(currentMedia));
         // Knap til at fjerne/tilføje film til ens liste
         makeAddRemoveList(c,popuppanel,currentMedia);
 
@@ -289,6 +292,12 @@ public class ClientUI {
         c.gridy = 0;
         popuppanel.add(img,c);
         c.gridy = 1;
+        popuppanel.add(title,c);
+        c.gridy = 2;
+        popuppanel.add(year,c);
+        c.gridy = 3;
+        popuppanel.add(score,c);
+        c.gridy = 5;
         popuppanel.add(playButton,c);
 
         //frame.getContentPane(panel);
@@ -310,7 +319,7 @@ public class ClientUI {
         JLabel seasonLabel = new JLabel("Season: ");
         //currentSeries.getSeasons();
         c.gridx = 0;
-        c.gridy = 3;
+        c.gridy = 6;
         popuppanel.add(seasonLabel, c);
         String[] seasons = new String[currentSeries.getSeasons()];
         for(int i = 0; i < seasons.length; i++)
@@ -322,14 +331,13 @@ public class ClientUI {
         //episode Label og Box
         JLabel episodeLabel = new JLabel("Episode: ");
         c.gridx = 0;
-        c.gridy = 4;
+        c.gridy = 7;
         popuppanel.add(episodeLabel, c);
 
 
         String[] episodes = makeEpisodes(currentSeries,seasonBox.getSelectedIndex());
         episodeBox = new JComboBox<>(episodes);
         c.gridx = 1;
-        c.gridy = 4;
         popuppanel.add(episodeBox, c);
         seasonBox.addActionListener(e ->
         {
@@ -337,17 +345,17 @@ public class ClientUI {
             episodeBox.removeAllItems();
             episodeBox = new JComboBox<>(makeEpisodes(currentSeries,seasonBox.getSelectedIndex()));
             c.gridx = 1;
-            c.gridy = 4;
+            c.gridy = 7;
             popuppanel.add(episodeBox,c);
             popuppanel.revalidate();
             popuppanel.repaint();
         });
         c.gridx = 1;
-        c.gridy = 3;
+        c.gridy = 6;
         popuppanel.add(seasonBox, c);
 
         c.gridx = 0;
-        c.gridy = 3;
+
         popuppanel.add(seasonLabel, c);
     }
 
@@ -368,7 +376,7 @@ public class ClientUI {
     {
         // sætter constraints til hvor knappen skal være
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 4;
         // Laver en button
         JButton AddRemoveList = new JButton("");
         if(currentMedia.isFavorite()) {
@@ -402,7 +410,7 @@ public class ClientUI {
             popuppanel.revalidate();
             popuppanel.repaint();
             c.gridx = 0;
-            c.gridy = 2;
+            c.gridy = 4;
             popuppanel.add(AddRemoveList,c);
         });
         popuppanel.add(AddRemoveList,c);

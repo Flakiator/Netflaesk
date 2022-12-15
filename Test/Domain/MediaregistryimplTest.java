@@ -28,6 +28,7 @@ class MediaregistryimplTest {
 
     @Test
     void initializeAllMedia() {
+        // sætter medias, movies og series til forskellige værdier
         int medias = 0;
         int movies = 1;
         int series = 2;
