@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,6 +15,7 @@ class MediaregistryimplTest {
 
     DataAccessImpl database;
     Mediaregistryimpl mediaReg;
+
     @BeforeEach
     void setUp() {
         database = new DataAccessImpl();
@@ -44,6 +47,14 @@ class MediaregistryimplTest {
 
     @Test
     void search() {
+        String searchtext = "Breaking bad";
+        List<MediaImpl> medias;
+        try {
+            medias = mediaReg.initializeAllMedia();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals(1,mediaReg.search(searchtext,medias).size());
     }
 
     @Test

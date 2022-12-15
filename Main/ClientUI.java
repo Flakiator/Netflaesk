@@ -148,6 +148,7 @@ public class ClientUI {
             public void focusLost(FocusEvent e) {
             }
         });
+
         //tilføjer tekstfelt
         menuBar.add(searchBar);
 
@@ -267,6 +268,8 @@ public class ClientUI {
         // Panel til at afspille
         JPanel popuppanel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
+        c.gridheight = 8;
+        c.gridwidth = 2;
         // Plakat af filmen
         JLabel img = new JLabel();
 
@@ -290,15 +293,24 @@ public class ClientUI {
         img.setIcon(new ImageIcon(currentMedia.getPicture()));
         c.gridx = 0;
         c.gridy = 0;
+        c.anchor = c.LINE_START;
+        c.fill = c.HORIZONTAL;
+        c.weightx = 1.0;
         popuppanel.add(img,c);
-        c.gridy = 1;
+        c.fill = 0;
+        c.weighty = 5.0;
+        c.anchor = c.CENTER;
+        c.gridheight = 1;
+        c.gridx = 1;
+        c.gridy = 0;
         popuppanel.add(title,c);
-        c.gridy = 2;
+        c.gridy = 1;
         popuppanel.add(year,c);
-        c.gridy = 3;
+        c.gridy = 2;
         popuppanel.add(score,c);
-        c.gridy = 5;
+        c.gridy = 4;
         popuppanel.add(playButton,c);
+        c.weighty = 0;
 
         //frame.getContentPane(panel);
         if(currentMedia.getMediaType().equals("Series"))
@@ -306,7 +318,7 @@ public class ClientUI {
             makeSeriesComboboxes(c,popuppanel,currentMedia);
         }
         popup.getContentPane().add(popuppanel);
-        popup.setSize(300, 500);
+        popup.setSize(600, 240);
         popup.setVisible(true); //frame bliver synlig
     }
 
@@ -318,8 +330,9 @@ public class ClientUI {
         Series currentSeries = (Series)currentMedia;
         JLabel seasonLabel = new JLabel("Season: ");
         //currentSeries.getSeasons();
-        c.gridx = 0;
-        c.gridy = 6;
+        c.anchor = c.LINE_END;
+        c.gridx = 1;
+        c.gridy = 5;
         popuppanel.add(seasonLabel, c);
         String[] seasons = new String[currentSeries.getSeasons()];
         for(int i = 0; i < seasons.length; i++)
@@ -330,33 +343,29 @@ public class ClientUI {
 
         //episode Label og Box
         JLabel episodeLabel = new JLabel("Episode: ");
-        c.gridx = 0;
-        c.gridy = 7;
+        c.gridx = 1;
+        c.gridy = 6;
         popuppanel.add(episodeLabel, c);
-
-
+        c.weightx = 0.25;
+        c.ipadx = 15;
         String[] episodes = makeEpisodes(currentSeries,seasonBox.getSelectedIndex());
         episodeBox = new JComboBox<>(episodes);
-        c.gridx = 1;
+        c.gridx = 2;
         popuppanel.add(episodeBox, c);
         seasonBox.addActionListener(e ->
         {
             popuppanel.remove(episodeBox);
             episodeBox.removeAllItems();
             episodeBox = new JComboBox<>(makeEpisodes(currentSeries,seasonBox.getSelectedIndex()));
-            c.gridx = 1;
-            c.gridy = 7;
+            c.gridx = 2;
+            c.gridy = 6;
             popuppanel.add(episodeBox,c);
             popuppanel.revalidate();
             popuppanel.repaint();
         });
-        c.gridx = 1;
-        c.gridy = 6;
+        c.gridx = 2;
+        c.gridy = 5;
         popuppanel.add(seasonBox, c);
-
-        c.gridx = 0;
-
-        popuppanel.add(seasonLabel, c);
     }
 
     private static String[] makeEpisodes(Series currentSeries, int season)
@@ -375,8 +384,9 @@ public class ClientUI {
     private static void makeAddRemoveList(GridBagConstraints c,JPanel popuppanel,MediaImpl currentMedia)
     {
         // sætter constraints til hvor knappen skal være
-        c.gridx = 0;
-        c.gridy = 4;
+        c.gridx = 1;
+        c.gridy = 5;
+        c.anchor = c.CENTER;
         // Laver en button
         JButton AddRemoveList = new JButton("");
         if(currentMedia.isFavorite()) {
@@ -409,8 +419,9 @@ public class ClientUI {
             }
             popuppanel.revalidate();
             popuppanel.repaint();
-            c.gridx = 0;
-            c.gridy = 4;
+            c.gridx = 1;
+            c.gridy = 5;
+            c.anchor = c.CENTER;
             popuppanel.add(AddRemoveList,c);
         });
         popuppanel.add(AddRemoveList,c);
