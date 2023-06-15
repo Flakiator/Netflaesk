@@ -1,4 +1,4 @@
-# GRPRO-Projectt
+# Netflæsk
 Projekt i Grundlæggende programmering - StreamingTjeneste
 
 Start programmet ved at køre ClientUI.java
